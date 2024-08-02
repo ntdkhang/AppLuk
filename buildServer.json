@@ -1,0 +1,19 @@
+{
+	"name": "xcode build server",
+	"version": "0.2",
+	"bspVersion": "2.0",
+	"languages": [
+		"c",
+		"cpp",
+		"objective-c",
+		"objective-cpp",
+		"swift"
+	],
+	"argv": [
+		"/usr/local/bin/xcode-build-server"
+	],
+	"workspace": "/Users/dk/Documents/Dev/iOS/PersonalProjects/AppLuk/AppLuk.xcodeproj/project.xcworkspace",
+	"build_root": "/Users/dk/Library/Developer/Xcode/DerivedData/AppLuk-ghhxbxmjldbuajbxczudupxthett",
+	"scheme": "AppLuk",
+	"kind": "xcode"
+}

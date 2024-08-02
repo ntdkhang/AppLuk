@@ -11,6 +11,9 @@
 		4212EDD22C56D9E400F30DD2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4212EDD12C56D9E400F30DD2 /* ContentView.swift */; };
 		4212EDD42C56D9E500F30DD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4212EDD32C56D9E500F30DD2 /* Assets.xcassets */; };
 		4212EDD72C56D9E600F30DD2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4212EDD62C56D9E600F30DD2 /* Preview Assets.xcassets */; };
+		428AAAC32C5D304D006B6647 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 428AAAC22C5D304D006B6647 /* MarkdownUI */; };
+		428AAAC52C5D3259006B6647 /* Idea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428AAAC42C5D3259006B6647 /* Idea.swift */; };
+		428AAAC72C5D3C4C006B6647 /* IdeaPreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428AAAC62C5D3C4C006B6647 /* IdeaPreView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +22,8 @@
 		4212EDD12C56D9E400F30DD2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4212EDD32C56D9E500F30DD2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4212EDD62C56D9E600F30DD2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		428AAAC42C5D3259006B6647 /* Idea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Idea.swift; sourceTree = "<group>"; };
+		428AAAC62C5D3C4C006B6647 /* IdeaPreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaPreView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				428AAAC32C5D304D006B6647 /* MarkdownUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +59,8 @@
 			children = (
 				4212EDCF2C56D9E400F30DD2 /* AppLukApp.swift */,
 				4212EDD12C56D9E400F30DD2 /* ContentView.swift */,
+				428AAAC42C5D3259006B6647 /* Idea.swift */,
+				428AAAC62C5D3C4C006B6647 /* IdeaPreView.swift */,
 				4212EDD32C56D9E500F30DD2 /* Assets.xcassets */,
 				4212EDD52C56D9E600F30DD2 /* Preview Content */,
 			);
@@ -83,6 +91,9 @@
 			dependencies = (
 			);
 			name = AppLuk;
+			packageProductDependencies = (
+				428AAAC22C5D304D006B6647 /* MarkdownUI */,
+			);
 			productName = AppLuk;
 			productReference = 4212EDCC2C56D9E400F30DD2 /* AppLuk.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +122,9 @@
 				Base,
 			);
 			mainGroup = 4212EDC32C56D9E300F30DD2;
+			packageReferences = (
+				428AAAC12C5D304D006B6647 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
+			);
 			productRefGroup = 4212EDCD2C56D9E400F30DD2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,7 +152,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4212EDD22C56D9E400F30DD2 /* ContentView.swift in Sources */,
+				428AAAC72C5D3C4C006B6647 /* IdeaPreView.swift in Sources */,
 				4212EDD02C56D9E400F30DD2 /* AppLukApp.swift in Sources */,
+				428AAAC52C5D3259006B6647 /* Idea.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +360,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		428AAAC12C5D304D006B6647 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		428AAAC22C5D304D006B6647 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 428AAAC12C5D304D006B6647 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4212EDC42C56D9E300F30DD2 /* Project object */;
 }
