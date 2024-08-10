@@ -9,10 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            IdeaPreView(idea: .example)
+        NavigationView {
+            KnowledgeView(knowledge: .example1)
         }
-        .padding()
     }
 }
 
