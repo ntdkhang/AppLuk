@@ -12,22 +12,54 @@ struct KnowledgeView: View {
     var body: some View {
         VStack {
             TopBarView()
-            // .frame(maxHeight: .infinity, alignment: .top)
 
             IdeaCreatorView(knowledge: knowledge)
-                .frame(maxHeight: .infinity, alignment: .top)
 
-            ZStack {
-                AsyncImage(url: knowledge.images.first!) { image in
+            ImageCarouselView(knowledge: knowledge)
+                .frame(maxHeight: .infinity, alignment: .top)
+        }
+    }
+}
+
+struct PageView: View {
+    var imageUrl: URL?
+    var pageContent: String
+
+    var body: some View {
+        Color.clear
+            .aspectRatio(1.0, contentMode: .fit)
+            .overlay(
+                AsyncImage(url: imageUrl) { image in
                     image
                         .resizable()
-                        .scaledToFit()
-                        .clipShape(RoundedRectangle(cornerRadius: 30))
+                        .scaledToFill()
                 } placeholder: {
                     RoundedRectangle(cornerRadius: 30)
+                        .foregroundColor(.gray)
+                }
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 30))
+    }
+}
+
+struct ImageCarouselView: View {
+    var knowledge: Knowledge
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack(spacing: 0) {
+                ForEach(knowledge.imageUrls.indices, id: \.self) { i in
+                    VStack {
+                        PageView(imageUrl: knowledge.imageUrls[i], pageContent: knowledge.contentPages[i])
+                            .padding(4)
+                    }
+                    .containerRelativeFrame(.horizontal)
+                    .scrollTransition(.animated, axis: .horizontal) { content, _ in
+                        content
+                    }
                 }
             }
         }
+        .scrollTargetBehavior(.paging)
     }
 }
 

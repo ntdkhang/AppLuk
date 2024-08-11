@@ -15,7 +15,7 @@ struct Knowledge: Identifiable {
     var contentPages: [String] // each index is the string of content on one page. What's the limit for word count?
 
     // Every contentPage needs to have a corresponding image. The image could be null, in that case, we'll use a black background
-    var images: [URL?] // images.length == contentPage.length
+    var imageUrls: [URL?] // images.length == contentPage.length
 
     var relativeTimeString: String {
         var formatStyle = Date.RelativeFormatStyle()
@@ -39,7 +39,7 @@ struct Knowledge: Identifiable {
                 Lý do số 3: ẻm rất năng động và khoẻ khoắn
                 """,
             ],
-            images:
+            imageUrls:
             [
                 URL(string: "https://cdn.britannica.com/22/234622-050-4D6BD081/Australian-shepherd-dog-red-merle.jpg"),
                 nil,
