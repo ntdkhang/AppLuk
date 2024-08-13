@@ -10,15 +10,43 @@ import SwiftUI
 struct CreateKnowledgeView: View {
     @State var contentPages: [String] = [""]
     @State var imageUrls: [URL?] = [nil]
+    @Environment(\.dismiss) private var dismiss
+
     var body: some View {
         VStack {
-            CreateImageCarouselView(contentPages: $contentPages, imageUrls: imageUrls)
+            CreateImageCarouselView(contentPages: $contentPages, imageUrls: $imageUrls)
+            HStack {
+                Image(systemName: "photo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 30)
+
+                Image(systemName: "xmark.bin")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 30)
+                    .padding(.horizontal)
+
+                Button {
+                    contentPages.append("")
+                    imageUrls.append(nil)
+                    print(contentPages.count)
+                } label: {
+                    Image(systemName: "plus.rectangle")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 30)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+            }
+            .padding()
         }
         .navigationBarBackButtonHidden(true)
         .frame(maxHeight: .infinity, alignment: .top)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
+                    dismiss()
                 } label: {
                     Text("Cancel")
                 }
@@ -83,7 +111,7 @@ struct CreatePageView: View {
 struct CreateImageCarouselView: View {
     @State private var scrollID: Int?
     @Binding var contentPages: [String]
-    @State var imageUrls: [URL?] = []
+    @Binding var imageUrls: [URL?]
 
     var body: some View {
         VStack {
@@ -108,9 +136,13 @@ struct CreateImageCarouselView: View {
             .scrollTargetBehavior(.paging)
 
             /// Indicator bar
-            // does this look better inside or outside of the image?
             IndicatorView(imageCount: imageUrls.count, scrollID: scrollID)
                 .frame(alignment: .top)
+        }
+        .onChange(of: imageUrls.count) {
+            withAnimation {
+                scrollID = imageUrls.count - 1
+            }
         }
     }
 }
