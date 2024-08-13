@@ -10,14 +10,113 @@ import SwiftUI
 struct KnowledgeView: View {
     var knowledge: Knowledge = .example1
     var body: some View {
-        VStack {
-            TopBarView()
+        NavigationStack {
+            VStack {
+                TopBarView()
 
-            IdeaCreatorView(knowledge: knowledge)
+                PostedByView(knowledge: knowledge)
 
-            ImageCarouselView(knowledge: knowledge)
-                .frame(maxHeight: .infinity, alignment: .top)
+                ImageCarouselView(knowledge: knowledge)
+                    .frame(maxWidth: .infinity)
+                    .layoutPriority(1)
+
+                ReactionView()
+
+                ReplyBoxView()
+
+                BottomBarView()
+                    .frame(maxHeight: .infinity, alignment: .top)
+            }
+            .background(
+                Color(red: 53 / 256, green: 53 / 256, blue: 53 / 256)
+                // Color(red: 30 / 256, green: 30 / 256, blue: 30 / 256)
+            )
         }
+    }
+}
+
+struct BottomBarView: View {
+    var body: some View {
+        HStack {
+            NavigationLink(destination: CreateKnowledgeView()) {
+                Image(systemName: "square.and.pencil")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 40)
+                    .padding()
+            }
+        }
+    }
+}
+
+struct ReplyBoxView: View {
+    var body: some View {
+        HStack {
+            RoundedRectangle(cornerRadius: 30)
+                .stroke()
+                .overlay {
+                    HStack {
+                        Image("Sua_ava")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 40)
+                            .clipShape(Circle())
+                        Text("Đúng nhận sai cãi ...")
+                            .padding()
+                    }
+                    .padding(.horizontal)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .padding(.horizontal, 24)
+                .frame(width: .infinity, height: 60)
+        }
+        .foregroundColor(Color(.lightGray))
+    }
+}
+
+struct ReactionView: View {
+    private var reactionList: [Character] = ["🍄"]
+    var body: some View {
+        HStack {
+            Button {
+            } label: {
+                Text("🍄")
+                    .font(iconFont)
+            }
+            .padding(8)
+
+            Button {
+            } label: {
+                Text("🗿")
+                    .font(iconFont)
+            }
+            .padding(8)
+
+            Button {
+            } label: {
+                Text("🤡")
+                    .font(iconFont)
+            }
+            .padding(8)
+
+            Button {
+            } label: {
+                Text("🚨")
+                    .font(iconFont)
+            }
+            .padding(8)
+
+            Button {
+            } label: {
+                Text("🚩")
+                    .font(iconFont)
+            }
+            .padding(8)
+        }
+    }
+
+    private var iconFont: Font {
+        .system(size: 30)
     }
 }
 
@@ -26,6 +125,19 @@ struct PageView: View {
     var pageContent: String
 
     var body: some View {
+        ZStack {
+            clippedImage
+            Color(.black)
+                .opacity(0.7)
+            Text(pageContent)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .padding(16)
+        }
+        .aspectRatio(1.0, contentMode: .fit)
+        .clipShape(RoundedRectangle(cornerRadius: 30))
+    }
+
+    var clippedImage: some View {
         Color.clear
             .aspectRatio(1.0, contentMode: .fit)
             .overlay(
@@ -34,8 +146,7 @@ struct PageView: View {
                         .resizable()
                         .scaledToFill()
                 } placeholder: {
-                    RoundedRectangle(cornerRadius: 30)
-                        .foregroundColor(.gray)
+                    Color.gray
                 }
             )
             .clipShape(RoundedRectangle(cornerRadius: 30))
@@ -43,27 +154,54 @@ struct PageView: View {
 }
 
 struct ImageCarouselView: View {
+    @State private var scrollID: Int?
     var knowledge: Knowledge
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHStack(spacing: 0) {
-                ForEach(knowledge.imageUrls.indices, id: \.self) { i in
-                    VStack {
-                        PageView(imageUrl: knowledge.imageUrls[i], pageContent: knowledge.contentPages[i])
-                            .padding(4)
-                    }
-                    .containerRelativeFrame(.horizontal)
-                    .scrollTransition(.animated, axis: .horizontal) { content, _ in
-                        content
+        VStack {
+            /// Images scroll
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 0) {
+                    ForEach(knowledge.imageUrls.indices, id: \.self) { i in
+                        VStack {
+                            PageView(imageUrl: knowledge.imageUrls[i], pageContent: knowledge.contentPages[i])
+                                .padding(4)
+                        }
+                        .containerRelativeFrame(.horizontal)
+                        .scrollTransition(.animated, axis: .horizontal) { content, phase in
+                            content
+                                .opacity(phase.isIdentity ? 1.0 : 0.6)
+                        }
                     }
                 }
+                .scrollTargetLayout()
             }
+            .scrollPosition(id: $scrollID)
+            .scrollTargetBehavior(.paging)
+
+            /// Indicator bar
+            // does this look better inside or outside of the image?
+            IndicatorView(imageCount: knowledge.imageUrls.count, scrollID: scrollID)
         }
-        .scrollTargetBehavior(.paging)
     }
 }
 
-struct IdeaCreatorView: View {
+struct IndicatorView: View {
+    let imageCount: Int
+    let scrollID: Int?
+
+    var body: some View {
+        HStack {
+            ForEach(0 ..< imageCount, id: \.self) { curIndex in
+                let scrollIndex = scrollID ?? 0
+                Image(systemName: "circle.fill")
+                    .font(.system(size: 8))
+                    .foregroundColor(scrollIndex == curIndex ? .white : Color(.systemGray6))
+            }
+        }
+    }
+}
+
+struct PostedByView: View {
     var knowledge: Knowledge
     var body: some View {
         HStack {
@@ -82,7 +220,7 @@ struct IdeaCreatorView: View {
 struct TopBarView: View {
     var body: some View {
         HStack {
-            Image(systemName: "line.3.horizontal.circle")
+            Image(systemName: "line.3.horizontal")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 40)
@@ -109,6 +247,7 @@ struct TopBarView: View {
                 .frame(width: 40)
                 .padding()
         }
+        .foregroundColor(Color(.lightGray))
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  Idea.swift
+//  Knowledge.swift
 //  AppLuk
 //
 //  Created by Khang Nguyen on 8/2/24.
@@ -17,6 +17,8 @@ struct Knowledge: Identifiable {
     // Every contentPage needs to have a corresponding image. The image could be null, in that case, we'll use a black background
     var imageUrls: [URL?] // images.length == contentPage.length
 
+    var tags: [String] = []
+
     var relativeTimeString: String {
         var formatStyle = Date.RelativeFormatStyle()
         formatStyle.presentation = .numeric
@@ -30,6 +32,7 @@ struct Knowledge: Identifiable {
             [
                 """
                 3 Lý do tại sao nên nuôi 1 (hoặc nhiều) em Australian Shepherd:
+
                 Lý do số 1: ẻm rất là cuteeeee phô mai queeeeee
                 """,
                 """
@@ -44,6 +47,10 @@ struct Knowledge: Identifiable {
                 URL(string: "https://cdn.britannica.com/22/234622-050-4D6BD081/Australian-shepherd-dog-red-merle.jpg"),
                 nil,
                 URL(string: "https://as1.ftcdn.net/v2/jpg/04/98/65/04/1000_F_498650403_XfVkkiHQMhoG5DCxACGSvRX0qMSRfyOw.jpg"),
+            ],
+            tags:
+            [
+                "dogs",
             ])
     }
 }

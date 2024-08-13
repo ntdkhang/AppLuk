@@ -8,11 +8,16 @@
 import Foundation
 
 struct User: Identifiable {
-    var id = UUID()
-    var name: String
-    var avatar: URL?
+    public let id = UUID()
+    public let name: String
+    public let avatar: URL?
+    public let isCurrentUser: Bool
 
     static var example_DK: User {
-        .init(name: "Khang Nguyen")
+        .init(name: "Khang Nguyen", avatar: nil, isCurrentUser: true)
+    }
+
+    static var example_Sua: User {
+        .init(name: "Sua Bui", avatar: nil, isCurrentUser: false)
     }
 }
