@@ -9,9 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NavigationView {
-            KnowledgeView(knowledge: .example1)
-        }
+        KnowledgeView(knowledge: .example1)
     }
 }
 
