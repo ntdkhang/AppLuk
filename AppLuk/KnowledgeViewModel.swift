@@ -45,6 +45,14 @@ class KnowledgeViewModel: ObservableObject {
         images.append(nil)
     }
 
+    func removeCurrentImage() {
+        images[scrollID ?? 0] = nil
+    }
+
+    var disableRemoveCurrentImage: Bool {
+        images[scrollID ?? 0] == nil
+    }
+
     var pageCount: Int {
         contentPages.count
     }

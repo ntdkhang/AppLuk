@@ -15,6 +15,7 @@ struct CreateKnowledgeView: View {
     var body: some View {
         VStack {
             CreateImageCarouselView(knowledgeVM: knowledgeVM)
+
             HStack {
                 PhotosPicker(selection: $knowledgeVM.selectedItem, matching: .images) {
                     Image(systemName: "photo")
@@ -23,12 +24,18 @@ struct CreateKnowledgeView: View {
                         .frame(height: 30)
                 }
 
-                Image(systemName: "xmark.bin")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 30)
-                    .padding(.horizontal)
+                Button {
+                    knowledgeVM.removeCurrentImage()
+                } label: {
+                    Image(systemName: "xmark.bin")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 30)
+                        .padding(.horizontal)
+                }
+                .disabled(knowledgeVM.disableRemoveCurrentImage)
 
+                Spacer()
                 Button {
                     knowledgeVM.newPage()
                 } label: {
@@ -36,7 +43,6 @@ struct CreateKnowledgeView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 30)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
                 }
             }
             .padding()
@@ -86,7 +92,6 @@ struct CreatePageView: View {
                 .disableAutocorrection(true)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 .padding(16)
-            // Text(pageContent)
         }
         .aspectRatio(1.0, contentMode: .fit)
         .clipShape(RoundedRectangle(cornerRadius: 30))

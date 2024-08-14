@@ -129,9 +129,12 @@ struct PageView: View {
             clippedImage
             Color(.black)
                 .opacity(0.7)
-            Text(pageContent)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                .padding(16)
+            ScrollView(.vertical) {
+                Text(pageContent)
+                    .lineLimit(nil)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    .padding(16)
+            }
         }
         .aspectRatio(1.0, contentMode: .fit)
         .clipShape(RoundedRectangle(cornerRadius: 30))
