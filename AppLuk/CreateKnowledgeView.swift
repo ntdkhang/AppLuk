@@ -5,21 +5,23 @@
 //  Created by Khang Nguyen on 8/12/24.
 //
 
+import PhotosUI
 import SwiftUI
 
 struct CreateKnowledgeView: View {
-    @State var contentPages: [String] = [""]
-    @State var imageUrls: [URL?] = [nil]
+    @StateObject var knowledgeVM = KnowledgeViewModel()
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         VStack {
-            CreateImageCarouselView(contentPages: $contentPages, imageUrls: $imageUrls)
+            CreateImageCarouselView(knowledgeVM: knowledgeVM)
             HStack {
-                Image(systemName: "photo")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 30)
+                PhotosPicker(selection: $knowledgeVM.selectedItem, matching: .images) {
+                    Image(systemName: "photo")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 30)
+                }
 
                 Image(systemName: "xmark.bin")
                     .resizable()
@@ -28,9 +30,7 @@ struct CreateKnowledgeView: View {
                     .padding(.horizontal)
 
                 Button {
-                    contentPages.append("")
-                    imageUrls.append(nil)
-                    print(contentPages.count)
+                    knowledgeVM.newPage()
                 } label: {
                     Image(systemName: "plus.rectangle")
                         .resizable()
@@ -73,7 +73,7 @@ struct CreateKnowledgeView: View {
 }
 
 struct CreatePageView: View {
-    var imageUrl: URL?
+    @Binding var image: Image?
     @Binding var pageContent: String
 
     var body: some View {
@@ -92,35 +92,39 @@ struct CreatePageView: View {
         .clipShape(RoundedRectangle(cornerRadius: 30))
     }
 
+    @ViewBuilder
+    var backgroundImage: some View {
+        if let image = image {
+            image
+                .resizable()
+                .scaledToFill()
+        } else {
+            Color.gray
+        }
+    }
+
     var clippedImage: some View {
         Color.clear
             .aspectRatio(1.0, contentMode: .fit)
             .overlay(
-                AsyncImage(url: imageUrl) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                } placeholder: {
-                    Color.gray
-                }
+                backgroundImage
             )
             .clipShape(RoundedRectangle(cornerRadius: 30))
     }
 }
 
 struct CreateImageCarouselView: View {
-    @State private var scrollID: Int?
-    @Binding var contentPages: [String]
-    @Binding var imageUrls: [URL?]
+    @ObservedObject var knowledgeVM: KnowledgeViewModel
 
     var body: some View {
         VStack {
             /// Images scroll
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 0) {
-                    ForEach(imageUrls.indices, id: \.self) { i in
+                    ForEach(knowledgeVM.imageUrls.indices, id: \.self) { i in
                         VStack {
-                            CreatePageView(imageUrl: imageUrls[i], pageContent: $contentPages[i])
+                            CreatePageView(image: $knowledgeVM.images[i],
+                                           pageContent: $knowledgeVM.contentPages[i])
                                 .padding(4)
                         }
                         .containerRelativeFrame(.horizontal)
@@ -132,16 +136,24 @@ struct CreateImageCarouselView: View {
                 }
                 .scrollTargetLayout()
             }
-            .scrollPosition(id: $scrollID)
+            .scrollPosition(id: $knowledgeVM.scrollID)
             .scrollTargetBehavior(.paging)
 
             /// Indicator bar
-            IndicatorView(imageCount: imageUrls.count, scrollID: scrollID)
+            IndicatorView(imageCount: knowledgeVM.imageUrls.count, scrollID: knowledgeVM.scrollID)
                 .frame(alignment: .top)
         }
-        .onChange(of: imageUrls.count) {
+        .onChange(of: knowledgeVM.pageCount) {
             withAnimation {
-                scrollID = imageUrls.count - 1
+                knowledgeVM.scrollID = knowledgeVM.pageCount - 1
+
+                // TODO: also move the focus of the text field to the new text field
+                UIApplication.shared.sendAction(
+                    #selector(UIResponder.resignFirstResponder),
+                    to: nil,
+                    from: nil,
+                    for: nil
+                )
             }
         }
     }

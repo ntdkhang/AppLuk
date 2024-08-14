@@ -16,6 +16,7 @@
 		4276316D2C6A506D005BF2CA /* CreateKnowledgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4276316C2C6A506D005BF2CA /* CreateKnowledgeView.swift */; };
 		428AAAC32C5D304D006B6647 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 428AAAC22C5D304D006B6647 /* MarkdownUI */; };
 		428AAAC52C5D3259006B6647 /* Knowledge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428AAAC42C5D3259006B6647 /* Knowledge.swift */; };
+		42B5974B2C6B977200C37F66 /* KnowledgeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B5974A2C6B977200C37F66 /* KnowledgeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		427631662C67A812005BF2CA /* KnowledgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeView.swift; sourceTree = "<group>"; };
 		4276316C2C6A506D005BF2CA /* CreateKnowledgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateKnowledgeView.swift; sourceTree = "<group>"; };
 		428AAAC42C5D3259006B6647 /* Knowledge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Knowledge.swift; sourceTree = "<group>"; };
+		42B5974A2C6B977200C37F66 /* KnowledgeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +47,7 @@
 		4212EDC32C56D9E300F30DD2 = {
 			isa = PBXGroup;
 			children = (
+				42B5974A2C6B977200C37F66 /* KnowledgeViewModel.swift */,
 				4212EDCE2C56D9E400F30DD2 /* AppLuk */,
 				4212EDCD2C56D9E400F30DD2 /* Products */,
 			);
@@ -162,6 +165,7 @@
 				4212EDD02C56D9E400F30DD2 /* AppLukApp.swift in Sources */,
 				4276316D2C6A506D005BF2CA /* CreateKnowledgeView.swift in Sources */,
 				427631652C6545C2005BF2CA /* User.swift in Sources */,
+				42B5974B2C6B977200C37F66 /* KnowledgeViewModel.swift in Sources */,
 				428AAAC52C5D3259006B6647 /* Knowledge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

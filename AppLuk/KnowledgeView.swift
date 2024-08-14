@@ -68,7 +68,7 @@ struct ReplyBoxView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .padding(.horizontal, 24)
-                .frame(width: .infinity, height: 60)
+                .frame(height: 60)
         }
         .foregroundColor(Color(.lightGray))
     }
