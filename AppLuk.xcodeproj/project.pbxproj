@@ -34,7 +34,6 @@
 		428AAAC42C5D3259006B6647 /* Knowledge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Knowledge.swift; sourceTree = "<group>"; };
 		42B5974A2C6B977200C37F66 /* KnowledgeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeViewModel.swift; sourceTree = "<group>"; };
 		42B597582C6D534F00C37F66 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		42B5975A2C6D5E3B00C37F66 /* Chat */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Chat; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,14 +69,11 @@
 		4212EDCE2C56D9E400F30DD2 /* AppLuk */ = {
 			isa = PBXGroup;
 			children = (
-				42B5975A2C6D5E3B00C37F66 /* Chat */,
 				4212EDCF2C56D9E400F30DD2 /* AppLukApp.swift */,
-				4212EDD12C56D9E400F30DD2 /* ContentView.swift */,
-				427631662C67A812005BF2CA /* KnowledgeView.swift */,
-				42B5974A2C6B977200C37F66 /* KnowledgeViewModel.swift */,
-				4276316C2C6A506D005BF2CA /* CreateKnowledgeView.swift */,
-				428AAAC42C5D3259006B6647 /* Knowledge.swift */,
+				42B597822C6D827300C37F66 /* Messaging */,
+				42B597832C6D828400C37F66 /* Posts */,
 				427631642C6545C2005BF2CA /* User.swift */,
+				4212EDD12C56D9E400F30DD2 /* ContentView.swift */,
 				4212EDD32C56D9E500F30DD2 /* Assets.xcassets */,
 				42B597582C6D534F00C37F66 /* GoogleService-Info.plist */,
 				4212EDD52C56D9E600F30DD2 /* Preview Content */,
@@ -91,6 +87,24 @@
 				4212EDD62C56D9E600F30DD2 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		42B597822C6D827300C37F66 /* Messaging */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Messaging;
+			sourceTree = "<group>";
+		};
+		42B597832C6D828400C37F66 /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				427631662C67A812005BF2CA /* KnowledgeView.swift */,
+				42B5974A2C6B977200C37F66 /* KnowledgeViewModel.swift */,
+				4276316C2C6A506D005BF2CA /* CreateKnowledgeView.swift */,
+				428AAAC42C5D3259006B6647 /* Knowledge.swift */,
+			);
+			path = Posts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
