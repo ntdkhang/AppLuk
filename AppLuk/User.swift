@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct User: Codable, Hashable, Identifiable {
+public struct User: Codable, Hashable, Identifiable {
     public let id: String
     public let name: String
     public let userName: String // unique

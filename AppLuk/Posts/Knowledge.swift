@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ExyteChat
 
 struct Knowledge: Identifiable {
     var id: UUID = UUID()
@@ -28,7 +29,7 @@ struct Knowledge: Identifiable {
     }
 
     static var example1: Knowledge {
-        .init(timePosted: .now.addingTimeInterval(-30000), postedBy: .example_DK, contentPages:
+        .init(timePosted: .now.addingTimeInterval(-30000), postedBy: User(id: "", name: "Khang Nguyen", avatarURL: nil, isCurrentUser: true), contentPages:
             [
                 """
                 3 Lý do tại sao nên nuôi 1 (hoặc nhiều) em Australian Shepherd:
