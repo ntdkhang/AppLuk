@@ -51,6 +51,7 @@ class AuthenticationViewModel: ObservableObject {
     func registerAuthStateHandler() {
         if authStateHandler == nil {
             authStateHandler = Auth.auth().addStateDidChangeListener { _, user in
+                DataStorageManager.currentUserId = user?.uid ?? ""
                 self.user = user
                 self.authenticationState = user == nil ? .unauthenticated : .authenticated
                 self.displayName = user?.email ?? ""

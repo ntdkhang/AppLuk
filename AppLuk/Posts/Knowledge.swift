@@ -5,8 +5,8 @@
 //  Created by Khang Nguyen on 8/2/24.
 //
 
-import Foundation
 import ExyteChat
+import Foundation
 
 struct Knowledge: Identifiable {
     var id: UUID = UUID()
@@ -29,7 +29,7 @@ struct Knowledge: Identifiable {
     }
 
     static var example1: Knowledge {
-        .init(timePosted: .now.addingTimeInterval(-30000), postedBy: User(id: "", name: "Khang Nguyen", avatarURL: nil, isCurrentUser: true), contentPages:
+        .init(timePosted: .now.addingTimeInterval(-30000), postedBy: User.example_DK, contentPages:
             [
                 """
                 3 Lý do tại sao nên nuôi 1 (hoặc nhiều) em Australian Shepherd:

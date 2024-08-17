@@ -10,10 +10,7 @@ import Foundation
 
 class DataStorageManager: ObservableObject {
     static var shared = DataStorageManager()
+    static var currentUserId: String = ""
 
-    @Published var conversations: [Conversation] = []
 
-    // func getConversations() async {
-    //
-    // }
 }

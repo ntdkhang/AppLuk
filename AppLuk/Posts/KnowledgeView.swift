@@ -221,13 +221,18 @@ struct PostedByView: View {
 }
 
 struct TopBarView: View {
+    @EnvironmentObject var authVM: AuthenticationViewModel
     var body: some View {
         HStack {
-            Image(systemName: "line.3.horizontal")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 40)
-                .padding()
+            Button {
+                authVM.signOut()
+            } label: {
+                Image(systemName: "line.3.horizontal")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 40)
+                    .padding()
+            }
 
             Spacer()
 
@@ -244,11 +249,15 @@ struct TopBarView: View {
 
             Spacer()
 
-            Image(systemName: "bubble.circle")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 40)
-                .padding()
+            NavigationLink {
+                ConversationsView()
+            } label: {
+                Image(systemName: "bubble.circle")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 40)
+                    .padding()
+            }
         }
         .foregroundColor(Color(.lightGray))
     }
