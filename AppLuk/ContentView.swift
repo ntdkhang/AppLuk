@@ -9,10 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        AuthenticatedView {
-            KnowledgeView(knowledge: .example1)
-        }
-        .environmentObject(AuthenticationViewModel())
+        KnowledgeView(knowledge: .example1)
+            .task {
+            }
     }
 }
 

@@ -5,20 +5,17 @@
 //  Created by Khang Nguyen on 8/8/24.
 //
 
+import FirebaseFirestore
 import Foundation
 
-public struct User: Codable, Hashable, Identifiable {
-    public let id: String
-    public let name: String
-    public let userName: String // unique
-    public let avatar: URL?
-    public let isCurrentUser: Bool
+struct User: Codable, Hashable, Identifiable {
+    @DocumentID public var id: String?
+    let name: String
+    let userName: String // unique
+    let avatarUrl: String
+    let friendsId: [String] // friend list (id)
 
-    static var example_DK: User {
-        .init(id: "", name: "Khang Nguyen", userName: "vuatretrau", avatar: nil, isCurrentUser: true)
-    }
-
-    static var example_Sua: User {
-        .init(id: "", name: "Sua Bui", userName: "noble", avatar: nil, isCurrentUser: false)
+    var isCurrentUser: Bool {
+        id ?? "" == DataStorageManager.currentUserId
     }
 }

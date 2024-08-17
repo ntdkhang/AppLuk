@@ -29,7 +29,7 @@ struct Knowledge: Identifiable {
     }
 
     static var example1: Knowledge {
-        .init(timePosted: .now.addingTimeInterval(-30000), postedBy: User.example_DK, contentPages:
+        .init(timePosted: .now.addingTimeInterval(-30000), postedBy: User(id: "", name: "Khang Nguyen", userName: "vuatretrau", avatarUrl: "", friendsId: []), contentPages:
             [
                 """
                 3 Lý do tại sao nên nuôi 1 (hoặc nhiều) em Australian Shepherd:

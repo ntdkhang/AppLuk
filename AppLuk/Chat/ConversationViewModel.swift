@@ -11,6 +11,7 @@ import Foundation
 class ConversationViewModel: ObservableObject {
     @Published var messages: [Message] = []
     @Published var conversation: Conversation
+    @Published var imageUrl: URL? // partner's avatar image url
 
     init(conversation: Conversation) {
         self.conversation = conversation

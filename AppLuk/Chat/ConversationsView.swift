@@ -23,5 +23,4 @@ struct ConversationsView: View {
             await conversationsVM.getConversations()
         }
     }
-
 }

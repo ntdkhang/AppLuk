@@ -8,20 +8,27 @@
 import FirebaseFirestore
 import Foundation
 
-public struct Conversation: Codable, Identifiable, Hashable {
-    @DocumentID public var id: String?
-    public let usersId: [String]
+struct Conversation: Codable, Identifiable, Hashable {
+    @DocumentID var id: String?
+    let usersId: [String]
+    let partner: User
+
+    var partnerId: String {
+        return usersId.first(where: { userId in
+            userId != DataStorageManager.currentUserId
+        }) ?? ""
+    }
 }
 
-public struct LatestMessageInChat: Codable, Hashable {
-    public var senderName: String
-    public var createdAt: Date?
-    public var text: String?
-    public var subtext: String?
+public struct FirestoreConversation: Codable, Identifiable, Hashable {
+    @DocumentID public var id: String?
+    public let usersId: [String]
 
-//    var isMyMessage: Bool {
-//        SessionManager.currentUser?.name == senderName
-//    }
+    var partnerId: String {
+        return usersId.first(where: { userId in
+            userId != DataStorageManager.currentUserId
+        }) ?? ""
+    }
 }
 
 // public struct FirestoreConversation: Codable, Identifiable, Hashable {

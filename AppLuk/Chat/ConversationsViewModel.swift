@@ -10,7 +10,7 @@ import Foundation
 
 class ConversationsViewModel: ObservableObject {
     @Published var conversations: [Conversation] = []
-    var db = Firestore.firestore()
+    let db = Firestore.firestore()
 
     func getConversations() async {
         db.collection("conversations").whereField("usersId", arrayContains: DataStorageManager.currentUserId)
@@ -26,10 +26,36 @@ class ConversationsViewModel: ObservableObject {
                         return conversation
                     } catch {
                         print(error)
+                        return nil
                     }
-                    return nil
                 }
+
                 self.conversations = conversations
             }
+    }
+
+    func createConversation(from: FirestoreConversation) async -> Conversation? {
+        guard let partner = await getUser(id: from.partnerId), let id = from.id else {
+            return nil
+        }
+        return Conversation(id: id, usersId: from.usersId, partner: partner)
+    }
+
+    func getUser(id: String) async -> User? {
+        let db = Firestore.firestore()
+        let ref = db.collection("users").document(id)
+        do {
+            let document = try await ref.getDocument()
+            if document.exists {
+                let user = try document.data(as: User.self)
+                return user
+            } else {
+                print("ERROR getting user")
+                return nil
+            }
+        } catch {
+            print("ERROR: \(error)")
+            return nil
+        }
     }
 }
