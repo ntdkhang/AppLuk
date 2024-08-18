@@ -5,20 +5,22 @@
 //  Created by Khang Nguyen on 8/2/24.
 //
 
-import ExyteChat
+import FirebaseFirestore
 import Foundation
 
-struct Knowledge: Identifiable {
-    var id: UUID = UUID()
+struct Knowledge: Codable, Identifiable {
+    @DocumentID var id: String?
     var timePosted: Date = .now
-    var postedBy: User
+    var postedById: String
 
-    var contentPages: [String] // each index is the string of content on one page. What's the limit for word count?
+    var contentPages: [String]
 
     // Every contentPage needs to have a corresponding image. The image could be null, in that case, we'll use a black background
     var imageUrls: [URL?] // images.length == contentPage.length
 
     var tags: [String] = []
+
+    var comments: [Comment] = []
 
     var relativeTimeString: String {
         var formatStyle = Date.RelativeFormatStyle()
@@ -29,7 +31,9 @@ struct Knowledge: Identifiable {
     }
 
     static var example1: Knowledge {
-        .init(timePosted: .now.addingTimeInterval(-30000), postedBy: User(id: "", name: "Khang Nguyen", userName: "vuatretrau", avatarUrl: "", friendsId: []), contentPages:
+        .init(timePosted: .now.addingTimeInterval(-30000),
+              postedById: "",
+              contentPages:
             [
                 """
                 3 Lý do tại sao nên nuôi 1 (hoặc nhiều) em Australian Shepherd:
@@ -212,4 +216,12 @@ struct Knowledge: Identifiable {
                 "dogs",
             ])
     }
+}
+
+struct Comment: Codable, Identifiable {
+    @DocumentID var id: String?
+    var postedById: String
+    var postedAt: Date
+
+    var text: String
 }

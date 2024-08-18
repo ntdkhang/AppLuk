@@ -9,7 +9,7 @@ import PhotosUI
 import SwiftUI
 
 struct CreateKnowledgeView: View {
-    @StateObject var knowledgeVM = KnowledgeViewModel()
+    @StateObject var knowledgeVM = CreateKnowledgeViewModel()
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -119,7 +119,7 @@ struct CreatePageView: View {
 }
 
 struct CreateImageCarouselView: View {
-    @ObservedObject var knowledgeVM: KnowledgeViewModel
+    @ObservedObject var knowledgeVM: CreateKnowledgeViewModel
 
     var body: some View {
         VStack {

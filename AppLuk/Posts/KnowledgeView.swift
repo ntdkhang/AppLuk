@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct KnowledgeView: View {
     var knowledge: Knowledge = .example1
@@ -220,7 +221,7 @@ struct PostedByView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 40)
                 .clipShape(Circle())
-            Text(knowledge.postedBy.name)
+            Text(knowledge.postedById.name)
                 .bold()
             Text(knowledge.relativeTimeString)
         }
@@ -228,11 +229,14 @@ struct PostedByView: View {
 }
 
 struct TopBarView: View {
-    @EnvironmentObject var authVM: AuthenticationViewModel
     var body: some View {
         HStack {
             Button {
-                authVM.signOut()
+                do {
+                    try Auth.auth().signOut()
+                } catch {
+                    print(error)
+                }
             } label: {
                 Image(systemName: "line.3.horizontal")
                     .resizable()

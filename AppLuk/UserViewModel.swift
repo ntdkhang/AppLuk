@@ -36,4 +36,10 @@ class UserViewModel: ObservableObject {
                 self.friends = friends
             }
     }
+
+    func friend(with id: String) -> User? {
+        return friends.first(where: { user in
+            user.id == id
+        })
+    }
 }
