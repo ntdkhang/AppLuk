@@ -60,6 +60,10 @@ struct CreateKnowledgeView: View {
 
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
+                    Task {
+                        await knowledgeVM.create()
+                        dismiss()
+                    }
                 } label: {
                     Text("Post")
                 }
@@ -79,7 +83,7 @@ struct CreateKnowledgeView: View {
 }
 
 struct CreatePageView: View {
-    @Binding var image: Image?
+    @Binding var image: UIImage?
     @Binding var pageContent: String
 
     var body: some View {
@@ -100,7 +104,7 @@ struct CreatePageView: View {
     @ViewBuilder
     var backgroundImage: some View {
         if let image = image {
-            image
+            Image(uiImage: image)
                 .resizable()
                 .scaledToFill()
         } else {

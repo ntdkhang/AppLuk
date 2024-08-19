@@ -5,8 +5,8 @@
 //  Created by Khang Nguyen on 8/10/24.
 //
 
-import SwiftUI
 import FirebaseAuth
+import SwiftUI
 
 struct KnowledgeView: View {
     var knowledge: Knowledge = .example1
@@ -57,17 +57,17 @@ struct ReplyBoxView: View {
                 .stroke()
                 .overlay {
                     HStack {
-                        AsyncImage(url: URL(string: "https://firebasestorage.googleapis.com/v0/b/blessed-by-knowledge-33707.appspot.com/o/avatars%2FReK9ac3suTfQx7mT4FhqirnGTfC2.png?alt=media&token=353169aa-d95c-43db-9e4e-f9c419281471"), content: { image in
+                        AsyncImage(url: DataStorageManager.currentUser?.avatarURL, content: { image in
                             image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 40)
-                            .clipShape(Circle())
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 40)
+                                .clipShape(Circle())
                         }, placeholder: {
                             Color.gray
-                            .frame(width: 40)
-                            .clipShape(Circle())
-                            
+                                .frame(width: 40)
+                                .clipShape(Circle())
+
                         })
                         Text("Đúng nhận sai cãi ...")
                             .padding()
@@ -129,7 +129,7 @@ struct ReactionView: View {
 }
 
 struct PageView: View {
-    var imageUrl: URL?
+    var imageUrl: String?
     var pageContent: String
 
     var body: some View {
@@ -152,7 +152,7 @@ struct PageView: View {
         Color.clear
             .aspectRatio(1.0, contentMode: .fit)
             .overlay(
-                AsyncImage(url: imageUrl) { image in
+                AsyncImage(url: URL(string: imageUrl ?? "")) { image in
                     image
                         .resizable()
                         .scaledToFill()
@@ -221,7 +221,7 @@ struct PostedByView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 40)
                 .clipShape(Circle())
-            Text(knowledge.postedById.name)
+            Text(DataStorageManager.shared.getFriendName(withId: knowledge.postedById))
                 .bold()
             Text(knowledge.relativeTimeString)
         }

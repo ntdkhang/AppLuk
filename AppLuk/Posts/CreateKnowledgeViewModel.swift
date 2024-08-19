@@ -6,6 +6,7 @@
 //
 
 import FirebaseFirestore
+import FirebaseStorage
 import Foundation
 import PhotosUI
 import SwiftUI
@@ -14,7 +15,7 @@ import SwiftUI
 class CreateKnowledgeViewModel: ObservableObject {
     @Published var contentPages: [String] = [""]
     @Published var imageUrls: [URL?] = [nil]
-    @Published var images: [Image?] = [nil]
+    @Published var images: [UIImage?] = [nil]
     @Published var scrollID: Int?
 
     @Published var selectedItem: PhotosPickerItem? = nil {
@@ -31,7 +32,7 @@ class CreateKnowledgeViewModel: ObservableObject {
         do {
             if let data = try await imageSelection?.loadTransferable(type: Data.self) {
                 if let uiImage = UIImage(data: data) {
-                    images[scrollID ?? 0] = Image(uiImage: uiImage)
+                    images[scrollID ?? 0] = uiImage
                     selectedItem = nil
                 }
             }
@@ -58,12 +59,52 @@ class CreateKnowledgeViewModel: ObservableObject {
         contentPages.count
     }
 
-    func create() {
+    func create() async {
+        let db = Firestore.firestore()
+        // create a new document, get ID
+        let knowledgeRef = db.collection("knowledges").document()
+        let knowledgeId = knowledgeRef.documentID
+
         // upload all images to storage, then retrieve the urls
-        var knowledge = Knowledge(postedById: DataStorageManager.currentUserId, contentPages: contentPages, imageUrls: [])
+        let urls = await uploadImages(knowledgeId: knowledgeId)
 
         // create a new post from the current items
+        var knowledge = Knowledge(postedById: DataStorageManager.currentUserId, contentPages: contentPages, imageUrls: urls)
 
         // post to database
+        do {
+            try knowledgeRef.setData(from: knowledge)
+        } catch {
+            print("Error posting knowledge: \(error)")
+        }
+    }
+
+    private func uploadImages(knowledgeId _: String) async -> [String?] {
+        let storageRef = Storage.storage().reference(withPath: "/knowledge_images")
+
+        do {
+            return try await withThrowingTaskGroup(of: String?.self) { group in
+                var urlsString = [String?]()
+
+                for (index, uiImage) in self.images.enumerated() {
+                    group.addTask(priority: .background) {
+                        guard let uiImage = uiImage, let data = uiImage.jpegData(compressionQuality: 0.2) else {
+                            return nil
+                        }
+                        let _ = try await storageRef.child("\(index)").putDataAsync(data)
+                        return try await storageRef.child("\(index)").downloadURL().absoluteString
+                    }
+                }
+
+                for try await uploadedPhotoString in group {
+                    urlsString.append(uploadedPhotoString)
+                }
+
+                return urlsString
+            }
+        } catch {
+            print("Error uploading images: \(error)")
+            return []
+        }
     }
 }

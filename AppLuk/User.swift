@@ -18,4 +18,8 @@ struct User: Codable, Hashable, Identifiable {
     var isCurrentUser: Bool {
         id ?? "" == DataStorageManager.currentUserId
     }
+
+    var avatarURL: URL? {
+        URL(string: avatarUrl)
+    }
 }
