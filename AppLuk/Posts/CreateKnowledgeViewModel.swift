@@ -69,7 +69,7 @@ class CreateKnowledgeViewModel: ObservableObject {
         let urls = await uploadImages(knowledgeId: knowledgeId)
 
         // create a new post from the current items
-        var knowledge = Knowledge(postedById: DataStorageManager.currentUserId, contentPages: contentPages, imageUrls: urls)
+        let knowledge = Knowledge(postedById: DataStorageManager.currentUserId, contentPages: contentPages, imageUrls: urls)
 
         // post to database
         do {

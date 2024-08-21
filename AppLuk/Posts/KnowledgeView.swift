@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct KnowledgeView: View {
+    @State private var showComments = false
     var knowledge: Knowledge = .example1
     var body: some View {
         VStack {
@@ -16,26 +17,70 @@ struct KnowledgeView: View {
             ImageCarouselView(knowledge: knowledge)
                 .frame(maxWidth: .infinity)
                 .layoutPriority(1)
+
+            Button {
+                showComments.toggle()
+            } label: {
+                Image(systemName: "text.bubble")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 40)
+            }
             // .frame(maxHeight: .infinity, alignment: .top)
         }
         .background(
             Color.knowledgeBackground
-
-            // Color(red: 30 / 256, green: 30 / 256, blue: 30 / 256)
         )
+        .sheet(isPresented: $showComments) {
+            CommentView(knowledgeId: knowledge.id ?? "", comments: knowledge.comments)
+        }
     }
 }
 
-struct BottomBarView: View {
+struct PostedByView: View {
+    var knowledge: Knowledge
     var body: some View {
         HStack {
-            NavigationLink(destination: CreateKnowledgeView()) {
-                Image(systemName: "square.and.pencil")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 40)
-                    .padding()
+            Image("DK_ava")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 40)
+                .clipShape(Circle())
+            Text(DataStorageManager.shared.getFriendName(withId: knowledge.postedById))
+                .bold()
+            Text(knowledge.relativeTimeString)
+        }
+    }
+}
+
+struct ImageCarouselView: View {
+    @State private var scrollID: Int?
+    var knowledge: Knowledge
+    var body: some View {
+        VStack {
+            /// Images scroll
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 0) {
+                    ForEach(knowledge.imageUrls.indices, id: \.self) { i in
+                        VStack {
+                            PageView(imageUrl: knowledge.imageUrls[i], pageContent: knowledge.contentPages[i])
+                                .padding(4)
+                        }
+                        .containerRelativeFrame(.horizontal)
+                        // .scrollTransition(.animated, axis: .horizontal) { content, phase in
+                        //     content
+                        //         .opacity(phase.isIdentity ? 1.0 : 0.6)
+                        // }
+                    }
+                }
+                .scrollTargetLayout()
             }
+            .scrollPosition(id: $scrollID)
+            .scrollTargetBehavior(.paging)
+
+            /// Indicator bar
+            // does this look better inside or outside of the image?
+            IndicatorView(imageCount: knowledge.imageUrls.count, scrollID: scrollID)
         }
     }
 }
@@ -76,38 +121,6 @@ struct PageView: View {
     }
 }
 
-struct ImageCarouselView: View {
-    @State private var scrollID: Int?
-    var knowledge: Knowledge
-    var body: some View {
-        VStack {
-            /// Images scroll
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 0) {
-                    ForEach(knowledge.imageUrls.indices, id: \.self) { i in
-                        VStack {
-                            PageView(imageUrl: knowledge.imageUrls[i], pageContent: knowledge.contentPages[i])
-                                .padding(4)
-                        }
-                        .containerRelativeFrame(.horizontal)
-                        // .scrollTransition(.animated, axis: .horizontal) { content, phase in
-                        //     content
-                        //         .opacity(phase.isIdentity ? 1.0 : 0.6)
-                        // }
-                    }
-                }
-                .scrollTargetLayout()
-            }
-            .scrollPosition(id: $scrollID)
-            .scrollTargetBehavior(.paging)
-
-            /// Indicator bar
-            // does this look better inside or outside of the image?
-            IndicatorView(imageCount: knowledge.imageUrls.count, scrollID: scrollID)
-        }
-    }
-}
-
 struct IndicatorView: View {
     let imageCount: Int
     let scrollID: Int?
@@ -120,22 +133,6 @@ struct IndicatorView: View {
                     .font(.system(size: 8))
                     .foregroundColor(scrollIndex == curIndex ? .white : Color(.systemGray6))
             }
-        }
-    }
-}
-
-struct PostedByView: View {
-    var knowledge: Knowledge
-    var body: some View {
-        HStack {
-            Image("DK_ava")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 40)
-                .clipShape(Circle())
-            Text(DataStorageManager.shared.getFriendName(withId: knowledge.postedById))
-                .bold()
-            Text(knowledge.relativeTimeString)
         }
     }
 }

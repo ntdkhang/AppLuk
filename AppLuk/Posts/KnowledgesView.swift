@@ -105,8 +105,5 @@ struct ReplyBoxView: View {
                 .frame(height: 60)
         }
         .foregroundColor(Color(.lightGray))
-        .onAppear {
-            print("AVATAR: \(DataStorageManager.currentUser?.avatarUrl ?? " nil")")
-        }
     }
 }

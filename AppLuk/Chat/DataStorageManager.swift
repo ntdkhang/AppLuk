@@ -34,7 +34,6 @@ class DataStorageManager: ObservableObject {
                 }
                 do {
                     let user = try document.data(as: User.self)
-                    print("USER_Fetched: \(user.avatarUrl)")
                     self.currentUser = user
                 } catch {
                     print("Error reading current user")
