@@ -17,6 +17,12 @@ class DataStorageManager: ObservableObject {
         shared.currentUser
     }
 
+    static var friendsAndSelfId: [String] {
+        var friendsId = currentUser?.friendsId ?? []
+        friendsId.append(currentUserId)
+        return friendsId
+    }
+
     @Published private var currentUser: User?
 
     func fetchCurrentUser() {
@@ -28,6 +34,7 @@ class DataStorageManager: ObservableObject {
                 }
                 do {
                     let user = try document.data(as: User.self)
+                    print("USER_Fetched: \(user.avatarUrl)")
                     self.currentUser = user
                 } catch {
                     print("Error reading current user")

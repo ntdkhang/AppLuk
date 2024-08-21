@@ -38,6 +38,9 @@
 		42B5983E2C711B9100C37F66 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B5983D2C711B9100C37F66 /* UserViewModel.swift */; };
 		42B598402C726AC300C37F66 /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B5983F2C726AC300C37F66 /* CommentsViewModel.swift */; };
 		42B598422C726B6800C37F66 /* KnowledgeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B598412C726B6800C37F66 /* KnowledgeViewModel.swift */; };
+		42B598442C737E2300C37F66 /* KnowledgesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B598432C737E2300C37F66 /* KnowledgesViewModel.swift */; };
+		42B598462C738A4A00C37F66 /* KnowledgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B598452C738A4A00C37F66 /* KnowledgesView.swift */; };
+		42B598482C73927500C37F66 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B598472C73927500C37F66 /* Color+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +71,9 @@
 		42B5983D2C711B9100C37F66 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		42B5983F2C726AC300C37F66 /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
 		42B598412C726B6800C37F66 /* KnowledgeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeViewModel.swift; sourceTree = "<group>"; };
+		42B598432C737E2300C37F66 /* KnowledgesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgesViewModel.swift; sourceTree = "<group>"; };
+		42B598452C738A4A00C37F66 /* KnowledgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgesView.swift; sourceTree = "<group>"; };
+		42B598472C73927500C37F66 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +116,7 @@
 				4212EDCF2C56D9E400F30DD2 /* AppLukApp.swift */,
 				42B598082C6F7FE100C37F66 /* User.swift */,
 				42B5983D2C711B9100C37F66 /* UserViewModel.swift */,
+				42B598472C73927500C37F66 /* Color+.swift */,
 				42B5983B2C70E23D00C37F66 /* SettingsView.swift */,
 				42B5982C2C70481900C37F66 /* Chat */,
 				42B598122C6FC92600C37F66 /* Auth */,
@@ -132,6 +139,8 @@
 		42B597832C6D828400C37F66 /* Posts */ = {
 			isa = PBXGroup;
 			children = (
+				42B598452C738A4A00C37F66 /* KnowledgesView.swift */,
+				42B598432C737E2300C37F66 /* KnowledgesViewModel.swift */,
 				427631662C67A812005BF2CA /* KnowledgeView.swift */,
 				42B598412C726B6800C37F66 /* KnowledgeViewModel.swift */,
 				42B5974A2C6B977200C37F66 /* CreateKnowledgeViewModel.swift */,
@@ -261,6 +270,7 @@
 				42B598182C6FC93200C37F66 /* AuthenticationViewModel.swift in Sources */,
 				4212EDD22C56D9E400F30DD2 /* ContentView.swift in Sources */,
 				427631672C67A812005BF2CA /* KnowledgeView.swift in Sources */,
+				42B598442C737E2300C37F66 /* KnowledgesViewModel.swift in Sources */,
 				42B598422C726B6800C37F66 /* KnowledgeViewModel.swift in Sources */,
 				4212EDD02C56D9E400F30DD2 /* AppLukApp.swift in Sources */,
 				4276316D2C6A506D005BF2CA /* CreateKnowledgeView.swift in Sources */,
@@ -280,6 +290,8 @@
 				42B598402C726AC300C37F66 /* CommentsViewModel.swift in Sources */,
 				42B598092C6F7FE200C37F66 /* User.swift in Sources */,
 				42B5983E2C711B9100C37F66 /* UserViewModel.swift in Sources */,
+				42B598482C73927500C37F66 /* Color+.swift in Sources */,
+				42B598462C738A4A00C37F66 /* KnowledgesView.swift in Sources */,
 				42B598392C70482900C37F66 /* ConversationsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

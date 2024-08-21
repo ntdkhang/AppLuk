@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        KnowledgeView(knowledge: .example1)
+        KnowledgesView()
     }
 }
 
