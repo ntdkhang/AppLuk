@@ -9,9 +9,9 @@ import FirebaseFirestore
 import SwiftUI
 
 struct CommentView: View {
-    @State var commentVM: CommentViewModel
-    @State var currentComment: String = ""
     var knowledgeId: String
+    @StateObject var commentVM: CommentViewModel
+    @State var currentComment: String = ""
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -28,6 +28,7 @@ struct CommentView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
+                        commentVM.postComment(text: currentComment)
                         // dismiss or not dismiss?
                         dismiss()
                     } label: {
@@ -37,5 +38,8 @@ struct CommentView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onAppear {
+            commentVM.getComments()
+        }
     }
 }

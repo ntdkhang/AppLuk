@@ -32,7 +32,7 @@ struct KnowledgeView: View {
             Color.knowledgeBackground
         )
         .sheet(isPresented: $showComments) {
-            CommentView(knowledgeId: knowledge.id ?? "", comments: knowledge.comments)
+            CommentView(knowledgeId: knowledge.id ?? "", commentVM: CommentViewModel(knowledgeId: knowledge.id ?? ""))
         }
     }
 }

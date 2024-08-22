@@ -40,9 +40,12 @@ class CommentViewModel: ObservableObject {
 
     func postComment(text: String) {
         let db = Firestore.firestore()
-        let document = db.collection("knowledges").document(knowledgeId)
-        document.updateData([
-            "comments": FieldValue.arrayUnion([text]),
-        ])
+        let comment = Comment(postedById: DataStorageManager.currentUserId, postedAt: .now, text: text)
+        print("DEBUG: \(knowledgeId)")
+        do {
+            try db.collection("knowledges").document(knowledgeId).collection("comments").addDocument(from: comment)
+        } catch {
+            print("Error posting comment \(error)")
+        }
     }
 }

@@ -13,11 +13,4 @@ class KnowledgeViewModel: ObservableObject {
     init(knowledge: Knowledge) {
         self.knowledge = knowledge
     }
-
-    func addComment(text: String) {
-        let comment = Comment(postedById: DataStorageManager.currentUserId, postedAt: .now, text: text)
-        knowledge.comments.append(comment)
-
-        // send to database
-    }
 }
