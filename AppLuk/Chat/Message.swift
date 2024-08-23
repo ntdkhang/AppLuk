@@ -19,7 +19,7 @@ public struct Message: Codable, Identifiable, Hashable {
     public var text: String
 
     var isSender: Bool {
-        fromId == DataStorageManager.currentUserId
+        fromId == DataStorageManager.shared.currentUserId
     }
 }
 

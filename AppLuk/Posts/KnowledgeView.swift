@@ -5,6 +5,7 @@
 //  Created by Khang Nguyen on 8/10/24.
 //
 
+import CachedAsyncImage
 import SwiftUI
 
 struct KnowledgeView: View {
@@ -32,7 +33,7 @@ struct KnowledgeView: View {
             Color.knowledgeBackground
         )
         .sheet(isPresented: $showComments) {
-            CommentView(knowledgeId: knowledge.id ?? "", commentVM: CommentViewModel(knowledgeId: knowledge.id ?? ""))
+            CommentsView(knowledgeId: knowledge.id ?? "", commentsVM: CommentsViewModel(knowledgeId: knowledge.id ?? ""))
         }
     }
 }
@@ -109,7 +110,7 @@ struct PageView: View {
         Color.clear
             .aspectRatio(1.0, contentMode: .fit)
             .overlay(
-                AsyncImage(url: URL(string: imageUrl ?? "")) { image in
+                CachedAsyncImage(url: URL(string: imageUrl ?? "")) { image in
                     image
                         .resizable()
                         .scaledToFill()

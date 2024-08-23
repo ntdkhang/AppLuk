@@ -16,7 +16,7 @@ struct User: Codable, Hashable, Identifiable {
     let friendsId: [String] // friend list (id)
 
     var isCurrentUser: Bool {
-        id ?? "" == DataStorageManager.currentUserId
+        id ?? "" == DataStorageManager.shared.currentUserId
     }
 
     var avatarURL: URL? {

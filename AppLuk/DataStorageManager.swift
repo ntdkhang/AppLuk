@@ -9,24 +9,49 @@ import FirebaseFirestore
 import Foundation
 
 class DataStorageManager: ObservableObject {
-    @Published var friends: [User] = []
-    let db = Firestore.firestore()
     static var shared = DataStorageManager()
-    static var currentUserId: String = ""
-    static var currentUser: User? {
-        shared.currentUser
+    @Published var friends: [User] = []
+    @Published var currentUser: User?
+    @Published var knowledges = [Knowledge]()
+    var currentUserId: String = "" // this ID is set from the Auth UID
+
+    let db = Firestore.firestore()
+
+    var currentUserAvatarUrl: URL? {
+        currentUser?.avatarURL
     }
 
-    static var friendsAndSelfId: [String] {
+    var friendsAndSelfId: [String] {
         var friendsId = currentUser?.friendsId ?? []
+        print("Friends ID: \(friendsId)")
         friendsId.append(currentUserId)
         return friendsId
     }
 
-    @Published private var currentUser: User?
+    func getKnowledges() {
+        db.collection("knowledges").whereField("postedById", in: DataStorageManager.shared.friendsAndSelfId)
+            .addSnapshotListener { querySnapshot, error in
+                guard let documents = querySnapshot?.documents else {
+                    print("Error fetching knowledges: \(error!)")
+                    return
+                }
 
-    func fetchCurrentUser() {
-        Firestore.firestore().collection("users").document(DataStorageManager.currentUserId)
+                let knowledges = documents.compactMap { document in
+                    do {
+                        let knowledge = try document.data(as: Knowledge.self)
+                        return knowledge
+                    } catch {
+                        print(error)
+                        return nil
+                    }
+                }
+
+                self.knowledges = knowledges
+            }
+    }
+
+    func fetchCurrentUser() async {
+        Firestore.firestore().collection("users").document(DataStorageManager.shared.currentUserId)
             .addSnapshotListener { snapshot, error in
                 guard let document = snapshot else {
                     print("Error fetching current user: \(error!)")
@@ -35,13 +60,15 @@ class DataStorageManager: ObservableObject {
                 do {
                     let user = try document.data(as: User.self)
                     self.currentUser = user
+                    // DataStorageManager.currentUserId = user.id ?? ""
+                    self.getFriends()
                 } catch {
                     print("Error reading current user")
                 }
             }
     }
 
-    func getFriends() async {
+    func getFriends() {
         guard let currentUser = currentUser else {
             print("Current user is nil")
             return
@@ -58,11 +85,13 @@ class DataStorageManager: ObservableObject {
                         let friend = try document.data(as: User.self)
                         return friend
                     } catch {
-                        print(error)
+                        print("Error reading friends: \(error)")
                         return nil
                     }
                 }
                 self.friends = friends
+                print("Friends: \(friends)")
+                self.getKnowledges()
             }
     }
 

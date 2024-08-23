@@ -13,7 +13,7 @@ class ConversationsViewModel: ObservableObject {
     let db = Firestore.firestore()
 
     func getConversations() async {
-        db.collection("conversations").whereField("usersId", arrayContains: DataStorageManager.currentUserId)
+        db.collection("conversations").whereField("usersId", arrayContains: DataStorageManager.shared.currentUserId)
             .addSnapshotListener { querySnapshot, error in
                 guard let documents = querySnapshot?.documents else {
                     print("Error fetching documents: \(error!)")

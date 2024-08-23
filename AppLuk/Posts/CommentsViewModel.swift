@@ -1,5 +1,5 @@
 //
-//  CommentViewModel.swift
+//  CommentsViewModel.swift
 //  AppLuk
 //
 //  Created by Khang Nguyen on 8/21/24.
@@ -9,7 +9,7 @@ import FirebaseFirestore
 import Foundation
 import SwiftUI
 
-class CommentViewModel: ObservableObject {
+class CommentsViewModel: ObservableObject {
     @Published var comments: [Comment] = []
     var knowledgeId: String
 
@@ -40,7 +40,7 @@ class CommentViewModel: ObservableObject {
 
     func postComment(text: String) {
         let db = Firestore.firestore()
-        let comment = Comment(postedById: DataStorageManager.currentUserId, postedAt: .now, text: text)
+        let comment = Comment(postedById: DataStorageManager.shared.currentUserId, postedAt: .now, text: text)
         print("DEBUG: \(knowledgeId)")
         do {
             try db.collection("knowledges").document(knowledgeId).collection("comments").addDocument(from: comment)

@@ -15,7 +15,7 @@ struct Conversation: Codable, Identifiable, Hashable {
 
     var partnerId: String {
         return usersId.first(where: { userId in
-            userId != DataStorageManager.currentUserId
+            userId != DataStorageManager.shared.currentUserId
         }) ?? ""
     }
 }
@@ -26,7 +26,7 @@ public struct FirestoreConversation: Codable, Identifiable, Hashable {
 
     var partnerId: String {
         return usersId.first(where: { userId in
-            userId != DataStorageManager.currentUserId
+            userId != DataStorageManager.shared.currentUserId
         }) ?? ""
     }
 }

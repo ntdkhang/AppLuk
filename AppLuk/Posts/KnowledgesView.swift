@@ -5,17 +5,17 @@
 //  Created by Khang Nguyen on 8/19/24.
 //
 
+import CachedAsyncImage
 import FirebaseAuth
 import SwiftUI
 
 struct KnowledgesView: View {
-    @StateObject var knowledgesVM = KnowledgesViewModel()
     @ObservedObject var dataStorageManager = DataStorageManager.shared
     var body: some View {
         NavigationView {
             VStack {
                 ScrollView(.vertical, showsIndicators: false) {
-                    ForEach(knowledgesVM.knowledges) { knowledge in
+                    ForEach(dataStorageManager.knowledges) { knowledge in
                         KnowledgeView(knowledge: knowledge)
                             .containerRelativeFrame(.vertical)
                     }
@@ -54,7 +54,8 @@ struct KnowledgesView: View {
             }
         }
         .task {
-            await knowledgesVM.getKnowledges()
+            await DataStorageManager.shared.fetchCurrentUser()
+            dataStorageManager.getKnowledges()
         }
     }
 }
@@ -83,7 +84,7 @@ struct ReplyBoxView: View {
                 .stroke()
                 .overlay {
                     HStack {
-                        AsyncImage(url: DataStorageManager.currentUser?.avatarURL, content: { image in
+                        CachedAsyncImage(url: dataStorageManager.currentUser?.avatarURL, content: { image in
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
