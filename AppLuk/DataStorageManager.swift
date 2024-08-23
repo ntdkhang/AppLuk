@@ -90,22 +90,26 @@ class DataStorageManager: ObservableObject {
                     }
                 }
                 self.friends = friends
-                print("Friends: \(friends)")
                 self.getKnowledges()
             }
     }
 
-    func friend(withId: String) -> User? {
-        return friends.first(where: { user in
+    func user(withId: String) -> User? {
+        if withId == currentUserId {
+            return currentUser
+        }
+        let user = friends.first(where: { user in
             user.id == withId
         })
+        // TODO: if cannot find in friends, then query the User with that Id, and add the user to friends array
+        return user
     }
 
     func getFriendName(withId: String) -> String {
-        return friend(withId: withId)?.name ?? ""
+        return user(withId: withId)?.name ?? ""
     }
 
     func getFriendAvatarUrl(withId: String) -> URL? {
-        return friend(withId: withId)?.avatarURL
+        return user(withId: withId)?.avatarURL
     }
 }

@@ -5,7 +5,6 @@
 //  Created by Khang Nguyen on 8/16/24.
 //
 
-import CachedAsyncImage
 import SwiftUI
 
 struct ConversationView: View {
@@ -98,7 +97,7 @@ struct ChatBubble: View {
 struct AvatarIconView: View {
     var imageUrl: String
     var body: some View {
-        CachedAsyncImage(url: URL(string: imageUrl), content: { image in
+        AsyncCachedImage(url: URL(string: imageUrl), content: { image in
             image
                 .aspectRatio(contentMode: .fit)
                 .clipShape(Circle())

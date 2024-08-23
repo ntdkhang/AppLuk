@@ -43,6 +43,7 @@
 		42B598442C737E2300C37F66 /* KnowledgesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B598432C737E2300C37F66 /* KnowledgesViewModel.swift */; };
 		42B598462C738A4A00C37F66 /* KnowledgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B598452C738A4A00C37F66 /* KnowledgesView.swift */; };
 		42B598482C73927500C37F66 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B598472C73927500C37F66 /* Color+.swift */; };
+		42EDD2BB2C78EEA800D99EDE /* AsyncCachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		42B598432C737E2300C37F66 /* KnowledgesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgesViewModel.swift; sourceTree = "<group>"; };
 		42B598452C738A4A00C37F66 /* KnowledgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgesView.swift; sourceTree = "<group>"; };
 		42B598472C73927500C37F66 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncCachedImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				42B598472C73927500C37F66 /* Color+.swift */,
 				42B5983B2C70E23D00C37F66 /* SettingsView.swift */,
 				42B5982D2C70482800C37F66 /* DataStorageManager.swift */,
+				42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */,
 				42B5982C2C70481900C37F66 /* Chat */,
 				42B598122C6FC92600C37F66 /* Auth */,
 				42B597832C6D828400C37F66 /* Posts */,
@@ -299,6 +302,7 @@
 				42B5983E2C711B9100C37F66 /* UserViewModel.swift in Sources */,
 				42B598482C73927500C37F66 /* Color+.swift in Sources */,
 				42B598462C738A4A00C37F66 /* KnowledgesView.swift in Sources */,
+				42EDD2BB2C78EEA800D99EDE /* AsyncCachedImage.swift in Sources */,
 				425307F42C7665C900CF16DA /* CommentsView.swift in Sources */,
 				42B598392C70482900C37F66 /* ConversationsView.swift in Sources */,
 			);

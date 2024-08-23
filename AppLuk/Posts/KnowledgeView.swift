@@ -5,7 +5,6 @@
 //  Created by Khang Nguyen on 8/10/24.
 //
 
-import CachedAsyncImage
 import SwiftUI
 
 struct KnowledgeView: View {
@@ -42,7 +41,7 @@ struct PostedByView: View {
     var knowledge: Knowledge
     var body: some View {
         HStack {
-            CachedAsyncImage(url: DataStorageManager.shared.getFriendAvatarUrl(withId: knowledge.postedById)) { image in
+            AsyncCachedImage(url: DataStorageManager.shared.getFriendAvatarUrl(withId: knowledge.postedById)) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -117,7 +116,7 @@ struct PageView: View {
         Color.clear
             .aspectRatio(1.0, contentMode: .fit)
             .overlay(
-                CachedAsyncImage(url: URL(string: imageUrl ?? "")) { image in
+                AsyncImage(url: URL(string: imageUrl ?? "")) { image in
                     image
                         .resizable()
                         .scaledToFill()

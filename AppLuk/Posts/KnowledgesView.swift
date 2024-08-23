@@ -5,7 +5,6 @@
 //  Created by Khang Nguyen on 8/19/24.
 //
 
-import CachedAsyncImage
 import FirebaseAuth
 import SwiftUI
 
@@ -22,7 +21,6 @@ struct KnowledgesView: View {
                 }
                 .scrollTargetBehavior(.paging)
                 ReactionView()
-                ReplyBoxView()
             }
             .background(Color.knowledgeBackground)
             .toolbar {
@@ -45,7 +43,8 @@ struct KnowledgesView: View {
                     NavigationLink {
                         CreateKnowledgeView()
                     } label: {
-                        Image(systemName: "square.and.pencil")
+                        // Image(systemName: "square.and.pencil")
+                        Image("hut_bong")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 40)
@@ -73,38 +72,5 @@ struct ReactionView: View {
                 .padding(8)
             }
         }
-    }
-}
-
-struct ReplyBoxView: View {
-    @ObservedObject var dataStorageManager = DataStorageManager.shared
-    var body: some View {
-        HStack {
-            RoundedRectangle(cornerRadius: 30)
-                .stroke()
-                .overlay {
-                    HStack {
-                        CachedAsyncImage(url: dataStorageManager.currentUser?.avatarURL, content: { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40)
-                                .clipShape(Circle())
-                        }, placeholder: {
-                            Color.gray
-                                .frame(width: 40)
-                                .clipShape(Circle())
-
-                        })
-                        Text("Đúng nhận sai cãi ...")
-                            .padding()
-                    }
-                    .padding(.horizontal)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                .padding(.horizontal, 24)
-                .frame(height: 60)
-        }
-        .foregroundColor(Color(.lightGray))
     }
 }
