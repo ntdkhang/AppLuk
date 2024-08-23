@@ -42,11 +42,18 @@ struct PostedByView: View {
     var knowledge: Knowledge
     var body: some View {
         HStack {
-            Image("DK_ava")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 40)
-                .clipShape(Circle())
+            CachedAsyncImage(url: DataStorageManager.shared.getFriendAvatarUrl(withId: knowledge.postedById)) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 40)
+                    .clipShape(Circle())
+            } placeholder: {
+                Color.gray
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 40)
+                    .clipShape(Circle())
+            }
             Text(DataStorageManager.shared.getFriendName(withId: knowledge.postedById))
                 .bold()
             Text(knowledge.relativeTimeString)

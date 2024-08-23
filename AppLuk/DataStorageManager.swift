@@ -104,4 +104,8 @@ class DataStorageManager: ObservableObject {
     func getFriendName(withId: String) -> String {
         return friend(withId: withId)?.name ?? ""
     }
+
+    func getFriendAvatarUrl(withId: String) -> URL? {
+        return friend(withId: withId)?.avatarURL
+    }
 }

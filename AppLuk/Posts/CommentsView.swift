@@ -55,7 +55,6 @@ struct CommentView: View {
 
     var body: some View {
         VStack {
-            Text(comment.postedById)
             HStack {
                 CachedAsyncImage(url: DataStorageManager.shared.friend(withId: comment.postedById)?.avatarURL) { image in
                     image
@@ -67,10 +66,6 @@ struct CommentView: View {
                 }
                 .frame(width: 30, height: 30)
                 Text(comment.text)
-            }
-            .onAppear {
-                print(DataStorageManager.shared.friends)
-                print("Avatar of poster: \(DataStorageManager.shared.friend(withId: comment.postedById)?.avatarURL?.absoluteString ?? "")")
             }
         }
     }
