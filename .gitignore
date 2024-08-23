@@ -1,4 +1,5 @@
-# Xcode
+# xcodebuild
+.nvim/
 
 GoogleService-Info.plist
 .DS_Store
