@@ -21,6 +21,7 @@ struct CommentsView: View {
                 ScrollView {
                     ForEach(commentsVM.comments) { comment in
                         CommentView(comment: comment)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                             .padding()
                     }
                 }
@@ -66,7 +67,7 @@ struct CommentView: View {
     var body: some View {
         VStack {
             HStack {
-                AsyncCachedImage(url: DataStorageManager.shared.user(withId: comment.postedById)?.avatarURL) { image in
+                AsyncCachedImage(url: postedBy?.avatarURL) { image in
                     image
                         .resizable()
                         .clipShape(Circle())
@@ -75,9 +76,17 @@ struct CommentView: View {
                         .clipShape(Circle())
                 }
                 .frame(width: 30, height: 30)
-                Text(comment.text)
+
+                Text(postedBy?.name ?? "")
+                Text(comment.relativeTimeString)
             }
+
+            Text(comment.text)
         }
+    }
+
+    var postedBy: User? {
+        DataStorageManager.shared.user(withId: comment.postedById)
     }
 }
 

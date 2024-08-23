@@ -53,7 +53,6 @@ class AuthenticationViewModel: ObservableObject {
             authStateHandler = Auth.auth().addStateDidChangeListener { _, user in
                 if user != nil {
                     DataStorageManager.shared.currentUserId = user!.uid
-                    // DataStorageManager.shared.fetchCurrentUser()
                 }
                 self.user = user
                 self.authenticationState = user == nil ? .unauthenticated : .authenticated

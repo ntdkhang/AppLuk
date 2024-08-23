@@ -54,7 +54,6 @@ struct KnowledgesView: View {
         }
         .task {
             await DataStorageManager.shared.fetchCurrentUser()
-            dataStorageManager.getKnowledges()
         }
     }
 }

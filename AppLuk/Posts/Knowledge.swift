@@ -24,7 +24,10 @@ struct Knowledge: Codable, Identifiable {
         var formatStyle = Date.RelativeFormatStyle()
         formatStyle.presentation = .numeric
         formatStyle.unitsStyle = .narrow
-        // TODO: if smaller than 1 minute, round up to 1 minute
+
+        if timePosted.timeIntervalSinceNow < 60 {
+            return "1m"
+        }
         return String(formatStyle.format(timePosted).dropLast(3)) // drop the "ago" string
     }
 

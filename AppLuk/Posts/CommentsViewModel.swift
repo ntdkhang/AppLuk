@@ -40,7 +40,7 @@ class CommentsViewModel: ObservableObject {
 
     func postComment(text: String) {
         let db = Firestore.firestore()
-        let comment = Comment(postedById: DataStorageManager.shared.currentUserId, postedAt: .now, text: text)
+        let comment = Comment(postedById: DataStorageManager.shared.currentUserId, timePosted: .now, text: text)
         do {
             try db.collection("knowledges").document(knowledgeId).collection("comments").addDocument(from: comment)
         } catch {
