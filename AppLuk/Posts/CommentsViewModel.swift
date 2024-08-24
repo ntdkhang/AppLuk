@@ -20,6 +20,7 @@ class CommentsViewModel: ObservableObject {
     func getComments() {
         let db = Firestore.firestore()
         db.collection("knowledges").document(knowledgeId).collection("comments")
+            .order(by: "timePosted")
             .addSnapshotListener { snapshot, error in
                 guard let documents = snapshot?.documents else {
                     print("Error fetching comments: \(error!)")

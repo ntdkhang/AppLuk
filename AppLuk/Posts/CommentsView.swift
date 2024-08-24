@@ -20,9 +20,13 @@ struct CommentsView: View {
             VStack {
                 ScrollView {
                     ForEach(commentsVM.comments) { comment in
-                        CommentView(comment: comment)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding()
+                        VStack {
+                            CommentView(comment: comment)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Divider()
+                        }
+                        .padding(.horizontal)
+                        .padding(.vertical, 8)
                     }
                 }
 
@@ -78,10 +82,17 @@ struct CommentView: View {
                 .frame(width: 30, height: 30)
 
                 Text(postedBy?.name ?? "")
+                    .bold()
+
+                Text("•")
+
                 Text(comment.relativeTimeString)
+                    .font(.caption)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
 
             Text(comment.text)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 

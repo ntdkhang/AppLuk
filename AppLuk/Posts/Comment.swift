@@ -20,7 +20,7 @@ struct Comment: Codable, Identifiable {
         formatStyle.presentation = .numeric
         formatStyle.unitsStyle = .narrow
 
-        if timePosted.timeIntervalSinceNow < 60 {
+        if timePosted.timeIntervalSinceNow > -60 {
             return "1m"
         }
         return String(formatStyle.format(timePosted).dropLast(3)) // drop the "ago" string
