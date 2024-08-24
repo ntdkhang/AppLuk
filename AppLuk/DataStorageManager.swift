@@ -29,7 +29,9 @@ class DataStorageManager: ObservableObject {
     }
 
     func getKnowledges() {
-        db.collection("knowledges").whereField("postedById", in: DataStorageManager.shared.friendsAndSelfId)
+        db.collection("knowledges")
+            .whereField("postedById", in: DataStorageManager.shared.friendsAndSelfId)
+            .order(by: "timePosted", descending: true)
             .addSnapshotListener { querySnapshot, error in
                 guard let documents = querySnapshot?.documents else {
                     print("Error fetching knowledges: \(error!)")

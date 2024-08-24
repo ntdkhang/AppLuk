@@ -9,7 +9,7 @@ import SwiftUI
 
 struct KnowledgeView: View {
     @State private var showComments = false
-    var knowledge: Knowledge = .example1
+    var knowledge: Knowledge
     var body: some View {
         VStack {
             PostedByView(knowledge: knowledge)
@@ -142,8 +142,4 @@ struct IndicatorView: View {
             }
         }
     }
-}
-
-#Preview {
-    KnowledgeView()
 }
