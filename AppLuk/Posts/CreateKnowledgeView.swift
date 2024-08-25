@@ -149,7 +149,7 @@ struct CreateImageCarouselView: View {
             .scrollTargetBehavior(.paging)
 
             /// Indicator bar
-            IndicatorView(imageCount: knowledgeVM.imageUrls.count, scrollID: knowledgeVM.scrollID)
+            IndicatorView(imageCount: knowledgeVM.imageUrls.count, scrollID: knowledgeVM.scrollID, isTag: false)
                 .frame(alignment: .top)
         }
         .onChange(of: knowledgeVM.pageCount) {

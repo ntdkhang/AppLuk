@@ -68,16 +68,12 @@ struct ImageCarouselView: View {
             /// Images scroll
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 0) {
-                    ForEach(knowledge.imageUrls.indices, id: \.self) { i in
+                    ForEach(knowledge.imageUrlsWithTags.indices, id: \.self) { i in
                         VStack {
-                            PageView(imageUrl: knowledge.imageUrls[i], pageContent: knowledge.contentPages[i])
+                            PageView(imageUrl: knowledge.imageUrlsWithTags[i], pageContent: knowledge.contentPagesWithTags[i])
                                 .padding(4)
                         }
                         .containerRelativeFrame(.horizontal)
-                        // .scrollTransition(.animated, axis: .horizontal) { content, phase in
-                        //     content
-                        //         .opacity(phase.isIdentity ? 1.0 : 0.6)
-                        // }
                     }
                 }
                 .scrollTargetLayout()
@@ -87,7 +83,7 @@ struct ImageCarouselView: View {
 
             /// Indicator bar
             // does this look better inside or outside of the image?
-            IndicatorView(imageCount: knowledge.imageUrls.count, scrollID: scrollID)
+            IndicatorView(imageCount: knowledge.imageUrls.count, scrollID: scrollID, isTag: !knowledge.tags.isEmpty)
         }
     }
 }
@@ -131,6 +127,7 @@ struct PageView: View {
 struct IndicatorView: View {
     let imageCount: Int
     let scrollID: Int?
+    let isTag: Bool
 
     var body: some View {
         HStack {
@@ -139,6 +136,12 @@ struct IndicatorView: View {
                 Image(systemName: "circle.fill")
                     .font(.system(size: 8))
                     .foregroundColor(scrollIndex == curIndex ? .white : Color(.systemGray6))
+            }
+            if isTag {
+                let scrollIndex = scrollID ?? 0
+                Image(systemName: "circle.fill")
+                    .font(.system(size: 8))
+                    .foregroundColor(scrollIndex == imageCount ? .purple : .blue)
             }
         }
     }

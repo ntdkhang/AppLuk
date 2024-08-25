@@ -13,6 +13,8 @@ struct Knowledge: Codable, Identifiable {
     var timePosted: Date = .now
     var postedById: String
 
+    // var title: String
+
     var contentPages: [String]
 
     // Every contentPage needs to have a corresponding image. The image could be null, in that case, we'll use a black background
@@ -29,5 +31,29 @@ struct Knowledge: Codable, Identifiable {
             return "1m"
         }
         return String(formatStyle.format(timePosted).dropLast(3)) // drop the "ago" string
+    }
+
+    var contentPagesWithTags: [String] {
+        if tags.isEmpty {
+            return contentPages
+        } else {
+            var temp = contentPages
+            var newPage: String = ""
+            for tag in tags {
+                newPage.append("#" + tag + " ")
+            }
+            temp.append(newPage)
+            return temp
+        }
+    }
+
+    var imageUrlsWithTags: [String?] {
+        if tags.isEmpty {
+            return imageUrls
+        } else {
+            var temp = imageUrls
+            temp.append(nil)
+            return temp
+        }
     }
 }
