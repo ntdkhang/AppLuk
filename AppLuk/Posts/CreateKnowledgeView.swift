@@ -59,13 +59,8 @@ struct CreateKnowledgeView: View {
             }
 
             ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    Task {
-                        await knowledgeVM.create()
-                        dismiss()
-                    }
-                } label: {
-                    Text("Post")
+                NavigationLink(destination: CreateTitleView(knowledgeVM: knowledgeVM)) {
+                    Text("Next")
                 }
             }
         }
@@ -79,6 +74,37 @@ struct CreateKnowledgeView: View {
                 )
             }
         )
+    }
+}
+
+struct CreateTitleView: View {
+    @State var title = ""
+    @ObservedObject var knowledgeVM: CreateKnowledgeViewModel
+    @Environment(\.dismiss) var dismiss
+
+    let items = ["Health", "Psychology", "Philosophy", "Science", "Math", "Life", "Relationship"]
+
+    var body: some View {
+        VStack {
+            TextField("Your knowledge title here", text: $title)
+
+            List(items, id: \.self, selection: $knowledgeVM.tagsSelection) {
+                Text("\($0)")
+            }
+            .environment(\.editMode, .constant(EditMode.active))
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    Task {
+                        await knowledgeVM.create()
+                        dismiss()
+                    }
+                } label: {
+                    Text("Post")
+                }
+            }
+        }
     }
 }
 
