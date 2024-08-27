@@ -11,6 +11,7 @@ import SwiftUI
 struct CreateKnowledgeView: View {
     @StateObject var knowledgeVM = CreateKnowledgeViewModel()
     @Environment(\.dismiss) private var dismiss
+    @Binding var isPresented: Bool
 
     var body: some View {
         VStack {
@@ -61,7 +62,7 @@ struct CreateKnowledgeView: View {
             }
 
             ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink(destination: CreateTitleView(knowledgeVM: knowledgeVM)) {
+                NavigationLink(destination: CreateTitleView(knowledgeVM: knowledgeVM, isPresented: $isPresented)) {
                     Text("Next")
                 }
             }
@@ -81,8 +82,7 @@ struct CreateKnowledgeView: View {
 
 struct CreateTitleView: View {
     @ObservedObject var knowledgeVM: CreateKnowledgeViewModel
-    // @Binding var isPresented: Bool
-    @Environment(\.dismiss) var dismiss
+    @Binding var isPresented: Bool
 
     let items = ["Health", "Psychology", "Philosophy", "Science", "Math", "Life", "Relationship"]
 
@@ -102,8 +102,7 @@ struct CreateTitleView: View {
                 Button {
                     Task {
                         await knowledgeVM.create()
-                        // isPresented = false
-                        // dismiss()
+                        isPresented = false
                     }
                 } label: {
                     Text("Post")

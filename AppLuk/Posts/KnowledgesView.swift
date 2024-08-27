@@ -10,8 +10,9 @@ import SwiftUI
 
 struct KnowledgesView: View {
     @ObservedObject var dataStorageManager = DataStorageManager.shared
+    @State private var presentCreateView = false
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 ScrollView(.vertical, showsIndicators: false) {
                     ForEach(dataStorageManager.knowledges) { knowledge in
@@ -40,8 +41,8 @@ struct KnowledgesView: View {
                 }
 
                 ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink {
-                        CreateKnowledgeView()
+                    Button {
+                        presentCreateView = true
                     } label: {
                         // Image(systemName: "square.and.pencil")
                         Image("hut_bong")
@@ -51,6 +52,9 @@ struct KnowledgesView: View {
                     }
                     .accessibilityLabel("Create new knowledge")
                 }
+            }
+            .navigationDestination(isPresented: $presentCreateView) {
+                CreateKnowledgeView(isPresented: $presentCreateView)
             }
         }
     }

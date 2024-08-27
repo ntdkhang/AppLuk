@@ -31,6 +31,8 @@ class CreateKnowledgeViewModel: ObservableObject {
     @Published var title = ""
     @Published var tagsSelection = Set<String>()
 
+    @Published var isFinished = false
+
     func loadTransferable(from imageSelection: PhotosPickerItem?) async throws {
         do {
             if let data = try await imageSelection?.loadTransferable(type: Data.self) {
