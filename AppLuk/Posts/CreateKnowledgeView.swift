@@ -34,6 +34,7 @@ struct CreateKnowledgeView: View {
                         .padding(.horizontal)
                 }
                 .disabled(knowledgeVM.disableRemoveCurrentImage)
+                .accessibilityLabel("Remove current image")
 
                 Spacer()
                 Button {
@@ -44,6 +45,7 @@ struct CreateKnowledgeView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 30)
                 }
+                .accessibilityLabel("Add new page")
             }
             .padding()
         }
@@ -78,15 +80,17 @@ struct CreateKnowledgeView: View {
 }
 
 struct CreateTitleView: View {
-    @State var title = ""
     @ObservedObject var knowledgeVM: CreateKnowledgeViewModel
+    // @Binding var isPresented: Bool
     @Environment(\.dismiss) var dismiss
 
     let items = ["Health", "Psychology", "Philosophy", "Science", "Math", "Life", "Relationship"]
 
     var body: some View {
         VStack {
-            TextField("Your knowledge title here", text: $title)
+            TextField("Your knowledge title here", text: $knowledgeVM.title)
+                .font(.title2)
+                .padding()
 
             List(items, id: \.self, selection: $knowledgeVM.tagsSelection) {
                 Text("\($0)")
@@ -98,7 +102,8 @@ struct CreateTitleView: View {
                 Button {
                     Task {
                         await knowledgeVM.create()
-                        dismiss()
+                        // isPresented = false
+                        // dismiss()
                     }
                 } label: {
                     Text("Post")
@@ -177,6 +182,7 @@ struct CreateImageCarouselView: View {
             /// Indicator bar
             IndicatorView(imageCount: knowledgeVM.imageUrls.count, scrollID: knowledgeVM.scrollID, isTag: false)
                 .frame(alignment: .top)
+                .accessibility(hidden: true)
         }
         .onChange(of: knowledgeVM.pageCount) {
             withAnimation {
@@ -207,11 +213,5 @@ struct CreateIndicatorView: View {
                     .foregroundColor(scrollIndex == curIndex ? .white : Color(.systemGray6))
             }
         }
-    }
-}
-
-#Preview {
-    NavigationView {
-        CreateKnowledgeView()
     }
 }

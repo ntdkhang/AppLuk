@@ -49,6 +49,7 @@ struct KnowledgesView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 40)
                     }
+                    .accessibilityLabel("Create new knowledge")
                 }
             }
         }

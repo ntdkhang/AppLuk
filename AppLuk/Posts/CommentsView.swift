@@ -16,23 +16,21 @@ struct CommentsView: View {
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        NavigationView {
-            VStack {
-                ScrollView {
-                    ForEach(commentsVM.comments) { comment in
-                        VStack {
-                            CommentView(comment: comment)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            Divider()
-                        }
-                        .padding(.horizontal)
-                        .padding(.vertical, 8)
+        VStack {
+            ScrollView {
+                ForEach(commentsVM.comments) { comment in
+                    VStack {
+                        CommentView(comment: comment)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Divider()
                     }
+                    .padding(.horizontal)
+                    .padding(.vertical, 8)
                 }
-
-                textField
-                    .padding(8)
             }
+
+            textField
+                .padding(8)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
@@ -48,8 +46,15 @@ struct CommentsView: View {
 
             Button {
                 commentsVM.postComment(text: currentComment)
-                // dismiss or not dismiss?
-                // dismiss()
+                currentComment = ""
+
+                // dismiss keyboard
+                UIApplication.shared.sendAction(
+                    #selector(UIResponder.resignFirstResponder),
+                    to: nil,
+                    from: nil,
+                    for: nil
+                )
             } label: {
                 Image(systemName: "paperplane.fill")
             }
@@ -57,6 +62,7 @@ struct CommentsView: View {
             .aspectRatio(contentMode: .fit)
             .frame(width: 40, height: 40)
             .padding(.horizontal)
+            .accessibilityLabel("Post comment")
         }
         .background {
             RoundedRectangle(cornerRadius: 20)
@@ -80,16 +86,20 @@ struct CommentView: View {
                         .clipShape(Circle())
                 }
                 .frame(width: 30, height: 30)
+                .accessibilityLabel("Avatar")
 
                 Text(postedBy?.name ?? "")
                     .bold()
+                    .accessibilityHint("Name")
 
                 Text("•")
+                    .accessibility(hidden: true)
 
                 Text(comment.relativeTimeString)
                     .font(.caption)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
+            .accessibilityElement(children: .combine)
 
             Text(comment.text)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -98,38 +108,5 @@ struct CommentView: View {
 
     var postedBy: User? {
         DataStorageManager.shared.user(withId: comment.postedById)
-    }
-}
-
-struct ReplyBoxView: View {
-    @ObservedObject var dataStorageManager = DataStorageManager.shared
-    var body: some View {
-        HStack {
-            RoundedRectangle(cornerRadius: 30)
-                .stroke()
-                .overlay {
-                    HStack {
-                        AsyncCachedImage(url: dataStorageManager.currentUser?.avatarURL, content: { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40)
-                                .clipShape(Circle())
-                        }, placeholder: {
-                            Color.gray
-                                .frame(width: 40)
-                                .clipShape(Circle())
-
-                        })
-                        Text("Đúng nhận sai cãi ...")
-                            .padding()
-                    }
-                    .padding(.horizontal)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                .padding(.horizontal, 24)
-                .frame(height: 60)
-        }
-        .foregroundColor(Color(.lightGray))
     }
 }

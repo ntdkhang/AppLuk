@@ -13,7 +13,7 @@ struct Knowledge: Codable, Identifiable {
     var timePosted: Date = .now
     var postedById: String
 
-    // var title: String
+    var title: String
 
     var contentPages: [String]
 

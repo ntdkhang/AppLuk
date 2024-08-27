@@ -28,6 +28,7 @@ class CreateKnowledgeViewModel: ObservableObject {
         }
     }
 
+    @Published var title = ""
     @Published var tagsSelection = Set<String>()
 
     func loadTransferable(from imageSelection: PhotosPickerItem?) async throws {
@@ -71,7 +72,7 @@ class CreateKnowledgeViewModel: ObservableObject {
         let urls = await uploadImages(knowledgeId: knowledgeId)
 
         // create a new post from the current items
-        let knowledge = Knowledge(postedById: DataStorageManager.shared.currentUserId, contentPages: contentPages, imageUrls: urls, tags: tagsSelection.sorted())
+        let knowledge = Knowledge(postedById: DataStorageManager.shared.currentUserId, title: title, contentPages: contentPages, imageUrls: urls, tags: tagsSelection.sorted())
 
         // post to database
         do {

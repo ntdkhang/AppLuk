@@ -14,6 +14,12 @@ struct KnowledgeView: View {
         VStack {
             PostedByView(knowledge: knowledge)
 
+            Text(knowledge.title)
+                .font(.title2)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
+                .accessibilityHint("Knowledge title")
+
             ImageCarouselView(knowledge: knowledge)
                 .frame(maxWidth: .infinity)
                 .layoutPriority(1)
@@ -53,10 +59,14 @@ struct PostedByView: View {
                     .frame(width: 40)
                     .clipShape(Circle())
             }
+            .accessibilityLabel("Avatar")
+
             Text(DataStorageManager.shared.getFriendName(withId: knowledge.postedById))
                 .bold()
+
             Text(knowledge.relativeTimeString)
         }
+        .accessibilityElement(children: .combine)
     }
 }
 
@@ -82,8 +92,8 @@ struct ImageCarouselView: View {
             .scrollTargetBehavior(.paging)
 
             /// Indicator bar
-            // does this look better inside or outside of the image?
             IndicatorView(imageCount: knowledge.imageUrls.count, scrollID: scrollID, isTag: !knowledge.tags.isEmpty)
+                .accessibility(hidden: true)
         }
     }
 }

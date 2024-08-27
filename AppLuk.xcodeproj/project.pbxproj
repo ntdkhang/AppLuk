@@ -43,6 +43,7 @@
 		42B598442C737E2300C37F66 /* KnowledgesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B598432C737E2300C37F66 /* KnowledgesViewModel.swift */; };
 		42B598462C738A4A00C37F66 /* KnowledgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B598452C738A4A00C37F66 /* KnowledgesView.swift */; };
 		42B598482C73927500C37F66 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B598472C73927500C37F66 /* Color+.swift */; };
+		42C6A8862C7D324D00A28FAA /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8852C7D324D00A28FAA /* Router.swift */; };
 		42EDD2BB2C78EEA800D99EDE /* AsyncCachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,7 @@
 		42B598432C737E2300C37F66 /* KnowledgesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgesViewModel.swift; sourceTree = "<group>"; };
 		42B598452C738A4A00C37F66 /* KnowledgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgesView.swift; sourceTree = "<group>"; };
 		42B598472C73927500C37F66 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		42C6A8852C7D324D00A28FAA /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncCachedImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,6 +122,7 @@
 			children = (
 				42B597CD2C6EEF7500C37F66 /* GoogleService-Info.plist */,
 				4212EDCF2C56D9E400F30DD2 /* AppLukApp.swift */,
+				42C6A8852C7D324D00A28FAA /* Router.swift */,
 				42B598082C6F7FE100C37F66 /* User.swift */,
 				42B5983D2C711B9100C37F66 /* UserViewModel.swift */,
 				42B598472C73927500C37F66 /* Color+.swift */,
@@ -298,6 +301,7 @@
 				425307F02C7656B000CF16DA /* CommentsViewModel.swift in Sources */,
 				42B598342C70482900C37F66 /* DataStorageManager.swift in Sources */,
 				42B5981C2C6FC93200C37F66 /* AuthenticationView.swift in Sources */,
+				42C6A8862C7D324D00A28FAA /* Router.swift in Sources */,
 				42B598092C6F7FE200C37F66 /* User.swift in Sources */,
 				42B5983E2C711B9100C37F66 /* UserViewModel.swift in Sources */,
 				42B598482C73927500C37F66 /* Color+.swift in Sources */,
