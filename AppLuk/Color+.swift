@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 extension Color {
-    static var knowledgeBackground: Color {
+    static var backgroundColor: Color {
         Color(red: 53 / 256, green: 53 / 256, blue: 53 / 256)
     }
 }

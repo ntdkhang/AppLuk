@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "bút_bóng_đèn 2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "bút_bóng_đèn 3.png",
+      "filename" : "bút_bóng_đèn 7.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "bút_bóng_đèn 4.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

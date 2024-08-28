@@ -35,7 +35,7 @@ struct KnowledgeView: View {
             // .frame(maxHeight: .infinity, alignment: .top)
         }
         .background(
-            Color.knowledgeBackground
+            Color.backgroundColor
         )
         .sheet(isPresented: $showComments) {
             CommentsView(knowledgeId: knowledge.id ?? "", commentsVM: CommentsViewModel(knowledgeId: knowledge.id ?? ""))

@@ -12,10 +12,16 @@ struct CreateKnowledgeView: View {
     @StateObject var knowledgeVM = CreateKnowledgeViewModel()
     @Environment(\.dismiss) private var dismiss
     @Binding var isPresented: Bool
+    let tags = ["Health", "Psychology", "Philosophy", "Science", "Math", "Life", "Relationship"]
 
     var body: some View {
         VStack {
+            TextField("Your knowledge title here", text: $knowledgeVM.title)
+                .font(.title2)
+                .padding()
+
             CreateImageCarouselView(knowledgeVM: knowledgeVM)
+                .frame(maxWidth: .infinity)
 
             HStack {
                 PhotosPicker(selection: $knowledgeVM.selectedItem, matching: .images) {
@@ -49,6 +55,8 @@ struct CreateKnowledgeView: View {
                 .accessibilityLabel("Add new page")
             }
             .padding()
+
+            // MultiSelectPickerView(allTags: tags, selectedItems: $knowledgeVM.tagsSelection)
         }
         .navigationBarBackButtonHidden(true)
         .frame(maxHeight: .infinity, alignment: .top)
@@ -62,7 +70,9 @@ struct CreateKnowledgeView: View {
             }
 
             ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink(destination: CreateTitleView(knowledgeVM: knowledgeVM, isPresented: $isPresented)) {
+                NavigationLink {
+                    CreateTitleView(knowledgeVM: knowledgeVM, isPresented: $isPresented)
+                } label: {
                     Text("Next")
                 }
             }
@@ -77,6 +87,40 @@ struct CreateKnowledgeView: View {
                 )
             }
         )
+        .background(
+            Color.backgroundColor
+        )
+    }
+}
+
+struct MultiSelectPickerView: View {
+    let allTags: [String]
+
+    // Binding to the selected items we want to track
+    @Binding var selectedItems: Set<String>
+
+    var body: some View {
+        List {
+            ForEach(allTags, id: \.self) { item in
+                Button(action: {
+                    withAnimation {
+                        if self.selectedItems.contains(item) {
+                            // Previous comment: you may need to adapt this piece
+                            self.selectedItems.remove(item)
+                        } else {
+                            self.selectedItems.insert(item)
+                        }
+                    }
+                }) {
+                    HStack {
+                        Image(systemName: "checkmark")
+                            .opacity(self.selectedItems.contains(item) ? 1.0 : 0.0)
+                        Text(item)
+                    }
+                }
+            }
+        }
+        .listStyle(.plain)
     }
 }
 
@@ -88,15 +132,16 @@ struct CreateTitleView: View {
 
     var body: some View {
         VStack {
-            TextField("Your knowledge title here", text: $knowledgeVM.title)
-                .font(.title2)
-                .padding()
-
             List(items, id: \.self, selection: $knowledgeVM.tagsSelection) {
                 Text("\($0)")
+                    .listRowBackground(Color.backgroundColor)
             }
+            .scrollContentBackground(.hidden)
             .environment(\.editMode, .constant(EditMode.active))
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .navigationTitle("Choose tags")
+        .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
@@ -109,6 +154,9 @@ struct CreateTitleView: View {
                 }
             }
         }
+        .background(
+            Color.backgroundColor
+        )
     }
 }
 

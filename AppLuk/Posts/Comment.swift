@@ -10,6 +10,8 @@ import Foundation
 
 struct Comment: Codable, Identifiable {
     @DocumentID var id: String?
+    var isReply: Bool = false
+    var parentID: String = "" // the id of the parent comment, if current comment is reply comment
     var postedById: String
     var timePosted: Date
 

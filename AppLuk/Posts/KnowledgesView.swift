@@ -21,9 +21,8 @@ struct KnowledgesView: View {
                     }
                 }
                 .scrollTargetBehavior(.paging)
-                ReactionView()
             }
-            .background(Color.knowledgeBackground)
+            .background(Color.backgroundColor)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
@@ -44,11 +43,10 @@ struct KnowledgesView: View {
                     Button {
                         presentCreateView = true
                     } label: {
-                        // Image(systemName: "square.and.pencil")
                         Image("hut_bong")
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 40)
+                            .aspectRatio(contentMode: .fill)
+                            .frame(height: 35)
                     }
                     .accessibilityLabel("Create new knowledge")
                 }
