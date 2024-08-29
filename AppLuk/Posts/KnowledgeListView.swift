@@ -1,5 +1,5 @@
 //
-//  KnowledgesView.swift
+//  KnowledgeListView.swift
 //  AppLuk
 //
 //  Created by Khang Nguyen on 8/19/24.
@@ -8,7 +8,7 @@
 import FirebaseAuth
 import SwiftUI
 
-struct KnowledgesView: View {
+struct KnowledgeListView: View {
     @ObservedObject var dataStorageManager = DataStorageManager.shared
     @State private var presentCreateView = false
     var body: some View {
@@ -22,7 +22,7 @@ struct KnowledgesView: View {
                 }
                 .scrollTargetBehavior(.paging)
             }
-            .background(Color.backgroundColor)
+            .background(Color.background)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
@@ -53,22 +53,6 @@ struct KnowledgesView: View {
             }
             .navigationDestination(isPresented: $presentCreateView) {
                 CreateKnowledgeView(isPresented: $presentCreateView)
-            }
-        }
-    }
-}
-
-struct ReactionView: View {
-    private var reactionList: [String] = ["🍄", "🗿", "🤡", "🚨", "🚩"]
-    var body: some View {
-        HStack {
-            ForEach(self.reactionList, id: \.self) { icon in
-                Button {
-                } label: {
-                    Text(icon)
-                        .font(.system(size: 30))
-                }
-                .padding(8)
             }
         }
     }

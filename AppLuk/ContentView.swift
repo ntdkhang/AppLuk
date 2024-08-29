@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        KnowledgesView()
+        KnowledgeListView()
             .task {
-                await DataStorageManager.shared.fetchCurrentUser()
+                DataStorageManager.shared.fetchCurrentUser()
             }
     }
 }

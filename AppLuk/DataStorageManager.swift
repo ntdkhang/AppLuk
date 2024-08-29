@@ -13,6 +13,8 @@ class DataStorageManager: ObservableObject {
     @Published var friends: [User] = []
     @Published var currentUser: User?
     @Published var knowledges = [Knowledge]()
+    @Published var savedKnowledges = [Knowledge]()
+
     var currentUserId: String = "" // this ID is set from the Auth UID
 
     let db = Firestore.firestore()
@@ -26,6 +28,47 @@ class DataStorageManager: ObservableObject {
         print("Friends ID: \(friendsId)")
         friendsId.append(currentUserId)
         return friendsId
+    }
+
+    func saveKnowledge(knowledgeId: String?) {
+        guard let knowledgeId = knowledgeId else {
+            return
+        }
+        let ref = db.collection("users").document(currentUserId)
+        if let currentUser = currentUser, !currentUser.savesId.contains(knowledgeId) {
+            ref.updateData([
+                "savesId": FieldValue.arrayUnion([knowledgeId]),
+            ])
+        }
+    }
+
+    func getSavedKnowledes() {
+        guard let currentUser = currentUser else {
+            print("Current user is nil")
+            return
+        }
+
+        db.collection("knowledges")
+            .whereField(FieldPath.documentID(), in: currentUser.savesId)
+            .order(by: "timePosted", descending: true)
+            .addSnapshotListener { querySnapshot, error in
+                guard let documents = querySnapshot?.documents else {
+                    print("Error fetching saved knowledges: \(error!)")
+                    return
+                }
+
+                let knowledges = documents.compactMap { document in
+                    do {
+                        let knowledge = try document.data(as: Knowledge.self)
+                        return knowledge
+                    } catch {
+                        print("Error mapping to saved Knowledge: \(error)")
+                        return nil
+                    }
+                }
+
+                self.savedKnowledges = knowledges
+            }
     }
 
     func getKnowledges() {
@@ -43,16 +86,17 @@ class DataStorageManager: ObservableObject {
                         let knowledge = try document.data(as: Knowledge.self)
                         return knowledge
                     } catch {
-                        print(error)
+                        print("Error mapping to Knowledge: \(error)")
                         return nil
                     }
                 }
 
                 self.knowledges = knowledges
+                self.getSavedKnowledes()
             }
     }
 
-    func fetchCurrentUser() async {
+    func fetchCurrentUser() {
         Firestore.firestore().collection("users").document(DataStorageManager.shared.currentUserId)
             .addSnapshotListener { snapshot, error in
                 guard let document = snapshot else {
@@ -76,7 +120,8 @@ class DataStorageManager: ObservableObject {
             return
         }
 
-        db.collection("users").whereField(FieldPath.documentID(), in: currentUser.friendsId)
+        db.collection("users")
+            .whereField(FieldPath.documentID(), in: currentUser.friendsId)
             .addSnapshotListener { querySnapshot, error in
                 guard let documents = querySnapshot?.documents else {
                     print("Error fetching documents: \(error!)")

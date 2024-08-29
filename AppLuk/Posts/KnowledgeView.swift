@@ -14,15 +14,10 @@ struct KnowledgeView: View {
         VStack {
             PostedByView(knowledge: knowledge)
 
-            Text(knowledge.title)
-                .font(.title2)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal)
-                .accessibilityHint("Knowledge title")
+            KnowledgeMainContent(knowledge: knowledge)
+                .padding(.horizontal, 8)
 
-            ImageCarouselView(knowledge: knowledge)
-                .frame(maxWidth: .infinity)
-                .layoutPriority(1)
+            SaveAndReactView(knowledge: knowledge)
 
             Button {
                 showComments.toggle()
@@ -35,11 +30,68 @@ struct KnowledgeView: View {
             // .frame(maxHeight: .infinity, alignment: .top)
         }
         .background(
-            Color.backgroundColor
+            Color.background
         )
         .sheet(isPresented: $showComments) {
             CommentsView(knowledgeId: knowledge.id ?? "", commentsVM: CommentsViewModel(knowledgeId: knowledge.id ?? ""))
         }
+    }
+}
+
+struct KnowledgeMainContent: View {
+    var knowledge: Knowledge
+
+    var body: some View {
+        VStack {
+            ImageCarouselView(knowledge: knowledge)
+                .padding(3)
+                .frame(maxWidth: .infinity)
+                .layoutPriority(1)
+
+            Text(knowledge.title)
+                .foregroundColor(Color.darkText)
+                .font(.title2)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
+                .padding(.bottom)
+                .accessibilityHint("Knowledge title")
+        }
+        .background(Color.imageBackground)
+    }
+}
+
+struct SaveAndReactView: View {
+    let knowledge: Knowledge
+    var body: some View {
+        HStack {
+            Button {
+                DataStorageManager.shared.saveKnowledge(knowledgeId: knowledge.id)
+            } label: {
+                Image(systemName: "bookmark")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 30)
+            }
+
+            Spacer()
+
+            Button {
+            } label: {
+                Image(systemName: "arrow.up")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 30)
+            }
+
+            Button {
+            } label: {
+                Image(systemName: "arrow.down")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 30)
+            }
+        }
+        .padding()
     }
 }
 
@@ -105,8 +157,7 @@ struct PageView: View {
     var body: some View {
         ZStack {
             clippedImage
-            Color(.black)
-                .opacity(0.7)
+            Color.imageBlur
             ScrollView(.vertical) {
                 Text(pageContent)
                     .lineLimit(nil)
@@ -115,7 +166,7 @@ struct PageView: View {
             }
         }
         .aspectRatio(1.0, contentMode: .fit)
-        .clipShape(RoundedRectangle(cornerRadius: 30))
+        // .clipShape(RoundedRectangle(cornerRadius: 30))
     }
 
     var clippedImage: some View {
@@ -130,7 +181,8 @@ struct PageView: View {
                     Color.gray
                 }
             )
-            .clipShape(RoundedRectangle(cornerRadius: 30))
+            .clipped()
+        // .clipShape(RoundedRectangle(cornerRadius: 30))
     }
 }
 

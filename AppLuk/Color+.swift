@@ -9,7 +9,15 @@ import Foundation
 import SwiftUI
 
 extension Color {
-    static var backgroundColor: Color {
-        Color(red: 53 / 256, green: 53 / 256, blue: 53 / 256)
-    }
+    // static var backgroundColor: Color {
+    //     Color("background")
+    // }
+    //
+    // static var imageBackground: Color {
+    //     Color("imageBackground")
+    // }
+    //
+    // static var imageBlur: Color {
+    //     Color("imageBlur")
+    // }
 }
