@@ -12,48 +12,48 @@ struct KnowledgeListView: View {
     @ObservedObject var dataStorageManager = DataStorageManager.shared
     @State private var presentCreateView = false
     var body: some View {
-        NavigationStack {
-            VStack {
-                ScrollView(.vertical, showsIndicators: false) {
+        VStack {
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(spacing: 0) {
                     ForEach(dataStorageManager.knowledges) { knowledge in
                         KnowledgeView(knowledge: knowledge)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .containerRelativeFrame(.vertical)
                     }
                 }
-                .scrollTargetBehavior(.paging)
             }
-            .background(Color.background)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        do {
-                            try Auth.auth().signOut()
-                        } catch {
-                            print(error)
-                        }
-                    } label: {
-                        Image(systemName: "line.3.horizontal")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 40)
-                    }
+            .ignoresSafeArea()
+            .scrollTargetLayout()
+            .scrollTargetBehavior(.paging)
+            .scrollBounceBehavior(.basedOnSize)
+        }
+        .background(Color.background)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                NavigationLink {
+                    SavedKnowledgeListView()
+                } label: {
+                    Image(systemName: "line.3.horizontal")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 40)
                 }
+            }
 
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        presentCreateView = true
-                    } label: {
-                        Image("hut_bong")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(height: 35)
-                    }
-                    .accessibilityLabel("Create new knowledge")
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    presentCreateView = true
+                } label: {
+                    Image("hut_bong")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: 35)
                 }
+                .accessibilityLabel("Create new knowledge")
             }
-            .navigationDestination(isPresented: $presentCreateView) {
-                CreateKnowledgeView(isPresented: $presentCreateView)
-            }
+        }
+        .navigationDestination(isPresented: $presentCreateView) {
+            CreateKnowledgeView(isPresented: $presentCreateView)
         }
     }
 }

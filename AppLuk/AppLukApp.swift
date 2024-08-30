@@ -24,6 +24,9 @@ struct AppLukApp: App {
         WindowGroup {
             AuthenticatedView {
                 ContentView()
+                    .task {
+                        DataStorageManager.shared.fetchCurrentUser()
+                    }
             }
         }
     }

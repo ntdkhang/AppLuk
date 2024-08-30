@@ -25,7 +25,6 @@ class DataStorageManager: ObservableObject {
 
     var friendsAndSelfId: [String] {
         var friendsId = currentUser?.friendsId ?? []
-        print("Friends ID: \(friendsId)")
         friendsId.append(currentUserId)
         return friendsId
     }

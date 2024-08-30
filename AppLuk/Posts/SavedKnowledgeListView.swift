@@ -20,5 +20,7 @@ struct SavedKnowledgeListView: View {
             }
             .scrollTargetBehavior(.paging)
         }
+        .navigationTitle("Saved Knowledge")
+        .background(Color.background)
     }
 }

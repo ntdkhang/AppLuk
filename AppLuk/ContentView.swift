@@ -8,14 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var tabSelection = 0
     var body: some View {
-        KnowledgeListView()
-            .task {
-                DataStorageManager.shared.fetchCurrentUser()
-            }
-    }
-}
+        NavigationStack {
+            ZStack {
+                KnowledgeListView()
 
-#Preview {
-    ContentView()
+                VStack {
+                    NavigationLink {
+                        SearchKnowledgeView()
+                    } label: {
+                        Text("Test")
+                    }
+                }
+                .frame(maxHeight: .infinity, alignment: .bottom)
+            }
+        }
+    }
 }
