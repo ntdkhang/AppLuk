@@ -11,21 +11,27 @@ struct SearchKnowledgeView: View {
     @StateObject private var knowledgeVM = SearchKnowledgeViewModel()
     let tags = ["Health", "Psychology", "Philosophy", "Science", "Math", "Life", "Relationship"]
     var body: some View {
-        ZStack {
+        VStack {
             ScrollView(.vertical, showsIndicators: false) {
-                ForEach(knowledgeVM.knowledges) { knowledge in
-                    KnowledgeView(knowledge: knowledge)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .containerRelativeFrame(.vertical)
+                VStack(spacing: 0) {
+                    ForEach(knowledgeVM.knowledges) { knowledge in
+                        KnowledgeView(knowledge: knowledge)
+                            .frame(maxWidth: .infinity)
+                            .containerRelativeFrame(.vertical, alignment: .center)
+                    }
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea()
+            .scrollTargetLayout()
             .scrollTargetBehavior(.paging)
             .scrollBounceBehavior(.basedOnSize)
-            .scrollTargetLayout()
-
-            VStack {
+        }
+        .frame(maxWidth: .infinity)
+        .background(
+            Color.background
+        )
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
                 Picker("Choose a tag", selection: $knowledgeVM.selectedTag) {
                     ForEach(tags, id: \.self) { tag in
                         Text(tag)
@@ -33,10 +39,6 @@ struct SearchKnowledgeView: View {
                 }
                 .pickerStyle(.menu)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         }
-        .background(
-            Color.background
-        )
     }
 }

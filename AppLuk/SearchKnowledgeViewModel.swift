@@ -10,7 +10,7 @@ import SwiftUI
 
 class SearchKnowledgeViewModel: ObservableObject {
     @Published var knowledges: [Knowledge]
-    @Published var selectedTag: String = "" {
+    @Published var selectedTag: String = "Health" {
         didSet {
             Task {
                 await queryKnowledges()
@@ -32,7 +32,6 @@ class SearchKnowledgeViewModel: ObservableObject {
                 .getDocuments()
 
             var searchedKnowledges = [Knowledge]()
-            print("Count: \(querySnapshot.documents.count)")
             for document in querySnapshot.documents {
                 do {
                     let knowledge = try document.data(as: Knowledge.self)
@@ -42,7 +41,6 @@ class SearchKnowledgeViewModel: ObservableObject {
                 }
             }
             knowledges = searchedKnowledges
-            print(knowledges.count)
         } catch {
             print("Error getting search knowledges: \(error)")
         }
