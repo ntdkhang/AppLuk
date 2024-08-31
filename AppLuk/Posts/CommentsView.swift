@@ -41,6 +41,7 @@ struct CommentsView: View {
     var textField: some View {
         HStack {
             TextField("Write your thoughts here:", text: $currentComment, axis: .vertical)
+                .font(.com_regular)
                 .multilineTextAlignment(.leading)
                 .padding()
 

@@ -69,7 +69,6 @@ class CreateKnowledgeViewModel: ObservableObject {
         // create a new document, get ID
         let knowledgeRef = db.collection("knowledges").document()
         let knowledgeId = knowledgeRef.documentID
-
         // upload all images to storage, then retrieve the urls
         let urls = await uploadImages(knowledgeId: knowledgeId)
 
@@ -84,7 +83,7 @@ class CreateKnowledgeViewModel: ObservableObject {
         }
     }
 
-    private func uploadImages(knowledgeId _: String) async -> [String?] {
+    private func uploadImages(knowledgeId: String) async -> [String?] {
         let storageRef = Storage.storage().reference(withPath: "/knowledge_images")
 
         do {
@@ -96,8 +95,8 @@ class CreateKnowledgeViewModel: ObservableObject {
                         guard let uiImage = uiImage, let data = uiImage.jpegData(compressionQuality: 0.2) else {
                             return nil
                         }
-                        let _ = try await storageRef.child("\(index)").putDataAsync(data)
-                        return try await storageRef.child("\(index)").downloadURL().absoluteString
+                        let _ = try await storageRef.child("\(knowledgeId + String(index))").putDataAsync(data)
+                        return try await storageRef.child("\(knowledgeId + String(index))").downloadURL().absoluteString
                     }
                 }
 

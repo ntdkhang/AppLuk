@@ -45,8 +45,47 @@
 		42C6A8B02C825E4500A28FAA /* Comfortaa.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42C6A8AF2C825E3500A28FAA /* Comfortaa.ttf */; };
 		42C6A8B32C828D1000A28FAA /* Comfortaa-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42C6A8B22C828D1000A28FAA /* Comfortaa-SemiBold.ttf */; };
 		42C6A8B52C828F8100A28FAA /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8B42C828F8100A28FAA /* Font+.swift */; };
+		42C6A8BC2C835E4000A28FAA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C6A8BB2C835E4000A28FAA /* WidgetKit.framework */; };
+		42C6A8BE2C835E4000A28FAA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C6A8BD2C835E4000A28FAA /* SwiftUI.framework */; };
+		42C6A8C12C835E4000A28FAA /* AppLukWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8C02C835E4000A28FAA /* AppLukWidgetBundle.swift */; };
+		42C6A8C32C835E4000A28FAA /* AppLukWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8C22C835E4000A28FAA /* AppLukWidget.swift */; };
+		42C6A8C52C835E4000A28FAA /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8C42C835E4000A28FAA /* AppIntent.swift */; };
+		42C6A8C72C835E4300A28FAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C6A8C62C835E4300A28FAA /* Assets.xcassets */; };
+		42C6A8CB2C835E4300A28FAA /* AppLukWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 42C6A8BA2C835E4000A28FAA /* AppLukWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		42C6A8D12C83636800A28FAA /* Knowledge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428AAAC42C5D3259006B6647 /* Knowledge.swift */; };
+		42C6A8D32C8365B200A28FAA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 42C6A8D22C8365B200A28FAA /* FirebaseAuth */; };
+		42C6A8D52C8365B200A28FAA /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 42C6A8D42C8365B200A28FAA /* FirebaseFirestore */; };
+		42C6A8D62C83776700A28FAA /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B598472C73927500C37F66 /* Color+.swift */; };
+		42C6A8D72C83779800A28FAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4212EDD32C56D9E500F30DD2 /* Assets.xcassets */; };
+		42C6A8D82C8377BE00A28FAA /* Comfortaa.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42C6A8AF2C825E3500A28FAA /* Comfortaa.ttf */; };
+		42C6A8D92C8377BE00A28FAA /* Comfortaa-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42C6A8B22C828D1000A28FAA /* Comfortaa-SemiBold.ttf */; };
+		42C6A8DB2C8377C100A28FAA /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8B42C828F8100A28FAA /* Font+.swift */; };
 		42EDD2BB2C78EEA800D99EDE /* AsyncCachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		42C6A8C92C835E4300A28FAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4212EDC42C56D9E300F30DD2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 42C6A8B92C835E4000A28FAA;
+			remoteInfo = AppLukWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		42C6A8CF2C835E4300A28FAA /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				42C6A8CB2C835E4300A28FAA /* AppLukWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4212EDCC2C56D9E400F30DD2 /* AppLuk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppLuk.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +123,14 @@
 		42C6A8B12C825EE000A28FAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		42C6A8B22C828D1000A28FAA /* Comfortaa-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-SemiBold.ttf"; sourceTree = "<group>"; };
 		42C6A8B42C828F8100A28FAA /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
+		42C6A8BA2C835E4000A28FAA /* AppLukWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AppLukWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		42C6A8BB2C835E4000A28FAA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		42C6A8BD2C835E4000A28FAA /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		42C6A8C02C835E4000A28FAA /* AppLukWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLukWidgetBundle.swift; sourceTree = "<group>"; };
+		42C6A8C22C835E4000A28FAA /* AppLukWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLukWidget.swift; sourceTree = "<group>"; };
+		42C6A8C42C835E4000A28FAA /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		42C6A8C62C835E4300A28FAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		42C6A8C82C835E4300A28FAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncCachedImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,6 +147,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		42C6A8B72C835E4000A28FAA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42C6A8BE2C835E4000A28FAA /* SwiftUI.framework in Frameworks */,
+				42C6A8D52C8365B200A28FAA /* FirebaseFirestore in Frameworks */,
+				42C6A8D32C8365B200A28FAA /* FirebaseAuth in Frameworks */,
+				42C6A8BC2C835E4000A28FAA /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -107,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				4212EDCE2C56D9E400F30DD2 /* AppLuk */,
+				42C6A8BF2C835E4000A28FAA /* AppLukWidget */,
 				4212EDCD2C56D9E400F30DD2 /* Products */,
 				42B597BE2C6EE84C00C37F66 /* Frameworks */,
 			);
@@ -116,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				4212EDCC2C56D9E400F30DD2 /* AppLuk.app */,
+				42C6A8BA2C835E4000A28FAA /* AppLukWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -177,6 +237,8 @@
 		42B597BE2C6EE84C00C37F66 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				42C6A8BB2C835E4000A28FAA /* WidgetKit.framework */,
+				42C6A8BD2C835E4000A28FAA /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -193,6 +255,18 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		42C6A8BF2C835E4000A28FAA /* AppLukWidget */ = {
+			isa = PBXGroup;
+			children = (
+				42C6A8C02C835E4000A28FAA /* AppLukWidgetBundle.swift */,
+				42C6A8C22C835E4000A28FAA /* AppLukWidget.swift */,
+				42C6A8C42C835E4000A28FAA /* AppIntent.swift */,
+				42C6A8C62C835E4300A28FAA /* Assets.xcassets */,
+				42C6A8C82C835E4300A28FAA /* Info.plist */,
+			);
+			path = AppLukWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -203,10 +277,12 @@
 				4212EDC82C56D9E400F30DD2 /* Sources */,
 				4212EDC92C56D9E400F30DD2 /* Frameworks */,
 				4212EDCA2C56D9E400F30DD2 /* Resources */,
+				42C6A8CF2C835E4300A28FAA /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				42C6A8CA2C835E4300A28FAA /* PBXTargetDependency */,
 			);
 			name = AppLuk;
 			packageProductDependencies = (
@@ -220,6 +296,27 @@
 			productReference = 4212EDCC2C56D9E400F30DD2 /* AppLuk.app */;
 			productType = "com.apple.product-type.application";
 		};
+		42C6A8B92C835E4000A28FAA /* AppLukWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42C6A8CC2C835E4300A28FAA /* Build configuration list for PBXNativeTarget "AppLukWidgetExtension" */;
+			buildPhases = (
+				42C6A8B62C835E4000A28FAA /* Sources */,
+				42C6A8B72C835E4000A28FAA /* Frameworks */,
+				42C6A8B82C835E4000A28FAA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AppLukWidgetExtension;
+			packageProductDependencies = (
+				42C6A8D22C8365B200A28FAA /* FirebaseAuth */,
+				42C6A8D42C8365B200A28FAA /* FirebaseFirestore */,
+			);
+			productName = AppLukWidgetExtension;
+			productReference = 42C6A8BA2C835E4000A28FAA /* AppLukWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -231,6 +328,9 @@
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					4212EDCB2C56D9E400F30DD2 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+					42C6A8B92C835E4000A28FAA = {
 						CreatedOnToolsVersion = 15.2;
 					};
 				};
@@ -254,6 +354,7 @@
 			projectRoot = "";
 			targets = (
 				4212EDCB2C56D9E400F30DD2 /* AppLuk */,
+				42C6A8B92C835E4000A28FAA /* AppLukWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -268,6 +369,17 @@
 				42C6A8B02C825E4500A28FAA /* Comfortaa.ttf in Resources */,
 				4212EDD42C56D9E500F30DD2 /* Assets.xcassets in Resources */,
 				42B597CE2C6EEF7500C37F66 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42C6A8B82C835E4000A28FAA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42C6A8D72C83779800A28FAA /* Assets.xcassets in Resources */,
+				42C6A8D82C8377BE00A28FAA /* Comfortaa.ttf in Resources */,
+				42C6A8D92C8377BE00A28FAA /* Comfortaa-SemiBold.ttf in Resources */,
+				42C6A8C72C835E4300A28FAA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,7 +422,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		42C6A8B62C835E4000A28FAA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42C6A8C32C835E4000A28FAA /* AppLukWidget.swift in Sources */,
+				42C6A8DB2C8377C100A28FAA /* Font+.swift in Sources */,
+				42C6A8D62C83776700A28FAA /* Color+.swift in Sources */,
+				42C6A8C12C835E4000A28FAA /* AppLukWidgetBundle.swift in Sources */,
+				42C6A8C52C835E4000A28FAA /* AppIntent.swift in Sources */,
+				42C6A8D12C83636800A28FAA /* Knowledge.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		42C6A8CA2C835E4300A28FAA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 42C6A8B92C835E4000A28FAA /* AppLukWidgetExtension */;
+			targetProxy = 42C6A8C92C835E4300A28FAA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4212EDD82C56D9E600F30DD2 /* Debug */ = {
@@ -435,6 +568,7 @@
 		4212EDDB2C56D9E600F30DD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -467,6 +601,7 @@
 		4212EDDC2C56D9E600F30DD2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -496,6 +631,60 @@
 			};
 			name = Release;
 		};
+		42C6A8CD2C835E4300A28FAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T76274KP97;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AppLukWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = AppLukWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.khang.nguyen.AppLuk.AppLukWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		42C6A8CE2C835E4300A28FAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T76274KP97;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AppLukWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = AppLukWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.khang.nguyen.AppLuk.AppLukWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -513,6 +702,15 @@
 			buildConfigurations = (
 				4212EDDB2C56D9E600F30DD2 /* Debug */,
 				4212EDDC2C56D9E600F30DD2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		42C6A8CC2C835E4300A28FAA /* Build configuration list for PBXNativeTarget "AppLukWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42C6A8CD2C835E4300A28FAA /* Debug */,
+				42C6A8CE2C835E4300A28FAA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -571,6 +769,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 42B5974E2C6D507D00C37F66 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		42C6A8D22C8365B200A28FAA /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42B5974E2C6D507D00C37F66 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		42C6A8D42C8365B200A28FAA /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42B5974E2C6D507D00C37F66 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

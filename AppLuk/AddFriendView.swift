@@ -29,10 +29,10 @@ struct AddFriendView: View {
 
                         VStack(alignment: .leading) {
                             Text(user.name)
-                                .bold()
+                                .font(.com_regular)
 
                             Text(user.userName)
-                                .font(.caption)
+                                .font(.com_caption)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
 

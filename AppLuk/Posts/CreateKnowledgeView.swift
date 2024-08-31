@@ -99,7 +99,7 @@ struct CreateTitleView: View {
     @Binding var isPresented: Bool
     @Environment(\.dismiss) private var dismiss
 
-    let items = ["Health", "Psychology", "Philosophy", "Science", "Math", "Life", "Relationship"]
+    let items = Knowledge.tags
 
     var body: some View {
         VStack {

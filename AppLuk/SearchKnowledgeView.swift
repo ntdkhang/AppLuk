@@ -34,6 +34,7 @@ struct SearchKnowledgeView: View {
         .onAppear {
             knowledgeVM.selectedTag = tags[0]
         }
+        .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
@@ -48,14 +49,32 @@ struct SearchKnowledgeView: View {
                 .foregroundColor(.white)
             }
             ToolbarItem(placement: .topBarTrailing) {
-                Picker("Choose a tag", selection: $knowledgeVM.selectedTag) {
+                // Picker("Choose a tag", selection: $knowledgeVM.selectedTag) {
+                //     ForEach(tags, id: \.self) { tag in
+                //         Text(tag)
+                //             .font(.com_subheadline)
+                //             .foregroundColor(.white)
+                //     }
+                // }
+                // .font(.com_subheadline)
+                // .foregroundColor(.white)
+                // .pickerStyle(.menu)
+
+                Menu {
                     ForEach(tags, id: \.self) { tag in
-                        Text(tag)
+                        Button {
+                            knowledgeVM.selectedTag = tag
+                        } label: {
+                            Text(tag)
+                                .font(.com_subheadline)
+                                .foregroundColor(.white)
+                        }
                     }
+                } label: {
+                    Text(knowledgeVM.selectedTag)
+                        .font(.com_regular)
+                        .foregroundColor(.lightButton)
                 }
-                .font(.com_subheadline)
-                .foregroundColor(.white)
-                .pickerStyle(.menu)
             }
         }
     }

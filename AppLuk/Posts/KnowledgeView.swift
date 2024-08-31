@@ -191,6 +191,7 @@ struct PageView: View {
             ScrollView(.vertical) {
                 Text(pageContent)
                     .font(.com_regular)
+                    .lineSpacing(10)
                     .lineLimit(nil)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     .padding(16)
@@ -224,18 +225,16 @@ struct IndicatorView: View {
 
     var body: some View {
         HStack {
-            ForEach(0 ..< imageCount, id: \.self) { curIndex in
+            ForEach(0 ..< indexMax, id: \.self) { curIndex in
                 let scrollIndex = scrollID ?? 0
                 Image(systemName: "circle.fill")
                     .font(.system(size: 8))
-                    .foregroundColor(scrollIndex == curIndex ? .white : Color(.systemGray6))
-            }
-            if isTag {
-                let scrollIndex = scrollID ?? 0
-                Image(systemName: "circle.fill")
-                    .font(.system(size: 8))
-                    .foregroundColor(scrollIndex == imageCount ? .purple : .blue)
+                    .foregroundColor(scrollIndex == curIndex ? .background : .gray)
             }
         }
+    }
+
+    var indexMax: Int {
+        isTag ? imageCount + 1 : imageCount
     }
 }

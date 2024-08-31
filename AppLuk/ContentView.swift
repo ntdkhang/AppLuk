@@ -13,48 +13,50 @@ struct ContentView: View {
         NavigationStack {
             ZStack {
                 KnowledgeListView()
-
-                HStack {
-                    NavigationLink {
-                        SearchKnowledgeView()
-                    } label: {
-                        Image("magnifier")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 60)
-                            .foregroundColor(.white)
-                    }
-                    .frame(maxWidth: .infinity)
-
-                    NavigationLink {
-                        MainProfileView()
-                    } label: {
-                        AsyncImage(url: dataStorageManager.currentUserAvatarUrl) { image in
-                            image
+                VStack {
+                    HStack {
+                        NavigationLink {
+                            SearchKnowledgeView()
+                        } label: {
+                            Image("magnifier")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .clipShape(Circle())
-                        } placeholder: {
-                            Color.gray
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40)
-                                .clipShape(Circle())
+                                .frame(height: 60)
+                                .foregroundColor(.white)
                         }
-                        .frame(height: 40)
-                    }
-                    .frame(maxWidth: .infinity)
+                        .frame(maxWidth: .infinity)
 
-                    NavigationLink {
-                        Text("SIKE")
-                    } label: {
-                        Image("gift_heart")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 60)
-                            .foregroundColor(.white)
-                            .offset(x: 0, y: -5)
+                        NavigationLink {
+                            MainProfileView()
+                        } label: {
+                            AsyncImage(url: dataStorageManager.currentUserAvatarUrl) { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .clipShape(Circle())
+                            } placeholder: {
+                                Color.gray
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 40)
+                                    .clipShape(Circle())
+                            }
+                            .frame(height: 40)
+                        }
+                        .frame(maxWidth: .infinity)
+
+                        NavigationLink {
+                            Text("SIKE")
+                        } label: {
+                            Image("gift_heart")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 60)
+                                .foregroundColor(.white)
+                                .offset(x: 0, y: -5)
+                        }
+                        .frame(maxWidth: .infinity)
                     }
-                    .frame(maxWidth: .infinity)
+                    .background(Color.background)
                 }
                 .ignoresSafeArea()
                 .frame(maxHeight: .infinity, alignment: .bottom)

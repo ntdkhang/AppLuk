@@ -69,7 +69,7 @@ struct Knowledge: Codable, Identifiable {
             "Mindfulness",
             "Book",
             "Fact",
-            "Scientific research",
+            "ScientificResearch",
             "Course",
             "Survival",
             "Tips",
@@ -77,13 +77,13 @@ struct Knowledge: Codable, Identifiable {
             "Handcraft",
             "Language",
             "Human",
-            "Health care",
+            "Healthcare",
             "Influencer",
-            "favorite list",
-            "Beauty care",
+            "Beautycare",
             "Sport",
-            "Soft Skill",
+            "SoftSkills",
             "Others",
         ]
+        .sorted()
     }
 }
