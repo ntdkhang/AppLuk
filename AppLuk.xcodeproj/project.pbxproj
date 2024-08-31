@@ -40,6 +40,11 @@
 		42C6A8A62C81067400A28FAA /* SearchKnowledgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8A52C81067400A28FAA /* SearchKnowledgeView.swift */; };
 		42C6A8A82C810AAF00A28FAA /* SearchKnowledgeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8A72C810AAF00A28FAA /* SearchKnowledgeViewModel.swift */; };
 		42C6A8AA2C8162A900A28FAA /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8A92C8162A900A28FAA /* SearchView.swift */; };
+		42C6A8AC2C81FAB300A28FAA /* AddFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8AB2C81FAB300A28FAA /* AddFriendView.swift */; };
+		42C6A8AE2C81FBA200A28FAA /* AddFriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8AD2C81FBA200A28FAA /* AddFriendViewModel.swift */; };
+		42C6A8B02C825E4500A28FAA /* Comfortaa.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42C6A8AF2C825E3500A28FAA /* Comfortaa.ttf */; };
+		42C6A8B32C828D1000A28FAA /* Comfortaa-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42C6A8B22C828D1000A28FAA /* Comfortaa-SemiBold.ttf */; };
+		42C6A8B52C828F8100A28FAA /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8B42C828F8100A28FAA /* Font+.swift */; };
 		42EDD2BB2C78EEA800D99EDE /* AsyncCachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +78,12 @@
 		42C6A8A52C81067400A28FAA /* SearchKnowledgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKnowledgeView.swift; sourceTree = "<group>"; };
 		42C6A8A72C810AAF00A28FAA /* SearchKnowledgeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKnowledgeViewModel.swift; sourceTree = "<group>"; };
 		42C6A8A92C8162A900A28FAA /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		42C6A8AB2C81FAB300A28FAA /* AddFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendView.swift; sourceTree = "<group>"; };
+		42C6A8AD2C81FBA200A28FAA /* AddFriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewModel.swift; sourceTree = "<group>"; };
+		42C6A8AF2C825E3500A28FAA /* Comfortaa.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Comfortaa.ttf; sourceTree = "<group>"; };
+		42C6A8B12C825EE000A28FAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		42C6A8B22C828D1000A28FAA /* Comfortaa-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-SemiBold.ttf"; sourceTree = "<group>"; };
+		42C6A8B42C828F8100A28FAA /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncCachedImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,15 +123,21 @@
 		4212EDCE2C56D9E400F30DD2 /* AppLuk */ = {
 			isa = PBXGroup;
 			children = (
+				42C6A8B12C825EE000A28FAA /* Info.plist */,
 				42B597CD2C6EEF7500C37F66 /* GoogleService-Info.plist */,
 				4212EDCF2C56D9E400F30DD2 /* AppLukApp.swift */,
 				42B598082C6F7FE100C37F66 /* User.swift */,
 				42C6A8A32C80C55C00A28FAA /* MainProfileView.swift */,
+				42C6A8AF2C825E3500A28FAA /* Comfortaa.ttf */,
+				42C6A8B22C828D1000A28FAA /* Comfortaa-SemiBold.ttf */,
+				42C6A8AD2C81FBA200A28FAA /* AddFriendViewModel.swift */,
 				42C6A8A52C81067400A28FAA /* SearchKnowledgeView.swift */,
 				42B5983D2C711B9100C37F66 /* UserViewModel.swift */,
+				42C6A8B42C828F8100A28FAA /* Font+.swift */,
 				42B598472C73927500C37F66 /* Color+.swift */,
 				42C6A8A72C810AAF00A28FAA /* SearchKnowledgeViewModel.swift */,
 				42C6A8A92C8162A900A28FAA /* SearchView.swift */,
+				42C6A8AB2C81FAB300A28FAA /* AddFriendView.swift */,
 				42B5982D2C70482800C37F66 /* DataStorageManager.swift */,
 				42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */,
 				42B598122C6FC92600C37F66 /* Auth */,
@@ -246,7 +263,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42C6A8B32C828D1000A28FAA /* Comfortaa-SemiBold.ttf in Resources */,
 				4212EDD72C56D9E600F30DD2 /* Preview Assets.xcassets in Resources */,
+				42C6A8B02C825E4500A28FAA /* Comfortaa.ttf in Resources */,
 				4212EDD42C56D9E500F30DD2 /* Assets.xcassets in Resources */,
 				42B597CE2C6EEF7500C37F66 /* GoogleService-Info.plist in Resources */,
 			);
@@ -259,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42C6A8AE2C81FBA200A28FAA /* AddFriendViewModel.swift in Sources */,
 				42B598182C6FC93200C37F66 /* AuthenticationViewModel.swift in Sources */,
 				4212EDD22C56D9E400F30DD2 /* ContentView.swift in Sources */,
 				427631672C67A812005BF2CA /* KnowledgeView.swift in Sources */,
@@ -268,6 +288,7 @@
 				4212EDD02C56D9E400F30DD2 /* AppLukApp.swift in Sources */,
 				4276316D2C6A506D005BF2CA /* CreateKnowledgeView.swift in Sources */,
 				42C6A8AA2C8162A900A28FAA /* SearchView.swift in Sources */,
+				42C6A8AC2C81FAB300A28FAA /* AddFriendView.swift in Sources */,
 				42B5981B2C6FC93200C37F66 /* SignupView.swift in Sources */,
 				42B5974B2C6B977200C37F66 /* CreateKnowledgeViewModel.swift in Sources */,
 				42B5981A2C6FC93200C37F66 /* AuthenticatedView.swift in Sources */,
@@ -279,6 +300,7 @@
 				42B598342C70482900C37F66 /* DataStorageManager.swift in Sources */,
 				42B5981C2C6FC93200C37F66 /* AuthenticationView.swift in Sources */,
 				42B598092C6F7FE200C37F66 /* User.swift in Sources */,
+				42C6A8B52C828F8100A28FAA /* Font+.swift in Sources */,
 				42B5983E2C711B9100C37F66 /* UserViewModel.swift in Sources */,
 				42B598482C73927500C37F66 /* Color+.swift in Sources */,
 				42C6A8A22C80BD8200A28FAA /* SavedKnowledgeListView.swift in Sources */,
@@ -421,6 +443,7 @@
 				DEVELOPMENT_TEAM = T76274KP97;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AppLuk/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "For avatar";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "For avatar";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -452,6 +475,7 @@
 				DEVELOPMENT_TEAM = T76274KP97;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AppLuk/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "For avatar";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "For avatar";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

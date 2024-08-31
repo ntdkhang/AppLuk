@@ -22,7 +22,7 @@ struct KnowledgeView: View {
             Button {
                 showComments.toggle()
             } label: {
-                Image(systemName: "text.bubble")
+                Image(systemName: "bubble.left.and.bubble.right")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 40)

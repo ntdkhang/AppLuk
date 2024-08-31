@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var tabSelection = 0
     var body: some View {
         NavigationStack {
             ZStack {
@@ -18,7 +17,19 @@ struct ContentView: View {
                     NavigationLink {
                         SearchKnowledgeView()
                     } label: {
-                        Text("Test")
+                        Text("Search Knowledge")
+                    }
+
+                    NavigationLink {
+                        AddFriendView()
+                    } label: {
+                        Text("Add fen")
+                    }
+
+                    NavigationLink {
+                        MainProfileView()
+                    } label: {
+                        Text("Profile")
                     }
                 }
                 .frame(maxHeight: .infinity, alignment: .bottom)

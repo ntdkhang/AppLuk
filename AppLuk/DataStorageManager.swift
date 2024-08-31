@@ -41,6 +41,16 @@ class DataStorageManager: ObservableObject {
         }
     }
 
+    func addFriend(userId: String?) {
+        guard let userId = userId else {
+            return
+        }
+        let ref = db.collection("users").document(currentUserId)
+        ref.updateData([
+            "friendsId": FieldValue.arrayUnion([userId]),
+        ])
+    }
+
     func getSavedKnowledes() {
         guard let currentUser = currentUser else {
             print("Current user is nil")
@@ -72,7 +82,7 @@ class DataStorageManager: ObservableObject {
 
     func getKnowledges() {
         db.collection("knowledges")
-            .whereField("postedById", in: DataStorageManager.shared.friendsAndSelfId)
+            .whereField("postedById", in: friendsAndSelfId)
             .order(by: "timePosted", descending: true)
             .addSnapshotListener { querySnapshot, error in
                 guard let documents = querySnapshot?.documents else {
@@ -96,7 +106,7 @@ class DataStorageManager: ObservableObject {
     }
 
     func fetchCurrentUser() {
-        Firestore.firestore().collection("users").document(DataStorageManager.shared.currentUserId)
+        Firestore.firestore().collection("users").document(currentUserId)
             .addSnapshotListener { snapshot, error in
                 guard let document = snapshot else {
                     print("Error fetching current user: \(error!)")
@@ -157,5 +167,10 @@ class DataStorageManager: ObservableObject {
 
     func getFriendAvatarUrl(withId: String) -> URL? {
         return user(withId: withId)?.avatarURL
+    }
+
+    func forPreview() {
+        currentUserId = "0KBb2kjXOkVQtpxUjkXg2Ss4aZA2"
+        fetchCurrentUser()
     }
 }
