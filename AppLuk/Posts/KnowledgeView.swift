@@ -140,7 +140,7 @@ struct PostedByView: View {
                     .clipShape(Circle())
             }
             .accessibilityLabel("Avatar")
-            HStack {
+            HStack(alignment: .firstTextBaseline) {
                 Text(DataStorageManager.shared.getFriendName(withId: knowledge.postedById))
                     .font(.com_title3)
 

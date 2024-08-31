@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SearchKnowledgeView: View {
     @StateObject private var knowledgeVM = SearchKnowledgeViewModel()
-    let tags = ["Health", "Psychology", "Philosophy", "Science", "Math", "Life", "Relationship"]
+    @Environment(\.dismiss) private var dismiss
+    let tags = Knowledge.tags
     var body: some View {
         VStack {
             ScrollView(.vertical, showsIndicators: false) {
@@ -30,13 +31,30 @@ struct SearchKnowledgeView: View {
         .background(
             Color.background
         )
+        .onAppear {
+            knowledgeVM.selectedTag = tags[0]
+        }
         .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    HStack {
+                        Image(systemName: "chevron.backward")
+                        Text("Back")
+                            .font(.com_subheadline)
+                    }
+                }
+                .foregroundColor(.white)
+            }
             ToolbarItem(placement: .topBarTrailing) {
                 Picker("Choose a tag", selection: $knowledgeVM.selectedTag) {
                     ForEach(tags, id: \.self) { tag in
                         Text(tag)
                     }
                 }
+                .font(.com_subheadline)
+                .foregroundColor(.white)
                 .pickerStyle(.menu)
             }
         }

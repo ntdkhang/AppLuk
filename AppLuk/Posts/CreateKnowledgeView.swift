@@ -25,6 +25,7 @@ struct CreateKnowledgeView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 30)
+                        .foregroundColor(.lightButton)
                 }
 
                 Button {
@@ -36,6 +37,7 @@ struct CreateKnowledgeView: View {
                         .frame(height: 30)
                         .padding(.horizontal)
                 }
+                .foregroundColor(knowledgeVM.disableRemoveCurrentImage ? .gray : .lightButton)
                 .disabled(knowledgeVM.disableRemoveCurrentImage)
                 .accessibilityLabel("Remove current image")
 
@@ -47,6 +49,7 @@ struct CreateKnowledgeView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 30)
+                        .foregroundColor(.lightButton)
                 }
                 .accessibilityLabel("Add new page")
             }
@@ -60,6 +63,8 @@ struct CreateKnowledgeView: View {
                     dismiss()
                 } label: {
                     Text("Cancel")
+                        .font(.com_subheadline)
+                        .foregroundColor(.white)
                 }
             }
 
@@ -68,6 +73,8 @@ struct CreateKnowledgeView: View {
                     CreateTitleView(knowledgeVM: knowledgeVM, isPresented: $isPresented)
                 } label: {
                     Text("Next")
+                        .font(.com_subheadline)
+                        .foregroundColor(.white)
                 }
             }
         }
@@ -90,16 +97,18 @@ struct CreateKnowledgeView: View {
 struct CreateTitleView: View {
     @ObservedObject var knowledgeVM: CreateKnowledgeViewModel
     @Binding var isPresented: Bool
+    @Environment(\.dismiss) private var dismiss
 
     let items = ["Health", "Psychology", "Philosophy", "Science", "Math", "Life", "Relationship"]
 
     var body: some View {
         VStack {
             TextField("Your knowledge title here", text: $knowledgeVM.title)
-                .font(.title2)
+                .font(.com_title2)
                 .padding()
             List(items, id: \.self, selection: $knowledgeVM.tagsSelection) {
                 Text("\($0)")
+                    .font(.com_regular)
                     .listRowBackground(Color.background)
             }
             .listStyle(.plain)
@@ -107,7 +116,21 @@ struct CreateTitleView: View {
             .environment(\.editMode, .constant(EditMode.active))
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .navigationBarBackButtonHidden()
         .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    HStack {
+                        Image(systemName: "chevron.backward")
+                        Text("Back")
+                            .font(.com_subheadline)
+                    }
+                }
+                .foregroundColor(.white)
+            }
+
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     Task {
@@ -116,6 +139,8 @@ struct CreateTitleView: View {
                     }
                 } label: {
                     Text("Post")
+                        .font(.com_subheadline)
+                        .foregroundColor(.white)
                 }
             }
         }
@@ -135,6 +160,7 @@ struct CreatePageView: View {
             Color.imageBlur
             TextField("Start typing here", text: $pageContent, axis: .vertical)
                 .keyboardType(.alphabet)
+                .font(.com_regular)
                 .disableAutocorrection(true)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 .padding(16)

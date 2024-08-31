@@ -33,10 +33,11 @@ struct KnowledgeListView: View {
                 NavigationLink {
                     SavedKnowledgeListView()
                 } label: {
-                    Image(systemName: "line.3.horizontal")
+                    Image(systemName: "list.bullet.clipboard")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 40)
+                        .foregroundColor(.white)
                 }
             }
 

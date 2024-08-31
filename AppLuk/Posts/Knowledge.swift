@@ -56,4 +56,34 @@ struct Knowledge: Codable, Identifiable {
             return temp
         }
     }
+
+    static var tags: [String] {
+        return [
+            "Mental",
+            "Spiritual",
+            "Art",
+            "Social",
+            "Toolset",
+            "Skillset",
+            "Mindset",
+            "Mindfulness",
+            "Book",
+            "Fact",
+            "Scientific research",
+            "Course",
+            "Survival",
+            "Tips",
+            "Cooking",
+            "Handcraft",
+            "Language",
+            "Human",
+            "Health care",
+            "Influencer",
+            "favorite list",
+            "Beauty care",
+            "Sport",
+            "Soft Skill",
+            "Others",
+        ]
+    }
 }

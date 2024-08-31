@@ -89,19 +89,20 @@ struct CommentView: View {
                 .accessibilityLabel("Avatar")
 
                 Text(postedBy?.name ?? "")
-                    .bold()
+                    .font(.com_regular)
                     .accessibilityHint("Name")
 
                 Text("•")
                     .accessibility(hidden: true)
 
                 Text(comment.relativeTimeString)
-                    .font(.caption)
+                    .font(.com_caption)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .accessibilityElement(children: .combine)
 
             Text(comment.text)
+                .font(.com_regular)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
     }

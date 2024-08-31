@@ -8,30 +8,55 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var dataStorageManager = DataStorageManager.shared
     var body: some View {
         NavigationStack {
             ZStack {
                 KnowledgeListView()
 
-                VStack {
+                HStack {
                     NavigationLink {
                         SearchKnowledgeView()
                     } label: {
-                        Text("Search Knowledge")
+                        Image("magnifier")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 60)
+                            .foregroundColor(.white)
                     }
-
-                    NavigationLink {
-                        AddFriendView()
-                    } label: {
-                        Text("Add fen")
-                    }
+                    .frame(maxWidth: .infinity)
 
                     NavigationLink {
                         MainProfileView()
                     } label: {
-                        Text("Profile")
+                        AsyncImage(url: dataStorageManager.currentUserAvatarUrl) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(Circle())
+                        } placeholder: {
+                            Color.gray
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 40)
+                                .clipShape(Circle())
+                        }
+                        .frame(height: 40)
                     }
+                    .frame(maxWidth: .infinity)
+
+                    NavigationLink {
+                        Text("SIKE")
+                    } label: {
+                        Image("gift_heart")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 60)
+                            .foregroundColor(.white)
+                            .offset(x: 0, y: -5)
+                    }
+                    .frame(maxWidth: .infinity)
                 }
+                .ignoresSafeArea()
                 .frame(maxHeight: .infinity, alignment: .bottom)
             }
         }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SavedKnowledgeListView: View {
     @ObservedObject var dataStorageManager = DataStorageManager.shared
-    @State private var presentCreateView = false
+    @Environment(\.dismiss) var dismiss
     var body: some View {
         VStack {
             ScrollView(.vertical, showsIndicators: false) {
@@ -20,7 +20,25 @@ struct SavedKnowledgeListView: View {
             }
             .scrollTargetBehavior(.paging)
         }
-        .navigationTitle("Saved Knowledge")
         .background(Color.background)
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    HStack {
+                        Image(systemName: "chevron.backward")
+                        Text("Back")
+                            .font(.com_subheadline)
+                    }
+                }
+                .foregroundColor(.white)
+            }
+            ToolbarItem(placement: .principal) {
+                Text("Saved Knowledge")
+                    .font(.com_title3)
+            }
+        }
     }
 }
