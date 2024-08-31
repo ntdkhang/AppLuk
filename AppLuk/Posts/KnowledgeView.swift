@@ -17,17 +17,18 @@ struct KnowledgeView: View {
             KnowledgeMainContent(knowledge: knowledge)
                 .padding(.horizontal, 8)
 
-            SaveAndReactView(knowledge: knowledge)
+            SaveAndReactView(knowledge: knowledge, showComments: $showComments)
+                .padding(.top, -8)
 
-            Button {
-                showComments.toggle()
-            } label: {
-                Image(systemName: "bubble.left.and.bubble.right")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 40)
-            }
-            // .frame(maxHeight: .infinity, alignment: .top)
+            // Button {
+            //     showComments.toggle()
+            // } label: {
+            //     Image(systemName: "bubble.left.and.bubble.right")
+            //         .resizable()
+            //         .aspectRatio(contentMode: .fit)
+            //         .frame(width: 40)
+            // }
+            // .foregroundColor(.white)
         }
         .background(
             Color.background
@@ -49,8 +50,9 @@ struct KnowledgeMainContent: View {
                 .layoutPriority(1)
 
             Text(knowledge.title)
+                .lineLimit(2)
                 .foregroundColor(Color.darkText)
-                .font(.title2)
+                .font(.com_title2)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
                 .padding(.bottom)
@@ -61,35 +63,61 @@ struct KnowledgeMainContent: View {
 }
 
 struct SaveAndReactView: View {
+    @ObservedObject var dataStorageManager = DataStorageManager.shared
     let knowledge: Knowledge
+    @Binding var showComments: Bool
     var body: some View {
         HStack {
             Button {
                 DataStorageManager.shared.saveKnowledge(knowledgeId: knowledge.id)
             } label: {
-                Image(systemName: "bookmark")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 30)
+                if DataStorageManager.shared.isSavedKnowledge(knowledge: knowledge) {
+                    Image(systemName: "bookmark.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 30)
+                        .foregroundColor(.lightButton)
+                } else {
+                    Image(systemName: "bookmark")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 30)
+                        .foregroundColor(.white)
+                }
             }
 
             Spacer()
 
+            // TODO: move show comment button somewhere else
             Button {
+                showComments.toggle()
             } label: {
-                Image(systemName: "arrow.up")
+                Image(systemName: "bubble.left.and.bubble.right")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 30)
+                    .frame(height: 40)
             }
+            .foregroundColor(.white)
 
-            Button {
-            } label: {
-                Image(systemName: "arrow.down")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 30)
-            }
+            /*
+             Button {
+             } label: {
+                 Image(systemName: "arrow.up")
+                     .resizable()
+                     .aspectRatio(contentMode: .fit)
+                     .frame(width: 30)
+             }
+             .foregroundColor(.lightButton)
+
+             Button {
+             } label: {
+                 Image(systemName: "arrow.down")
+                     .resizable()
+                     .aspectRatio(contentMode: .fit)
+                     .frame(width: 30)
+             }
+             .foregroundColor(.lightButton)
+             */
         }
         .padding()
     }
@@ -98,7 +126,7 @@ struct SaveAndReactView: View {
 struct PostedByView: View {
     var knowledge: Knowledge
     var body: some View {
-        HStack {
+        VStack {
             AsyncCachedImage(url: DataStorageManager.shared.getFriendAvatarUrl(withId: knowledge.postedById)) { image in
                 image
                     .resizable()
@@ -112,11 +140,13 @@ struct PostedByView: View {
                     .clipShape(Circle())
             }
             .accessibilityLabel("Avatar")
+            HStack {
+                Text(DataStorageManager.shared.getFriendName(withId: knowledge.postedById))
+                    .font(.com_title3)
 
-            Text(DataStorageManager.shared.getFriendName(withId: knowledge.postedById))
-                .bold()
-
-            Text(knowledge.relativeTimeString)
+                Text(knowledge.relativeTimeString)
+                    .font(.com_subheadline)
+            }
         }
         .accessibilityElement(children: .combine)
     }
@@ -160,6 +190,7 @@ struct PageView: View {
             Color.imageBlur
             ScrollView(.vertical) {
                 Text(pageContent)
+                    .font(.com_regular)
                     .lineLimit(nil)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     .padding(16)

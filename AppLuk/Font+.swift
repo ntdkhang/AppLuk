@@ -10,8 +10,12 @@ import SwiftUI
 
 extension Font {
     static var com_regular: Font {
-        Font.custom("Comfortaa", size: 18)
+        Font.custom("Comfortaa", size: 17)
             .bold()
+    }
+
+    static var com_subheadline: Font {
+        Font.custom("Comfortaa", size: 15)
     }
 
     static var com_caption: Font {
@@ -29,6 +33,6 @@ extension Font {
     }
 
     static var com_regular_light: Font {
-        Font.custom("Comfortaa", size: 18)
+        Font.custom("Comfortaa", size: 17)
     }
 }

@@ -116,6 +116,7 @@ struct MainProfileView: View {
                             .font(.com_regular_light)
                     }
                 }
+                .foregroundColor(.white)
             }
         }
     }

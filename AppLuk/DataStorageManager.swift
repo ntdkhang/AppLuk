@@ -173,4 +173,11 @@ class DataStorageManager: ObservableObject {
         currentUserId = "0KBb2kjXOkVQtpxUjkXg2Ss4aZA2"
         fetchCurrentUser()
     }
+
+    func isSavedKnowledge(knowledge: Knowledge) -> Bool {
+        guard let savesId = currentUser?.savesId else {
+            return false
+        }
+        return savesId.contains(knowledge.id ?? "")
+    }
 }
