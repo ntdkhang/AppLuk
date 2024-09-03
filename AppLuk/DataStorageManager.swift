@@ -6,6 +6,7 @@
 //
 
 import FirebaseFirestore
+import FirebaseStorage
 import Foundation
 
 class DataStorageManager: ObservableObject {
@@ -157,7 +158,7 @@ class DataStorageManager: ObservableObject {
         let user = friends.first(where: { user in
             user.id == withId
         })
-        // TODO: if cannot find in friends, then query the User with that Id, and add the user to friends array
+        // TODO: if cannot find in friends, then query the User with that Id from users collection
         return user
     }
 
@@ -169,15 +170,22 @@ class DataStorageManager: ObservableObject {
         return user(withId: withId)?.avatarURL
     }
 
-    func forPreview() {
-        currentUserId = "0KBb2kjXOkVQtpxUjkXg2Ss4aZA2"
-        fetchCurrentUser()
-    }
-
     func isSavedKnowledge(knowledge: Knowledge) -> Bool {
         guard let savesId = currentUser?.savesId else {
             return false
         }
         return savesId.contains(knowledge.id ?? "")
+    }
+
+    func createNewUser(user: User) {
+        do {
+            guard let id = user.id else {
+                return
+            }
+
+            let _ = try db.collection("users").document(id).setData(from: user)
+        } catch {
+            print("Error creating new user: \(error)")
+        }
     }
 }

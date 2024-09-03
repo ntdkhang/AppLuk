@@ -137,11 +137,3 @@ struct MainProfileView: View {
             .padding(.trailing, 4)
     }
 }
-
-#Preview {
-    MainProfileView()
-        .preferredColorScheme(.dark)
-        .task {
-            DataStorageManager.shared.forPreview()
-        }
-}

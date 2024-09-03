@@ -6,7 +6,10 @@
 //
 
 import FirebaseAuth
+import FirebaseStorage
 import Foundation
+import PhotosUI
+import SwiftUI
 
 enum AuthenticationState {
     case unauthenticated
@@ -31,7 +34,9 @@ class AuthenticationViewModel: ObservableObject {
     @Published var authenticationState: AuthenticationState = .unauthenticated
     @Published var errorMessage = ""
     @Published var user: FirebaseAuth.User?
-    @Published var displayName = ""
+    @Published var userName = ""
+    @Published var name = ""
+    @Published var image: UIImage?
 
     init() {
         registerAuthStateHandler()
@@ -46,6 +51,28 @@ class AuthenticationViewModel: ObservableObject {
             .assign(to: &$isValid)
     }
 
+    @Published var selectedPhoto: PhotosPickerItem? = nil {
+        didSet {
+            if let selectedPhoto {
+                Task {
+                    try await loadTransferable(from: selectedPhoto)
+                }
+            }
+        }
+    }
+
+    func loadTransferable(from imageSelection: PhotosPickerItem?) async throws {
+        do {
+            if let data = try await imageSelection?.loadTransferable(type: Data.self) {
+                if let uiImage = UIImage(data: data) {
+                    image = uiImage
+                }
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+
     private var authStateHandler: AuthStateDidChangeListenerHandle?
 
     func registerAuthStateHandler() {
@@ -56,7 +83,7 @@ class AuthenticationViewModel: ObservableObject {
                 }
                 self.user = user
                 self.authenticationState = user == nil ? .unauthenticated : .authenticated
-                self.displayName = user?.email ?? ""
+                self.userName = user?.email ?? ""
             }
         }
     }
@@ -103,10 +130,26 @@ extension AuthenticationViewModel {
     func signUpWithEmailPassword() async -> Bool {
         authenticationState = .authenticating
         do {
-            try await Auth.auth().createUser(withEmail: email, password: password)
+            let result = try await Auth.auth().createUser(withEmail: email, password: password)
+
+            let storageRef = Storage.storage().reference(withPath: "/avatars")
+
+            guard let uiImage = image ?? UIImage(named: "empty_ava"),
+                  let data = uiImage.jpegData(compressionQuality: 0.2)
+            else {
+                print("Error: Missing empty_ava asset")
+                return false
+            }
+            let _ = try await storageRef.child("\(result.user.uid).jpg").putDataAsync(data)
+            let urlString = try await storageRef.child("\(result.user.uid).jpg").downloadURL().absoluteString
+
+            let userProfile = AppLuk.User(id: result.user.uid, name: name, userName: userName, avatarUrl: urlString, friendsId: [], savesId: [])
+
+            // TODO: pass image for avatar
+            DataStorageManager.shared.createNewUser(user: userProfile)
             return true
         } catch {
-            print(error)
+            print("Error signing up: \(error)")
             errorMessage = error.localizedDescription
             authenticationState = .unauthenticated
             return false
