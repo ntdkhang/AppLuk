@@ -61,7 +61,6 @@ class DataStorageManager: ObservableObject {
         // Since we're checking before calling the function, this should never be empty
         let tempSavesId = currentUser.savesId.isEmpty ? ["VS7iKmF50v6HF2o6w07g"] : currentUser.savesId
 
-        print("Saved Knowledges: \(tempSavesId)")
         db.collection("knowledges")
             .whereField(FieldPath.documentID(), in: tempSavesId)
             .order(by: "timePosted", descending: true)
@@ -113,7 +112,6 @@ class DataStorageManager: ObservableObject {
     }
 
     func fetchCurrentUser() {
-        print("FETCH current user")
         Firestore.firestore().collection("users").document(currentUserId)
             .addSnapshotListener { snapshot, error in
                 guard let document = snapshot else {
@@ -132,8 +130,6 @@ class DataStorageManager: ObservableObject {
     }
 
     func getFriends() {
-        print("GET friends: \(friendsAndSelfId)")
-
         db.collection("users")
             .whereField(FieldPath.documentID(), in: friendsAndSelfId)
             .addSnapshotListener { querySnapshot, error in
@@ -151,7 +147,6 @@ class DataStorageManager: ObservableObject {
                     }
                 }
                 self.friends = friends
-                print("DONE FRIENDs")
                 self.getKnowledges()
             }
     }
@@ -185,7 +180,6 @@ class DataStorageManager: ObservableObject {
     func createNewUser(id: String, user: User, completion: @escaping (Error?) -> Void) {
         do {
             try db.collection("users").document(id).setData(from: user) { error in
-                print("DONE uploading user")
                 completion(error)
             }
         } catch {

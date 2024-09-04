@@ -143,9 +143,9 @@ extension AuthenticationViewModel {
             var userProfile = AppLuk.User(name: self.name, userName: self.userName, avatarUrl: "", friendsId: [], savesId: [])
 
             if let uiImage = self.image ?? UIImage(named: "empty_ava"),
-               let imageData = uiImage.jpegData(compressionQuality: 0.8)
+               let imageData = uiImage.jpegData(compressionQuality: 0.6)
             {
-                let storageRef = Storage.storage().reference().child("avatars/")
+                let storageRef = Storage.storage().reference().child("avatars/").child("\(result.user.uid).jpeg")
                 let metaData = StorageMetadata()
                 metaData.contentType = "image/jpeg"
                 storageRef.putData(imageData, metadata: metaData) { metaData, error in
