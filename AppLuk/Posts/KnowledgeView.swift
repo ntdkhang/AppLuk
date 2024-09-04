@@ -131,13 +131,13 @@ struct PostedByView: View {
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 40)
                     .clipShape(Circle())
+                    .frame(width: 40)
             } placeholder: {
                 Color.gray
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 40)
                     .clipShape(Circle())
+                    .frame(width: 40)
             }
             .accessibilityLabel("Avatar")
             HStack(alignment: .firstTextBaseline) {
@@ -191,7 +191,7 @@ struct PageView: View {
             ScrollView(.vertical) {
                 Text(pageContent)
                     .font(.com_regular)
-                    .lineSpacing(10)
+                    .lineSpacing(6)
                     .lineLimit(nil)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     .padding(16)

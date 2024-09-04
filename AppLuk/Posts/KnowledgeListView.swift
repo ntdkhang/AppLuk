@@ -14,7 +14,7 @@ struct KnowledgeListView: View {
     var body: some View {
         VStack {
             ScrollView(.vertical, showsIndicators: false) {
-                VStack(spacing: 0) {
+                LazyVStack(spacing: 0) {
                     ForEach(dataStorageManager.knowledges) { knowledge in
                         KnowledgeView(knowledge: knowledge)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)

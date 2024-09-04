@@ -62,5 +62,6 @@ struct ContentView: View {
                 .frame(maxHeight: .infinity, alignment: .bottom)
             }
         }
+        .background(Color.background)
     }
 }

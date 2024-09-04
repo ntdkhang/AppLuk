@@ -14,6 +14,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                      didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool
     {
         FirebaseApp.configure()
+        do {
+            try Auth.auth().useUserAccessGroup("\(teamID).com.khang.nguyen.AppLuk.firebase")
+        } catch let error as NSError {
+            print("Error changing user access group in app: \(error)")
+        }
         return true
     }
 }
@@ -25,12 +30,6 @@ struct AppLukApp: App {
         WindowGroup {
             AuthenticatedView {
                 ContentView()
-                    .task {
-//                         do {
-//                             try Auth.auth().signOut()
-//                         } catch {
-//                         }
-                    }
             }
         }
     }

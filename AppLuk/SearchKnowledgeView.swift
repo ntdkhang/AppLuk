@@ -14,7 +14,7 @@ struct SearchKnowledgeView: View {
     var body: some View {
         VStack {
             ScrollView(.vertical, showsIndicators: false) {
-                VStack(spacing: 0) {
+                LazyVStack(spacing: 0) {
                     ForEach(knowledgeVM.knowledges) { knowledge in
                         KnowledgeView(knowledge: knowledge)
                             .frame(maxWidth: .infinity)
@@ -27,7 +27,7 @@ struct SearchKnowledgeView: View {
             .scrollTargetBehavior(.paging)
             .scrollBounceBehavior(.basedOnSize)
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
             Color.background
         )

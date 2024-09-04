@@ -5,6 +5,7 @@
 //  Created by Khang Nguyen on 8/31/24.
 //
 
+import FirebaseAuth
 import FirebaseFirestore
 import SwiftUI
 import WidgetKit
@@ -26,14 +27,13 @@ struct Provider: AppIntentTimelineProvider {
         let nextUpdate = Calendar.current.date(byAdding: .minute, value: 1, to: currentDate)!
 
         let imageUrl = "https://firebasestorage.googleapis.com:443/v0/b/blessed-by-knowledge-33707.appspot.com/o/knowledge_images%2Fu7qvNbXhU4cCCuUfY0fe0?alt=media&token=57339dac-df39-45fc-a91a-f07acfd8ff55"
-        let knowledge = Knowledge(postedById: "", title: "Aussie number 1", contentPages: [
-            "2 Lý do nên nuôi 1 em Australian Shepherd:\n\nSố 1: Ẻm rất là cuteeee"], imageUrls:
-                                    [imageUrl])
-        
+        let knowledge = Knowledge(postedById: "", title: Auth.auth().currentUser?.uid ?? "nil", contentPages: [
+            "\(Auth.auth().currentUser?.uid ?? "nil")"], imageUrls:
+        [imageUrl])
 
         let entry = KnowledgeEntry(date: currentDate, knowledge: knowledge)
         entries.append(entry)
-        
+
 //        fetchKnowledge { knowledge in
 //            let entry = KnowledgeEntry(date: currentDate, knowledge: knowledge)
 //
@@ -72,7 +72,6 @@ struct AppLukWidgetEntryView: View {
     var imageUrl: String?
     var pageContent: String
 
-
     var body: some View {
         ZStack {
             clippedImage
@@ -87,7 +86,7 @@ struct AppLukWidgetEntryView: View {
             }
         }
         .aspectRatio(1.0, contentMode: .fit)
-         .clipShape(RoundedRectangle(cornerRadius: 20))
+        .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 
     var clippedImage: some View {

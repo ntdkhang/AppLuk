@@ -13,13 +13,16 @@ struct SavedKnowledgeListView: View {
     var body: some View {
         VStack {
             ScrollView(.vertical, showsIndicators: false) {
-                ForEach(dataStorageManager.savedKnowledges) { knowledge in
-                    KnowledgeView(knowledge: knowledge)
-                        .containerRelativeFrame(.vertical)
+                LazyVStack {
+                    ForEach(dataStorageManager.savedKnowledges) { knowledge in
+                        KnowledgeView(knowledge: knowledge)
+                            .containerRelativeFrame(.vertical)
+                    }
                 }
             }
             .scrollTargetBehavior(.paging)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.background)
         .navigationBarBackButtonHidden()
         .toolbar {

@@ -60,6 +60,9 @@
 		42C6A8D82C8377BE00A28FAA /* Comfortaa.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42C6A8AF2C825E3500A28FAA /* Comfortaa.ttf */; };
 		42C6A8D92C8377BE00A28FAA /* Comfortaa-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42C6A8B22C828D1000A28FAA /* Comfortaa-SemiBold.ttf */; };
 		42C6A8DB2C8377C100A28FAA /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8B42C828F8100A28FAA /* Font+.swift */; };
+		42C6A8E72C890DA200A28FAA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 42B597CD2C6EEF7500C37F66 /* GoogleService-Info.plist */; };
+		42C6A8E92C89102D00A28FAA /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8E82C89102D00A28FAA /* Secrets.swift */; };
+		42C6A8EA2C89109400A28FAA /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8E82C89102D00A28FAA /* Secrets.swift */; };
 		42EDD2BB2C78EEA800D99EDE /* AsyncCachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */; };
 /* End PBXBuildFile section */
 
@@ -131,6 +134,9 @@
 		42C6A8C42C835E4000A28FAA /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		42C6A8C62C835E4300A28FAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42C6A8C82C835E4300A28FAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42C6A8E52C890B7D00A28FAA /* AppLuk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppLuk.entitlements; sourceTree = "<group>"; };
+		42C6A8E62C890B9100A28FAA /* AppLukWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppLukWidgetExtension.entitlements; sourceTree = "<group>"; };
+		42C6A8E82C89102D00A28FAA /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncCachedImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,6 +172,7 @@
 			children = (
 				4212EDCE2C56D9E400F30DD2 /* AppLuk */,
 				42C6A8BF2C835E4000A28FAA /* AppLukWidget */,
+				42C6A8E62C890B9100A28FAA /* AppLukWidgetExtension.entitlements */,
 				4212EDCD2C56D9E400F30DD2 /* Products */,
 				42B597BE2C6EE84C00C37F66 /* Frameworks */,
 			);
@@ -183,6 +190,7 @@
 		4212EDCE2C56D9E400F30DD2 /* AppLuk */ = {
 			isa = PBXGroup;
 			children = (
+				42C6A8E52C890B7D00A28FAA /* AppLuk.entitlements */,
 				42C6A8B12C825EE000A28FAA /* Info.plist */,
 				42B597CD2C6EEF7500C37F66 /* GoogleService-Info.plist */,
 				4212EDCF2C56D9E400F30DD2 /* AppLukApp.swift */,
@@ -196,6 +204,7 @@
 				42C6A8B42C828F8100A28FAA /* Font+.swift */,
 				42B598472C73927500C37F66 /* Color+.swift */,
 				42C6A8A72C810AAF00A28FAA /* SearchKnowledgeViewModel.swift */,
+				42C6A8E82C89102D00A28FAA /* Secrets.swift */,
 				42C6A8A92C8162A900A28FAA /* SearchView.swift */,
 				42C6A8AB2C81FAB300A28FAA /* AddFriendView.swift */,
 				42B5982D2C70482800C37F66 /* DataStorageManager.swift */,
@@ -378,6 +387,7 @@
 			files = (
 				42C6A8D72C83779800A28FAA /* Assets.xcassets in Resources */,
 				42C6A8D82C8377BE00A28FAA /* Comfortaa.ttf in Resources */,
+				42C6A8E72C890DA200A28FAA /* GoogleService-Info.plist in Resources */,
 				42C6A8D92C8377BE00A28FAA /* Comfortaa-SemiBold.ttf in Resources */,
 				42C6A8C72C835E4300A28FAA /* Assets.xcassets in Resources */,
 			);
@@ -391,6 +401,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42C6A8AE2C81FBA200A28FAA /* AddFriendViewModel.swift in Sources */,
+				42C6A8E92C89102D00A28FAA /* Secrets.swift in Sources */,
 				42B598182C6FC93200C37F66 /* AuthenticationViewModel.swift in Sources */,
 				4212EDD22C56D9E400F30DD2 /* ContentView.swift in Sources */,
 				427631672C67A812005BF2CA /* KnowledgeView.swift in Sources */,
@@ -428,6 +439,7 @@
 			files = (
 				42C6A8C32C835E4000A28FAA /* AppLukWidget.swift in Sources */,
 				42C6A8DB2C8377C100A28FAA /* Font+.swift in Sources */,
+				42C6A8EA2C89109400A28FAA /* Secrets.swift in Sources */,
 				42C6A8D62C83776700A28FAA /* Color+.swift in Sources */,
 				42C6A8C12C835E4000A28FAA /* AppLukWidgetBundle.swift in Sources */,
 				42C6A8C52C835E4000A28FAA /* AppIntent.swift in Sources */,
@@ -571,6 +583,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AppLuk/AppLuk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AppLuk/Preview Content\"";
@@ -604,6 +617,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AppLuk/AppLuk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AppLuk/Preview Content\"";
@@ -636,6 +650,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = AppLukWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T76274KP97;
@@ -663,6 +678,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = AppLukWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T76274KP97;
