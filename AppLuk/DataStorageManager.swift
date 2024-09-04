@@ -6,7 +6,6 @@
 //
 
 import FirebaseFirestore
-import FirebaseStorage
 import Foundation
 
 class DataStorageManager: ObservableObject {
@@ -58,8 +57,12 @@ class DataStorageManager: ObservableObject {
             return
         }
 
+        // because the array for query cannot be empty
+        let tempSavesId = currentUser.savesId.isEmpty ? ["VS7iKmF50v6HF2o6w07g"] : currentUser.savesId
+
+        print("Saved Knowledges: \(tempSavesId)")
         db.collection("knowledges")
-            .whereField(FieldPath.documentID(), in: currentUser.savesId)
+            .whereField(FieldPath.documentID(), in: tempSavesId)
             .order(by: "timePosted", descending: true)
             .addSnapshotListener { querySnapshot, error in
                 guard let documents = querySnapshot?.documents else {
@@ -102,11 +105,14 @@ class DataStorageManager: ObservableObject {
                 }
 
                 self.knowledges = knowledges
-                self.getSavedKnowledes()
+                if let currentUser = self.currentUser, !currentUser.savesId.isEmpty {
+                    self.getSavedKnowledes()
+                }
             }
     }
 
     func fetchCurrentUser() {
+        print("FETCH current user")
         Firestore.firestore().collection("users").document(currentUserId)
             .addSnapshotListener { snapshot, error in
                 guard let document = snapshot else {
@@ -125,13 +131,10 @@ class DataStorageManager: ObservableObject {
     }
 
     func getFriends() {
-        guard let currentUser = currentUser else {
-            print("Current user is nil")
-            return
-        }
+        print("GET friends: \(friendsAndSelfId)")
 
         db.collection("users")
-            .whereField(FieldPath.documentID(), in: currentUser.friendsId)
+            .whereField(FieldPath.documentID(), in: friendsAndSelfId)
             .addSnapshotListener { querySnapshot, error in
                 guard let documents = querySnapshot?.documents else {
                     print("Error fetching documents: \(error!)")
@@ -147,6 +150,7 @@ class DataStorageManager: ObservableObject {
                     }
                 }
                 self.friends = friends
+                print("DONE FRIENDs")
                 self.getKnowledges()
             }
     }
@@ -177,15 +181,15 @@ class DataStorageManager: ObservableObject {
         return savesId.contains(knowledge.id ?? "")
     }
 
-    func createNewUser(user: User) {
+    func createNewUser(id: String, user: User, completion: @escaping (Error?) -> Void) {
         do {
-            guard let id = user.id else {
-                return
+            try db.collection("users").document(id).setData(from: user) { error in
+                print("DONE uploading user")
+                completion(error)
             }
-
-            let _ = try db.collection("users").document(id).setData(from: user)
         } catch {
             print("Error creating new user: \(error)")
+            completion(error)
         }
     }
 }

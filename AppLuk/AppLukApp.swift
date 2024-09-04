@@ -5,6 +5,7 @@
 //  Created by Khang Nguyen on 7/28/24.
 //
 
+import FirebaseAuth
 import FirebaseCore
 import SwiftUI
 
@@ -25,7 +26,10 @@ struct AppLukApp: App {
             AuthenticatedView {
                 ContentView()
                     .task {
-                        DataStorageManager.shared.fetchCurrentUser()
+//                         do {
+//                             try Auth.auth().signOut()
+//                         } catch {
+//                         }
                     }
             }
         }

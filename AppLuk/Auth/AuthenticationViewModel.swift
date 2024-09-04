@@ -79,7 +79,9 @@ class AuthenticationViewModel: ObservableObject {
         if authStateHandler == nil {
             authStateHandler = Auth.auth().addStateDidChangeListener { _, user in
                 if user != nil {
+                    print("AUTH CHANGED")
                     DataStorageManager.shared.currentUserId = user!.uid
+                    DataStorageManager.shared.fetchCurrentUser()
                 }
                 self.user = user
                 self.authenticationState = user == nil ? .unauthenticated : .authenticated
@@ -127,32 +129,20 @@ extension AuthenticationViewModel {
         }
     }
 
-    func signUpWithEmailPassword() async -> Bool {
+    func signUpWithEmailPassword(completion: @escaping (Error?) -> Void) {
         authenticationState = .authenticating
-        do {
-            let result = try await Auth.auth().createUser(withEmail: email, password: password)
-
-            let storageRef = Storage.storage().reference(withPath: "/avatars")
-
-            guard let uiImage = image ?? UIImage(named: "empty_ava"),
-                  let data = uiImage.jpegData(compressionQuality: 0.2)
-            else {
-                print("Error: Missing empty_ava asset")
-                return false
+        Auth.auth().createUser(withEmail: email, password: password) { result, error in
+            guard let result = result else {
+                print("Error signing up: \(error?.localizedDescription ?? "Error")")
+                self.errorMessage = error?.localizedDescription ?? "Error"
+                self.authenticationState = .unauthenticated
+                completion(error)
+                return
             }
-            let _ = try await storageRef.child("\(result.user.uid).jpg").putDataAsync(data)
-            let urlString = try await storageRef.child("\(result.user.uid).jpg").downloadURL().absoluteString
-
-            let userProfile = AppLuk.User(id: result.user.uid, name: name, userName: userName, avatarUrl: urlString, friendsId: [], savesId: [])
-
-            // TODO: pass image for avatar
-            DataStorageManager.shared.createNewUser(user: userProfile)
-            return true
-        } catch {
-            print("Error signing up: \(error)")
-            errorMessage = error.localizedDescription
-            authenticationState = .unauthenticated
-            return false
+            let userProfile = AppLuk.User(name: self.name, userName: self.userName, avatarUrl: "", friendsId: [], savesId: [])
+            DataStorageManager.shared.createNewUser(id: result.user.uid, user: userProfile) { error in
+                completion(error)
+            }
         }
     }
 

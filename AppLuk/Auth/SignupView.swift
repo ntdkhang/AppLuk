@@ -22,8 +22,9 @@ struct SignupView: View {
     @FocusState private var focus: FocusableField?
 
     private func signUpWithEmailPassword() {
-        Task {
-            if await viewModel.signUpWithEmailPassword() == true {
+        viewModel.signUpWithEmailPassword { error in
+            if error == nil {
+                DataStorageManager.shared.fetchCurrentUser()
                 dismiss()
             }
         }
@@ -35,13 +36,22 @@ struct SignupView: View {
                 .font(.com_title2)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-            PhotosPicker(selection: $viewModel.selectedPhoto, matching: .images) {
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 50)
-                    .foregroundColor(.gray)
-            }
+            // PhotosPicker(selection: $viewModel.selectedPhoto, matching: .images) {
+            //     if viewModel.image == nil {
+            //         Image(systemName: "person.circle.fill")
+            //             .resizable()
+            //             .aspectRatio(contentMode: .fit)
+            //             .frame(height: 50)
+            //             .clipShape(Circle())
+            //             .foregroundColor(.gray)
+            //     } else {
+            //         Image(uiImage: viewModel.image!)
+            //             .resizable()
+            //             .aspectRatio(contentMode: .fit)
+            //             .frame(height: 50)
+            //             .clipShape(Circle())
+            //     }
+            // }
 
             HStack {
                 Image(systemName: "tag")
@@ -108,7 +118,9 @@ struct SignupView: View {
                 }
             }
 
-            Button(action: signUpWithEmailPassword) {
+            Button {
+                signUpWithEmailPassword()
+            } label: {
                 if viewModel.authenticationState != .authenticating {
                     Text("Sign up")
                         .padding(.vertical, 8)

@@ -95,8 +95,10 @@ class CreateKnowledgeViewModel: ObservableObject {
                         guard let uiImage = uiImage, let data = uiImage.jpegData(compressionQuality: 0.2) else {
                             return nil
                         }
-                        let _ = try await storageRef.child("\(knowledgeId + String(index)).jpg").putDataAsync(data)
-                        return try await storageRef.child("\(knowledgeId + String(index)).jpg").downloadURL().absoluteString
+                        let metadata = StorageMetadata()
+                        metadata.contentType = "image/jpeg"
+                        let _ = try await storageRef.child("\(knowledgeId + String(index)).jpeg").putDataAsync(data)
+                        return try await storageRef.child("\(knowledgeId + String(index)).jpeg").downloadURL().absoluteString
                     }
                 }
 

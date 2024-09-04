@@ -5,6 +5,7 @@
 //  Created by Khang Nguyen on 8/29/24.
 //
 
+import FirebaseAuth
 import SwiftUI
 
 struct MainProfileView: View {
@@ -93,8 +94,13 @@ struct MainProfileView: View {
                     makeRow(iconName: "trash", text: "Delete your account")
                 }
 
-                NavigationLink {
-                    Text("Sike")
+                Button {
+                    do {
+                        try Auth.auth().signOut()
+                    } catch {
+                        print(error)
+                    }
+
                 } label: {
                     makeRow(iconName: "rectangle.portrait.and.arrow.right", text: "Sign out")
                 }
