@@ -139,9 +139,43 @@ extension AuthenticationViewModel {
                 completion(error)
                 return
             }
-            let userProfile = AppLuk.User(name: self.name, userName: self.userName, avatarUrl: "", friendsId: [], savesId: [])
-            DataStorageManager.shared.createNewUser(id: result.user.uid, user: userProfile) { error in
-                completion(error)
+
+            var userProfile = AppLuk.User(name: self.name, userName: self.userName, avatarUrl: "", friendsId: [], savesId: [])
+
+            if let uiImage = self.image ?? UIImage(named: "empty_ava"),
+               let imageData = uiImage.jpegData(compressionQuality: 0.8)
+            {
+                let storageRef = Storage.storage().reference().child("avatars/")
+                let metaData = StorageMetadata()
+                metaData.contentType = "image/jpeg"
+                storageRef.putData(imageData, metadata: metaData) { metaData, error in
+                    if error != nil {
+                        print("Error uploading avatar")
+                        DataStorageManager.shared.createNewUser(id: result.user.uid, user: userProfile) { error in
+                            completion(error)
+                        }
+                    } else { // upload successful
+                        storageRef.downloadURL { url, error in
+                            guard let url = url else {
+                                print("Error downloading URL for avatar")
+                                DataStorageManager.shared.createNewUser(id: result.user.uid, user: userProfile) { error in
+                                    completion(error)
+                                }
+                                return
+                            }
+                            userProfile = AppLuk.User(name: self.name, userName: self.userName, avatarUrl: url.absoluteString, friendsId: [], savesId: [])
+                            DataStorageManager.shared.createNewUser(id: result.user.uid, user: userProfile) { error in
+                                completion(error)
+                            }
+                        }
+                    }
+                }
+            } else {
+                print("Not found asset empty_ava")
+                DataStorageManager.shared.createNewUser(id: result.user.uid, user: userProfile) { error in
+                    completion(error)
+                }
+                return
             }
         }
     }

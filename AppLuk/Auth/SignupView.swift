@@ -36,22 +36,22 @@ struct SignupView: View {
                 .font(.com_title2)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-            // PhotosPicker(selection: $viewModel.selectedPhoto, matching: .images) {
-            //     if viewModel.image == nil {
-            //         Image(systemName: "person.circle.fill")
-            //             .resizable()
-            //             .aspectRatio(contentMode: .fit)
-            //             .frame(height: 50)
-            //             .clipShape(Circle())
-            //             .foregroundColor(.gray)
-            //     } else {
-            //         Image(uiImage: viewModel.image!)
-            //             .resizable()
-            //             .aspectRatio(contentMode: .fit)
-            //             .frame(height: 50)
-            //             .clipShape(Circle())
-            //     }
-            // }
+            PhotosPicker(selection: $viewModel.selectedPhoto, matching: .images) {
+                if viewModel.image == nil {
+                    Image(systemName: "person.circle.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 50)
+                        .clipShape(Circle())
+                        .foregroundColor(.gray)
+                } else {
+                    Image(uiImage: viewModel.image!)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 50)
+                        .clipShape(Circle())
+                }
+            }
 
             HStack {
                 Image(systemName: "tag")

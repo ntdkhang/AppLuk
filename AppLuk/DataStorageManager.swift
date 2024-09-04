@@ -58,6 +58,7 @@ class DataStorageManager: ObservableObject {
         }
 
         // because the array for query cannot be empty
+        // Since we're checking before calling the function, this should never be empty
         let tempSavesId = currentUser.savesId.isEmpty ? ["VS7iKmF50v6HF2o6w07g"] : currentUser.savesId
 
         print("Saved Knowledges: \(tempSavesId)")
