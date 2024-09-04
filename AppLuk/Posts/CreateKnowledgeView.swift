@@ -98,6 +98,7 @@ struct CreateTitleView: View {
     @ObservedObject var knowledgeVM: CreateKnowledgeViewModel
     @Binding var isPresented: Bool
     @Environment(\.dismiss) private var dismiss
+    @State var disablePostButton = false
 
     let items = Knowledge.tags
 
@@ -133,8 +134,9 @@ struct CreateTitleView: View {
 
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    Task {
-                        await knowledgeVM.create()
+                    // prevent double clicking and posting twice
+                    disablePostButton = true
+                    knowledgeVM.create {
                         isPresented = false
                     }
                 } label: {
@@ -142,6 +144,7 @@ struct CreateTitleView: View {
                         .font(.com_subheadline)
                         .foregroundColor(.white)
                 }
+                .disabled(disablePostButton)
             }
         }
         .background(

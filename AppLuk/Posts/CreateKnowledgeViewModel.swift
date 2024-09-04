@@ -64,53 +64,60 @@ class CreateKnowledgeViewModel: ObservableObject {
         contentPages.count
     }
 
-    func create() async {
+    func create(completion: @escaping () -> Void) {
         let db = Firestore.firestore()
         // create a new document, get ID
         let knowledgeRef = db.collection("knowledges").document()
         let knowledgeId = knowledgeRef.documentID
         // upload all images to storage, then retrieve the urls
-        let urls = await uploadImages(knowledgeId: knowledgeId)
+        uploadImages(knowledgeId: knowledgeId) { urls in
+            // create a new post from the current items
+            let knowledge = Knowledge(postedById: DataStorageManager.shared.currentUserId, title: self.title, contentPages: self.contentPages, imageUrls: urls, tags: self.tagsSelection.sorted())
 
-        // create a new post from the current items
-        let knowledge = Knowledge(postedById: DataStorageManager.shared.currentUserId, title: title, contentPages: contentPages, imageUrls: urls, tags: tagsSelection.sorted())
-
-        // post to database
-        do {
-            try knowledgeRef.setData(from: knowledge)
-        } catch {
-            print("Error posting knowledge: \(error)")
+            // post to database
+            do {
+                try knowledgeRef.setData(from: knowledge) { error in
+                    if error != nil {
+                        print(error!.localizedDescription)
+                    }
+                    completion()
+                }
+            } catch {
+                print("Error posting knowledge: \(error)")
+            }
         }
     }
 
-    private func uploadImages(knowledgeId: String) async -> [String?] {
+    private func uploadImages(knowledgeId: String, completion: @escaping ([String?]) -> Void) {
         let storageRef = Storage.storage().reference(withPath: "/knowledge_images")
+        var urlsString = [String?](repeating: nil, count: images.count)
+        let urlToDownLoad = images.filter { $0 != nil }.count
+        var urlDownloaded = 0
 
-        do {
-            return try await withThrowingTaskGroup(of: String?.self) { group in
-                var urlsString = [String?]()
+        for (index, uiImage) in images.enumerated() {
+            if let data = uiImage?.jpegData(compressionQuality: 0.6) {
+                let metadata = StorageMetadata()
+                metadata.contentType = "image/jpeg"
+                let childRef = storageRef.child("\(knowledgeId)_\(index)")
+                childRef.putData(data, metadata: metadata) { metadata, error in
+                    if error != nil {
+                        print("Error uploading knowledge image: \(error!.localizedDescription)")
+                    } else {
+                        childRef.downloadURL { url, error in
+                            urlDownloaded += 1
+                            if let url = url {
+                                urlsString[index] = url.absoluteString
+                            } else {
+                                print("Error downloading knowledge image URL")
+                            }
 
-                for (index, uiImage) in self.images.enumerated() {
-                    group.addTask(priority: .background) {
-                        guard let uiImage = uiImage, let data = uiImage.jpegData(compressionQuality: 0.2) else {
-                            return nil
+                            if urlDownloaded == urlToDownLoad {
+                                completion(urlsString)
+                            }
                         }
-                        let metadata = StorageMetadata()
-                        metadata.contentType = "image/jpeg"
-                        let _ = try await storageRef.child("\(knowledgeId + String(index)).jpeg").putDataAsync(data)
-                        return try await storageRef.child("\(knowledgeId + String(index)).jpeg").downloadURL().absoluteString
                     }
                 }
-
-                for try await uploadedPhotoString in group {
-                    urlsString.append(uploadedPhotoString)
-                }
-
-                return urlsString
             }
-        } catch {
-            print("Error uploading images: \(error)")
-            return []
         }
     }
 }
