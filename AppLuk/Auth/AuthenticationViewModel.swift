@@ -79,7 +79,6 @@ class AuthenticationViewModel: ObservableObject {
         if authStateHandler == nil {
             authStateHandler = Auth.auth().addStateDidChangeListener { _, user in
                 if user != nil {
-                    print("AUTH CHANGED")
                     DataStorageManager.shared.currentUserId = user!.uid
                     DataStorageManager.shared.fetchCurrentUser()
                 }

@@ -73,20 +73,24 @@ struct AppLukWidgetEntryView: View {
     var pageContent: String
 
     var body: some View {
-        ZStack {
-            clippedImage
-            Color.imageBlur
-            VStack {
-                Text(pageContent)
-                    .font(.com_regular)
-                    .lineSpacing(12)
-                    .lineLimit(nil)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    .padding(16)
+        VStack {
+            ZStack {
+                clippedImage
+                Color.imageBlur
+                VStack {
+                    Text(pageContent)
+                        .font(.com_regular)
+                        .lineSpacing(12)
+                        .lineLimit(nil)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                        .padding(16)
+                }
             }
+            .aspectRatio(1.0, contentMode: .fit)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+
+            Text("Title")
         }
-        .aspectRatio(1.0, contentMode: .fit)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 
     var clippedImage: some View {

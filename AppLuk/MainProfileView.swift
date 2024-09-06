@@ -14,7 +14,7 @@ struct MainProfileView: View {
     var body: some View {
         Form {
             Section {
-                AsyncCachedImage(url: dataStorageManager.currentUserAvatarUrl) { image in
+                AsyncImage(url: dataStorageManager.currentUserAvatarUrl) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fit)

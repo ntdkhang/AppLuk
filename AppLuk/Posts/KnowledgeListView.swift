@@ -11,12 +11,14 @@ import SwiftUI
 struct KnowledgeListView: View {
     @ObservedObject var dataStorageManager = DataStorageManager.shared
     @State private var presentCreateView = false
+    @State private var showComments = false
+    @State private var knowledgeId = ""
     var body: some View {
         VStack {
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVStack(spacing: 0) {
                     ForEach(dataStorageManager.knowledges) { knowledge in
-                        KnowledgeView(knowledge: knowledge)
+                        KnowledgeView(knowledge: knowledge, showComments: $showComments, currentKnowledge: $knowledgeId)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .containerRelativeFrame(.vertical)
                     }
@@ -25,7 +27,10 @@ struct KnowledgeListView: View {
             .ignoresSafeArea()
             .scrollTargetLayout()
             .scrollTargetBehavior(.paging)
-            .scrollBounceBehavior(.basedOnSize)
+            .onChange(of: knowledgeId) {} // IDK why but if I remove this, it crashes when open comments. Maybe it needs to reload when the value of knowledgeId changed
+            .sheet(isPresented: $showComments) {
+                CommentsView(commentsVM: CommentsViewModel(knowledgeId: self.knowledgeId))
+            }
         }
         .background(Color.background)
         .toolbar {

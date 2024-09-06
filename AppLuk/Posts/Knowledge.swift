@@ -86,4 +86,8 @@ struct Knowledge: Codable, Identifiable {
         ]
         .sorted()
     }
+
+    static var empty: Knowledge {
+        return Knowledge(postedById: "", title: "", contentPages: [""], imageUrls: [])
+    }
 }

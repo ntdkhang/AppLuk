@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct KnowledgeView: View {
-    @State private var showComments = false
     var knowledge: Knowledge
+    @Binding var showComments: Bool
+    @Binding var currentKnowledge: String
     var body: some View {
         VStack {
             PostedByView(knowledge: knowledge)
@@ -17,25 +18,12 @@ struct KnowledgeView: View {
             KnowledgeMainContent(knowledge: knowledge)
                 .padding(.horizontal, 8)
 
-            SaveAndReactView(knowledge: knowledge, showComments: $showComments)
+            SaveAndReactView(knowledge: knowledge, showComments: $showComments, currentKnowledge: $currentKnowledge)
                 .padding(.top, -8)
-
-            // Button {
-            //     showComments.toggle()
-            // } label: {
-            //     Image(systemName: "bubble.left.and.bubble.right")
-            //         .resizable()
-            //         .aspectRatio(contentMode: .fit)
-            //         .frame(width: 40)
-            // }
-            // .foregroundColor(.white)
         }
         .background(
             Color.background
         )
-        .sheet(isPresented: $showComments) {
-            CommentsView(knowledgeId: knowledge.id ?? "", commentsVM: CommentsViewModel(knowledgeId: knowledge.id ?? ""))
-        }
     }
 }
 
@@ -51,7 +39,7 @@ struct KnowledgeMainContent: View {
 
             Text(knowledge.title)
                 .lineLimit(2)
-                .foregroundColor(Color.darkText)
+                .foregroundColor(Color.darkgreenText)
                 .font(.com_title2)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
@@ -66,10 +54,15 @@ struct SaveAndReactView: View {
     @ObservedObject var dataStorageManager = DataStorageManager.shared
     let knowledge: Knowledge
     @Binding var showComments: Bool
+    @Binding var currentKnowledge: String
     var body: some View {
         HStack {
             Button {
-                DataStorageManager.shared.saveKnowledge(knowledgeId: knowledge.id)
+                if DataStorageManager.shared.isSavedKnowledge(knowledge: knowledge) {
+                    DataStorageManager.shared.unsaveKnowledge(knowledgeId: knowledge.id)
+                } else {
+                    DataStorageManager.shared.saveKnowledge(knowledgeId: knowledge.id)
+                }
             } label: {
                 if DataStorageManager.shared.isSavedKnowledge(knowledge: knowledge) {
                     Image(systemName: "bookmark.fill")
@@ -85,11 +78,13 @@ struct SaveAndReactView: View {
                         .foregroundColor(.white)
                 }
             }
+            .offset(y: -10)
 
             Spacer()
 
             // TODO: move show comment button somewhere else
             Button {
+                currentKnowledge = knowledge.id ?? ""
                 showComments.toggle()
             } label: {
                 Image(systemName: "bubble.left.and.bubble.right")
@@ -130,15 +125,15 @@ struct PostedByView: View {
             AsyncCachedImage(url: DataStorageManager.shared.getFriendAvatarUrl(withId: knowledge.postedById)) { image in
                 image
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .aspectRatio(contentMode: .fill)
                     .clipShape(Circle())
-                    .frame(width: 40)
             } placeholder: {
                 Color.gray
                     .aspectRatio(contentMode: .fit)
                     .clipShape(Circle())
-                    .frame(width: 40)
+                // .frame(width: 40)
             }
+            .frame(width: 40, height: 40)
             .accessibilityLabel("Avatar")
             HStack(alignment: .firstTextBaseline) {
                 Text(DataStorageManager.shared.getFriendName(withId: knowledge.postedById))

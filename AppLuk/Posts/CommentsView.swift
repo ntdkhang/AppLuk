@@ -10,10 +10,14 @@ import FirebaseFirestore
 import SwiftUI
 
 struct CommentsView: View {
-    var knowledgeId: String
     @StateObject var commentsVM: CommentsViewModel
-    @State var currentComment: String = ""
+    @State private var currentComment: String = ""
     @Environment(\.dismiss) private var dismiss
+
+    // init(knowledgeId: String) {
+    //     self.knowledgeId = knowledgeId
+    //     _commentsVM = StateObject(wrappedValue: CommentsViewModel(knowledgeId: knowledgeId))
+    // }
 
     var body: some View {
         VStack {

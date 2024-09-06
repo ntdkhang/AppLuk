@@ -41,6 +41,18 @@ class DataStorageManager: ObservableObject {
         }
     }
 
+    func unsaveKnowledge(knowledgeId: String?) {
+        guard let knowledgeId = knowledgeId else {
+            return
+        }
+        let ref = db.collection("users").document(currentUserId)
+        if let currentUser = currentUser, currentUser.savesId.contains(knowledgeId) {
+            ref.updateData([
+                "savesId": FieldValue.arrayRemove([knowledgeId]),
+            ])
+        }
+    }
+
     func addFriend(userId: String?) {
         guard let userId = userId else {
             return
