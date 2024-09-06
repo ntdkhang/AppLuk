@@ -8,7 +8,7 @@
 import FirebaseFirestore
 import Foundation
 
-struct Knowledge: Codable, Identifiable {
+struct Knowledge: Codable, Identifiable, Equatable {
     @DocumentID var id: String?
     var timePosted: Date = .now
     var postedById: String

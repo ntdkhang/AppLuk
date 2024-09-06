@@ -12,13 +12,14 @@ struct KnowledgeListView: View {
     @ObservedObject var dataStorageManager = DataStorageManager.shared
     @State private var presentCreateView = false
     @State private var showComments = false
-    @State private var knowledgeId = ""
+    // @State private var knowledgeId = ""
+    @State private var currentKnowledge = Knowledge.empty
     var body: some View {
         VStack {
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVStack(spacing: 0) {
                     ForEach(dataStorageManager.knowledges) { knowledge in
-                        KnowledgeView(knowledge: knowledge, showComments: $showComments, currentKnowledge: $knowledgeId)
+                        KnowledgeView(knowledge: knowledge, showComments: $showComments, currentKnowledge: $currentKnowledge)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .containerRelativeFrame(.vertical)
                     }
@@ -27,9 +28,9 @@ struct KnowledgeListView: View {
             .ignoresSafeArea()
             .scrollTargetLayout()
             .scrollTargetBehavior(.paging)
-            .onChange(of: knowledgeId) {} // IDK why but if I remove this, it crashes when open comments. Maybe it needs to reload when the value of knowledgeId changed
+            .onChange(of: currentKnowledge) {} // IDK why but if I remove this, it crashes when open comments. Maybe it needs to reload when the value of knowledgeId changed
             .sheet(isPresented: $showComments) {
-                CommentsView(commentsVM: CommentsViewModel(knowledgeId: self.knowledgeId))
+                CommentsView(commentsVM: CommentsViewModel(knowledge: self.currentKnowledge))
             }
         }
         .background(Color.background)

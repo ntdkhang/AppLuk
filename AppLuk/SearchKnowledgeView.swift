@@ -11,14 +11,15 @@ struct SearchKnowledgeView: View {
     @StateObject private var knowledgeVM = SearchKnowledgeViewModel()
     @Environment(\.dismiss) private var dismiss
     @State private var showComments = false
-    @State private var knowledgeId = ""
+    // @State private var knowledgeId = ""
+    @State private var currentKnowledge = Knowledge.empty
     let tags = Knowledge.tags
     var body: some View {
         VStack {
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVStack(spacing: 0) {
                     ForEach(knowledgeVM.knowledges) { knowledge in
-                        KnowledgeView(knowledge: knowledge, showComments: $showComments, currentKnowledge: $knowledgeId)
+                        KnowledgeView(knowledge: knowledge, showComments: $showComments, currentKnowledge: $currentKnowledge)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .containerRelativeFrame(.vertical)
                     }
@@ -28,9 +29,9 @@ struct SearchKnowledgeView: View {
             .scrollTargetLayout()
             .scrollTargetBehavior(.paging)
             .scrollBounceBehavior(.basedOnSize)
-            .onChange(of: knowledgeId) {} // IDK why but if I remove this, it crashes when open comments. Maybe it needs to reload when the value of knowledgeId changed
+            .onChange(of: currentKnowledge) {} // IDK why but if I remove this, it crashes when open comments. Maybe it needs to reload when the value of knowledgeId changed
             .sheet(isPresented: $showComments) {
-                CommentsView(commentsVM: CommentsViewModel(knowledgeId: self.knowledgeId))
+                CommentsView(commentsVM: CommentsViewModel(knowledge: self.currentKnowledge))
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

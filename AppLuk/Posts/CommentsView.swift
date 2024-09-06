@@ -15,23 +15,27 @@ struct CommentsView: View {
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        VStack {
-            ScrollView {
-                ForEach(commentsVM.comments) { comment in
-                    VStack {
-                        CommentView(comment: comment)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        Divider()
+        NavigationStack {
+            VStack {
+                ScrollView {
+                    ForEach(commentsVM.comments) { comment in
+                        VStack {
+                            CommentView(comment: comment)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Divider()
+                        }
+                        .padding(.horizontal)
+                        .padding(.vertical, 8)
                     }
-                    .padding(.horizontal)
-                    .padding(.vertical, 8)
                 }
-            }
-            .padding(.top)
+                .padding(.top)
 
-            textField
-                .padding(8)
+                textField
+                    .padding(8)
+            }
+            .navigationBarTitle(commentsVM.knowledge.title)
         }
+        .presentationBackground(Color.background)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
             commentsVM.getComments()
@@ -70,6 +74,13 @@ struct CommentsView: View {
             RoundedRectangle(cornerRadius: 20)
                 .stroke()
         }
+    }
+
+    init(commentsVM: CommentsViewModel) {
+        _commentsVM = StateObject(wrappedValue: commentsVM)
+
+        UINavigationBar.appearance().largeTitleTextAttributes = [.font: UIFont(name: "Comfortaa-SemiBold", size: 20)!]
+        UINavigationBar.appearance().titleTextAttributes = [.font: UIFont(name: "Comfortaa-SemiBold", size: 17)!]
     }
 }
 

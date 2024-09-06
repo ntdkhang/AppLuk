@@ -11,13 +11,14 @@ import SwiftUI
 
 class CommentsViewModel: ObservableObject {
     @Published var comments: [Comment] = []
-    var knowledgeId: String
+    var knowledge: Knowledge
 
-    init(knowledgeId: String) {
-        self.knowledgeId = knowledgeId
+    init(knowledge: Knowledge) {
+        self.knowledge = knowledge
     }
 
     func getComments() {
+        guard let knowledgeId = knowledge.id else { return }
         let db = Firestore.firestore()
         db.collection("knowledges").document(knowledgeId).collection("comments")
             .order(by: "timePosted")
@@ -40,6 +41,7 @@ class CommentsViewModel: ObservableObject {
     }
 
     func postComment(text: String) {
+        guard let knowledgeId = knowledge.id else { return }
         let db = Firestore.firestore()
         let comment = Comment(postedById: DataStorageManager.shared.currentUserId, timePosted: .now, text: text)
         do {
