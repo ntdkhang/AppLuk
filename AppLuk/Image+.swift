@@ -32,4 +32,12 @@ extension Image {
     static var giftHeart: Image {
         Image("giftHeart")
     }
+
+    static var save_empty: Image {
+        Image("save_empty")
+    }
+
+    static var save_fill: Image {
+        Image("save_fill")
+    }
 }

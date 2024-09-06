@@ -65,13 +65,13 @@ struct SaveAndReactView: View {
                 }
             } label: {
                 if DataStorageManager.shared.isSavedKnowledge(knowledge: knowledge) {
-                    Image(systemName: "bookmark.fill")
+                    Image.save_fill
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 30)
                         .foregroundColor(.lightButton)
                 } else {
-                    Image(systemName: "bookmark")
+                    Image.save_empty
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 30)
