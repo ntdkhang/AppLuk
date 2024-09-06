@@ -28,7 +28,6 @@ struct CommentsView: View {
                         .padding(.vertical, 8)
                     }
                 }
-                .padding(.top)
 
                 textField
                     .padding(8)
@@ -61,7 +60,7 @@ struct CommentsView: View {
                     for: nil
                 )
             } label: {
-                Image("gift_heart")
+                Image.giftHeart
                     .resizable()
             }
             .foregroundColor(.white)

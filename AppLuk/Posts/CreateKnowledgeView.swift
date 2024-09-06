@@ -21,7 +21,7 @@ struct CreateKnowledgeView: View {
 
             HStack {
                 PhotosPicker(selection: $knowledgeVM.selectedItem, matching: .images) {
-                    Image(systemName: "photo")
+                    Image.camera
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 30)
@@ -31,7 +31,7 @@ struct CreateKnowledgeView: View {
                 Button {
                     knowledgeVM.removeCurrentImage()
                 } label: {
-                    Image(systemName: "xmark.bin")
+                    Image.attachment
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 30)
@@ -45,7 +45,7 @@ struct CreateKnowledgeView: View {
                 Button {
                     knowledgeVM.newPage()
                 } label: {
-                    Image(systemName: "plus.rectangle")
+                    Image.addPage
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 30)
@@ -142,7 +142,7 @@ struct CreateTitleView: View {
                 } label: {
                     Text("Post")
                         .font(.com_subheadline)
-                        .foregroundColor(.white)
+                        .foregroundColor(disablePostButton ? .gray : .white)
                 }
                 .disabled(disablePostButton)
             }

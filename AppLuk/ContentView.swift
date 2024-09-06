@@ -18,7 +18,7 @@ struct ContentView: View {
                         NavigationLink {
                             SearchKnowledgeView()
                         } label: {
-                            Image("magnifier")
+                            Image.magnifier
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(height: 60)
@@ -47,7 +47,7 @@ struct ContentView: View {
                         NavigationLink {
                             Text("SIKE")
                         } label: {
-                            Image("gift_heart")
+                            Image.giftHeart
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(height: 60)
@@ -57,9 +57,11 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity)
                     }
                     .background(Color.background)
+                    .padding(.bottom, 8)
+                    .ignoresSafeArea()
                 }
-                .ignoresSafeArea()
                 .frame(maxHeight: .infinity, alignment: .bottom)
+                .ignoresSafeArea()
             }
         }
         .background(Color.background)

@@ -88,4 +88,8 @@ class AddFriendViewModel: ObservableObject {
                 self.requestsSent = requests
             }
     }
+
+    func didSendFriendRequest(userId: String) -> Bool {
+        return requestsSent.contains { $0.toId == userId }
+    }
 }

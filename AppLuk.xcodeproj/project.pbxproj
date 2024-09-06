@@ -65,6 +65,7 @@
 		42C6A8EA2C89109400A28FAA /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8E82C89102D00A28FAA /* Secrets.swift */; };
 		42C6A8EC2C89F3CC00A28FAA /* WidgetDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8EB2C89F3CC00A28FAA /* WidgetDataManager.swift */; };
 		42C6A8EE2C8B3E6800A28FAA /* FriendRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8ED2C8B3E6800A28FAA /* FriendRequest.swift */; };
+		42C6A8F02C8B6DFD00A28FAA /* Image+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8EF2C8B6DFD00A28FAA /* Image+.swift */; };
 		42EDD2BB2C78EEA800D99EDE /* AsyncCachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */; };
 /* End PBXBuildFile section */
 
@@ -141,6 +142,7 @@
 		42C6A8E82C89102D00A28FAA /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		42C6A8EB2C89F3CC00A28FAA /* WidgetDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataManager.swift; sourceTree = "<group>"; };
 		42C6A8ED2C8B3E6800A28FAA /* FriendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequest.swift; sourceTree = "<group>"; };
+		42C6A8EF2C8B6DFD00A28FAA /* Image+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+.swift"; sourceTree = "<group>"; };
 		42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncCachedImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -208,6 +210,7 @@
 				42C6A8B42C828F8100A28FAA /* Font+.swift */,
 				42C6A8ED2C8B3E6800A28FAA /* FriendRequest.swift */,
 				42B598472C73927500C37F66 /* Color+.swift */,
+				42C6A8EF2C8B6DFD00A28FAA /* Image+.swift */,
 				42C6A8A72C810AAF00A28FAA /* SearchKnowledgeViewModel.swift */,
 				42C6A8E82C89102D00A28FAA /* Secrets.swift */,
 				42C6A8A92C8162A900A28FAA /* SearchView.swift */,
@@ -416,6 +419,7 @@
 				42B598422C726B6800C37F66 /* KnowledgeViewModel.swift in Sources */,
 				42C6A8A62C81067400A28FAA /* SearchKnowledgeView.swift in Sources */,
 				4212EDD02C56D9E400F30DD2 /* AppLukApp.swift in Sources */,
+				42C6A8F02C8B6DFD00A28FAA /* Image+.swift in Sources */,
 				4276316D2C6A506D005BF2CA /* CreateKnowledgeView.swift in Sources */,
 				42C6A8AA2C8162A900A28FAA /* SearchView.swift in Sources */,
 				42C6A8AC2C81FAB300A28FAA /* AddFriendView.swift in Sources */,

@@ -31,6 +31,7 @@ struct AppLukApp: App {
             AuthenticatedView {
                 ContentView()
             }
+            .preferredColorScheme(.dark)
         }
     }
 }
