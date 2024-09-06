@@ -14,11 +14,6 @@ struct CommentsView: View {
     @State private var currentComment: String = ""
     @Environment(\.dismiss) private var dismiss
 
-    // init(knowledgeId: String) {
-    //     self.knowledgeId = knowledgeId
-    //     _commentsVM = StateObject(wrappedValue: CommentsViewModel(knowledgeId: knowledgeId))
-    // }
-
     var body: some View {
         VStack {
             ScrollView {
@@ -74,9 +69,6 @@ struct CommentsView: View {
         .background {
             RoundedRectangle(cornerRadius: 20)
                 .stroke()
-            // Image("commentBox")
-            //     .resizable()
-            // .padding(-2)
         }
     }
 }
