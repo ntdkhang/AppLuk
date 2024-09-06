@@ -10,6 +10,12 @@ import Foundation
 
 class AddFriendViewModel: ObservableObject {
     @Published var searchResults: [User] = []
+    @Published var requestsSent: [FriendRequest] = [] // array of IDs of users who the current user has sent a friend request
+
+    init() {
+        fetchFriendRequests()
+    }
+
     @Published var searchText: String = "" {
         didSet {
             Task {
@@ -58,5 +64,28 @@ class AddFriendViewModel: ObservableObject {
         }
 
         return false
+    }
+
+    func fetchFriendRequests() {
+        Firestore.firestore().collection("friendRequests")
+            .whereField("fromId", isEqualTo: DataStorageManager.shared.currentUserId)
+            .addSnapshotListener { snapshot, error in
+                guard let documents = snapshot?.documents else {
+                    print("Error fetching friend requests \(error!)")
+                    return
+                }
+
+                let requests = documents.compactMap { document in
+                    do {
+                        let request = try document.data(as: FriendRequest.self)
+                        return request
+                    } catch {
+                        print("Error reading friend request: \(error)")
+                        return nil
+                    }
+                }
+
+                self.requestsSent = requests
+            }
     }
 }

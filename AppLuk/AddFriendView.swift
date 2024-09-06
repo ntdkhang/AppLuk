@@ -36,6 +36,7 @@ struct AddFriendView: View {
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
 
+                        // Image(systemName: "person.badge.clock")
                         if !addFriendVM.isFriend(user) {
                             Button {
                                 addFriendVM.addFriend(user)
