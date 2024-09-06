@@ -64,6 +64,7 @@
 		42C6A8E92C89102D00A28FAA /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8E82C89102D00A28FAA /* Secrets.swift */; };
 		42C6A8EA2C89109400A28FAA /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8E82C89102D00A28FAA /* Secrets.swift */; };
 		42C6A8EC2C89F3CC00A28FAA /* WidgetDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8EB2C89F3CC00A28FAA /* WidgetDataManager.swift */; };
+		42C6A8EE2C8B3E6800A28FAA /* FriendRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8ED2C8B3E6800A28FAA /* FriendRequest.swift */; };
 		42EDD2BB2C78EEA800D99EDE /* AsyncCachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */; };
 /* End PBXBuildFile section */
 
@@ -139,6 +140,7 @@
 		42C6A8E62C890B9100A28FAA /* AppLukWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppLukWidgetExtension.entitlements; sourceTree = "<group>"; };
 		42C6A8E82C89102D00A28FAA /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		42C6A8EB2C89F3CC00A28FAA /* WidgetDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataManager.swift; sourceTree = "<group>"; };
+		42C6A8ED2C8B3E6800A28FAA /* FriendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequest.swift; sourceTree = "<group>"; };
 		42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncCachedImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -204,6 +206,7 @@
 				42C6A8A52C81067400A28FAA /* SearchKnowledgeView.swift */,
 				42B5983D2C711B9100C37F66 /* UserViewModel.swift */,
 				42C6A8B42C828F8100A28FAA /* Font+.swift */,
+				42C6A8ED2C8B3E6800A28FAA /* FriendRequest.swift */,
 				42B598472C73927500C37F66 /* Color+.swift */,
 				42C6A8A72C810AAF00A28FAA /* SearchKnowledgeViewModel.swift */,
 				42C6A8E82C89102D00A28FAA /* Secrets.swift */,
@@ -418,6 +421,7 @@
 				42C6A8AC2C81FAB300A28FAA /* AddFriendView.swift in Sources */,
 				42B5981B2C6FC93200C37F66 /* SignupView.swift in Sources */,
 				42B5974B2C6B977200C37F66 /* CreateKnowledgeViewModel.swift in Sources */,
+				42C6A8EE2C8B3E6800A28FAA /* FriendRequest.swift in Sources */,
 				42B5981A2C6FC93200C37F66 /* AuthenticatedView.swift in Sources */,
 				42C6A8A42C80C55D00A28FAA /* MainProfileView.swift in Sources */,
 				42B598192C6FC93200C37F66 /* LoginView.swift in Sources */,
