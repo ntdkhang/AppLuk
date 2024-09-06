@@ -184,7 +184,7 @@ struct PageView: View {
             clippedImage
             Color.imageBlur
             ScrollView(.vertical) {
-                Text(pageContent)
+                Text(LocalizedStringKey(pageContent))
                     .font(.com_regular)
                     .lineSpacing(6)
                     .lineLimit(nil)
