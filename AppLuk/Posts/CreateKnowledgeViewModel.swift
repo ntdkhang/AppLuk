@@ -69,6 +69,7 @@ class CreateKnowledgeViewModel: ObservableObject {
         // create a new document, get ID
         let knowledgeRef = db.collection("knowledges").document()
         let knowledgeId = knowledgeRef.documentID
+
         // upload all images to storage, then retrieve the urls
         uploadImages(knowledgeId: knowledgeId) { urls in
             // create a new post from the current items
@@ -93,6 +94,11 @@ class CreateKnowledgeViewModel: ObservableObject {
         var urlsString = [String?](repeating: nil, count: images.count)
         let urlToDownLoad = images.filter { $0 != nil }.count
         var urlDownloaded = 0
+
+        if urlToDownLoad == 0 {
+            completion(urlsString)
+            return
+        }
 
         for (index, uiImage) in images.enumerated() {
             if let data = uiImage?.jpegData(compressionQuality: 0.6) {
