@@ -182,7 +182,11 @@ struct PageView: View {
     var body: some View {
         ZStack {
             clippedImage
-            Color.imageBlur
+            // Color.imageBlur
+            Rectangle()
+                .fill(
+                    Color.imageBlur.gradient.shadow(.inner(color: .black, radius: 10))
+                )
             ScrollView(.vertical) {
                 Text(LocalizedStringKey(pageContent))
                     .font(.com_regular)
