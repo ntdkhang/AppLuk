@@ -32,6 +32,7 @@ struct CommentsView: View {
                     .padding(.vertical, 8)
                 }
             }
+            .padding(.top)
 
             textField
                 .padding(8)
@@ -44,7 +45,7 @@ struct CommentsView: View {
 
     var textField: some View {
         HStack {
-            TextField("Write your thoughts here:", text: $currentComment, axis: .vertical)
+            TextField("Gift me your thoughts", text: $currentComment, axis: .vertical)
                 .font(.com_regular)
                 .multilineTextAlignment(.leading)
                 .padding()
@@ -61,17 +62,21 @@ struct CommentsView: View {
                     for: nil
                 )
             } label: {
-                Image(systemName: "paperplane.fill")
+                Image("gift_heart")
+                    .resizable()
             }
-            .foregroundColor(.blue)
+            .foregroundColor(.white)
             .aspectRatio(contentMode: .fit)
             .frame(width: 40, height: 40)
-            .padding(.horizontal)
+            .padding(.trailing, 4)
             .accessibilityLabel("Post comment")
         }
         .background {
             RoundedRectangle(cornerRadius: 20)
                 .stroke()
+            // Image("commentBox")
+            //     .resizable()
+            // .padding(-2)
         }
     }
 }
