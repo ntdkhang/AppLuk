@@ -6,10 +6,12 @@
 //
 
 import FirebaseAuth
+import PhotosUI
 import SwiftUI
 
 struct MainProfileView: View {
     @ObservedObject var dataStorageManager = DataStorageManager.shared
+    @StateObject var viewModel = ProfileViewModel()
     @Environment(\.dismiss) var dismiss
     var body: some View {
         Form {
@@ -22,7 +24,6 @@ struct MainProfileView: View {
                 } placeholder: {
                     Color.gray
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 40)
                         .clipShape(Circle())
                 }
                 .frame(height: 100)
@@ -42,9 +43,7 @@ struct MainProfileView: View {
             .listRowSeparator(.hidden)
 
             Section(header: Text("General").font(.com_caption)) {
-                NavigationLink {
-                    Text("Sike")
-                } label: {
+                PhotosPicker(selection: $viewModel.selectedPhoto, matching: .images) {
                     makeRow(iconName: "person.crop.circle", text: "Edit profile image")
                 }
 
@@ -54,12 +53,7 @@ struct MainProfileView: View {
                     makeRow(iconName: "tag", text: "Edit name")
                 }
                 NavigationLink {
-                    Text("Sike")
-                } label: {
-                    makeRow(iconName: "at", text: "Edit email")
-                }
-                NavigationLink {
-                    Text("Sike")
+                    Text("Work in progress")
                 } label: {
                     makeRow(iconName: "plus.square.dashed", text: "How to add Widget")
                 }

@@ -40,4 +40,8 @@ extension Image {
     static var save_fill: Image {
         Image("save_fill")
     }
+
+    static var empty_ava: Image {
+        Image("empty_ava")
+    }
 }

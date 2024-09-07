@@ -6,7 +6,9 @@
 //
 
 import FirebaseFirestore
+import FirebaseStorage
 import Foundation
+import SwiftUI
 
 class DataStorageManager: ObservableObject {
     static var shared = DataStorageManager()
@@ -14,6 +16,7 @@ class DataStorageManager: ObservableObject {
     @Published var currentUser: User?
     @Published var knowledges = [Knowledge]()
     @Published var savedKnowledges = [Knowledge]()
+    @Published var avatar: Image?
 
     var currentUserId: String = "" // this ID is set from the Auth UID
 
@@ -58,19 +61,19 @@ class DataStorageManager: ObservableObject {
             print("Other person id is nil")
             return
         }
-        let ref = db.collection("friendRequests").document()
-        let friendRequest = FriendRequest(fromId: currentUserId, toId: userId)
-
-        do {
-            try ref.setData(from: friendRequest)
-        } catch {
-            print("Error sending friend request: \(error)")
-            return
-        }
-        // let ref = db.collection("users").document(currentUserId)
-        // ref.updateData([
-        //     "friendsId": FieldValue.arrayUnion([userId]),
-        // ])
+        // let ref = db.collection("friendRequests").document()
+        // let friendRequest = FriendRequest(fromId: currentUserId, toId: userId)
+        //
+        // do {
+        //     try ref.setData(from: friendRequest)
+        // } catch {
+        //     print("Error sending friend request: \(error)")
+        //     return
+        // }
+        let ref = db.collection("users").document(currentUserId)
+        ref.updateData([
+            "friendsId": FieldValue.arrayUnion([userId]),
+        ])
     }
 
     func getSavedKnowledes() {
@@ -143,6 +146,7 @@ class DataStorageManager: ObservableObject {
                 do {
                     let user = try document.data(as: User.self)
                     self.currentUser = user
+                    self.downloadAvatar()
                     // DataStorageManager.currentUserId = user.id ?? ""
                     self.getFriends()
                 } catch {
@@ -208,5 +212,33 @@ class DataStorageManager: ObservableObject {
             print("Error creating new user: \(error)")
             completion(error)
         }
+    }
+
+    func downloadAvatar() {
+        let storageRef = Storage.storage().reference().child("avatars/").child("\(currentUserId).jpeg")
+        storageRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+            if let error = error {
+                print("Error downloading avatar: \(error.localizedDescription)")
+            } else {
+                if let uiImage = UIImage(data: data!) {
+                    self.avatar = Image(uiImage: uiImage)
+                }
+            }
+        }
+    }
+
+    var avatarImage: Image {
+        if let avatar = avatar {
+            return avatar
+        } else {
+            return Image.empty_ava
+        }
+    }
+
+    func updateAvatar(newUrl: String) {
+        let ref = db.collection("users").document(currentUserId)
+        ref.updateData([
+            "avatarUrl": newUrl,
+        ])
     }
 }
