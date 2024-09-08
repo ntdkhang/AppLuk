@@ -17,8 +17,25 @@ struct UpdateProfileView: View {
     var body: some View {
         VStack {
             TextField("Name", text: $viewModel.name)
+                .font(.com_regular)
+                .padding()
+                .background {
+                    RoundedRectangle(cornerRadius: 15)
+                        .stroke()
+                }
+
             TextField("username", text: $viewModel.username)
+                .font(.com_regular)
+                .padding()
+                .background {
+                    RoundedRectangle(cornerRadius: 15)
+                        .stroke()
+                }
+
             Text(errorText)
+                .font(.com_subheadline)
+                .foregroundColor(.red)
+
             Button {
                 Task {
                     let result = await viewModel.saveName()
@@ -33,22 +50,18 @@ struct UpdateProfileView: View {
                 }
             } label: {
                 Text("Save")
+                    .font(.com_title3)
+                    .foregroundColor(.white)
+                    .padding()
+                    .padding(.horizontal, 24)
+                    .background {
+                        RoundedRectangle(cornerRadius: 25)
+                            .foregroundColor(Color.lightButton)
+                    }
             }
         }
-        // .navigationBarBackButtonHidden()
-        // .toolbar {
-        //     ToolbarItem(placement: .topBarLeading) {
-        //         Button {
-        //             dismiss()
-        //         } label: {
-        //             HStack {
-        //                 Image(systemName: "chevron.backward")
-        //                 Text("Back")
-        //                     .font(.com_subheadline)
-        //             }
-        //         }
-        //         .foregroundColor(.white)
-        //     }
-        // }
+        .padding()
+        .frame(maxHeight: .infinity)
+        .background(Color.background)
     }
 }

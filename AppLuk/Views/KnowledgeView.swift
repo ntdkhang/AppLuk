@@ -10,7 +10,7 @@ import SwiftUI
 struct KnowledgeView: View {
     var knowledge: Knowledge
     @Binding var showComments: Bool
-    @Binding var currentKnowledge: Knowledge
+    @Binding var currentKnowledge: Knowledge?
     var body: some View {
         VStack {
             PostedByView(knowledge: knowledge)
@@ -54,7 +54,7 @@ struct SaveAndReactView: View {
     @ObservedObject var dataStorageManager = DataStorageManager.shared
     let knowledge: Knowledge
     @Binding var showComments: Bool
-    @Binding var currentKnowledge: Knowledge
+    @Binding var currentKnowledge: Knowledge?
     var body: some View {
         HStack {
             Button {

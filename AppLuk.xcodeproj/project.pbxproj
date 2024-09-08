@@ -202,24 +202,12 @@
 				42C6A8B12C825EE000A28FAA /* Info.plist */,
 				42B597CD2C6EEF7500C37F66 /* GoogleService-Info.plist */,
 				4212EDCF2C56D9E400F30DD2 /* AppLukApp.swift */,
-				42B598082C6F7FE100C37F66 /* User.swift */,
-				42C6A8A32C80C55C00A28FAA /* MainProfileView.swift */,
-				42C6A8AF2C825E3500A28FAA /* Comfortaa.ttf */,
-				42C6A8B22C828D1000A28FAA /* Comfortaa-SemiBold.ttf */,
-				42C6A8AD2C81FBA200A28FAA /* AddFriendViewModel.swift */,
-				42C6A8A52C81067400A28FAA /* SearchKnowledgeView.swift */,
-				42B5983D2C711B9100C37F66 /* ProfileViewModel.swift */,
-				42C6A8F12C8CDA0300A28FAA /* UpdateProfileView.swift */,
-				42C6A8B42C828F8100A28FAA /* Font+.swift */,
-				42C6A8ED2C8B3E6800A28FAA /* FriendRequest.swift */,
-				42B598472C73927500C37F66 /* Color+.swift */,
-				42C6A8EF2C8B6DFD00A28FAA /* Image+.swift */,
-				42C6A8A72C810AAF00A28FAA /* SearchKnowledgeViewModel.swift */,
+				42C6A8F32C8E4FD200A28FAA /* Extensions */,
+				42C6A8F42C8E4FE400A28FAA /* Views */,
 				42C6A8E82C89102D00A28FAA /* Secrets.swift */,
-				42C6A8A92C8162A900A28FAA /* SearchView.swift */,
-				42C6A8AB2C81FAB300A28FAA /* AddFriendView.swift */,
 				42B5982D2C70482800C37F66 /* DataStorageManager.swift */,
-				42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */,
+				42C6A8F52C8E502200A28FAA /* Model */,
+				42C6A8F62C8E503B00A28FAA /* ViewModel */,
 				42B598122C6FC92600C37F66 /* Auth */,
 				42B597832C6D828400C37F66 /* Posts */,
 				4212EDD12C56D9E400F30DD2 /* ContentView.swift */,
@@ -240,16 +228,6 @@
 		42B597832C6D828400C37F66 /* Posts */ = {
 			isa = PBXGroup;
 			children = (
-				42B598452C738A4A00C37F66 /* KnowledgeListView.swift */,
-				427631662C67A812005BF2CA /* KnowledgeView.swift */,
-				42C6A8A12C80BD8100A28FAA /* SavedKnowledgeListView.swift */,
-				425307EF2C7656B000CF16DA /* CommentsViewModel.swift */,
-				425307F12C76570300CF16DA /* Comment.swift */,
-				425307F32C7665C900CF16DA /* CommentsView.swift */,
-				42B598412C726B6800C37F66 /* KnowledgeViewModel.swift */,
-				42B5974A2C6B977200C37F66 /* CreateKnowledgeViewModel.swift */,
-				4276316C2C6A506D005BF2CA /* CreateKnowledgeView.swift */,
-				428AAAC42C5D3259006B6647 /* Knowledge.swift */,
 			);
 			path = Posts;
 			sourceTree = "<group>";
@@ -286,6 +264,60 @@
 				42C6A8C82C835E4300A28FAA /* Info.plist */,
 			);
 			path = AppLukWidget;
+			sourceTree = "<group>";
+		};
+		42C6A8F32C8E4FD200A28FAA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				42C6A8AF2C825E3500A28FAA /* Comfortaa.ttf */,
+				42C6A8B22C828D1000A28FAA /* Comfortaa-SemiBold.ttf */,
+				42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */,
+				42C6A8B42C828F8100A28FAA /* Font+.swift */,
+				42B598472C73927500C37F66 /* Color+.swift */,
+				42C6A8EF2C8B6DFD00A28FAA /* Image+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		42C6A8F42C8E4FE400A28FAA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				42C6A8A32C80C55C00A28FAA /* MainProfileView.swift */,
+				42C6A8A52C81067400A28FAA /* SearchKnowledgeView.swift */,
+				42C6A8F12C8CDA0300A28FAA /* UpdateProfileView.swift */,
+				42C6A8A92C8162A900A28FAA /* SearchView.swift */,
+				42C6A8AB2C81FAB300A28FAA /* AddFriendView.swift */,
+				42B598452C738A4A00C37F66 /* KnowledgeListView.swift */,
+				427631662C67A812005BF2CA /* KnowledgeView.swift */,
+				42C6A8A12C80BD8100A28FAA /* SavedKnowledgeListView.swift */,
+				425307F32C7665C900CF16DA /* CommentsView.swift */,
+				4276316C2C6A506D005BF2CA /* CreateKnowledgeView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		42C6A8F52C8E502200A28FAA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				42C6A8ED2C8B3E6800A28FAA /* FriendRequest.swift */,
+				42B598082C6F7FE100C37F66 /* User.swift */,
+				425307F12C76570300CF16DA /* Comment.swift */,
+				428AAAC42C5D3259006B6647 /* Knowledge.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		42C6A8F62C8E503B00A28FAA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				42C6A8AD2C81FBA200A28FAA /* AddFriendViewModel.swift */,
+				42B5983D2C711B9100C37F66 /* ProfileViewModel.swift */,
+				42C6A8A72C810AAF00A28FAA /* SearchKnowledgeViewModel.swift */,
+				425307EF2C7656B000CF16DA /* CommentsViewModel.swift */,
+				42B598412C726B6800C37F66 /* KnowledgeViewModel.swift */,
+				42B5974A2C6B977200C37F66 /* CreateKnowledgeViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

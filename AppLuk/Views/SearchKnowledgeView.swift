@@ -12,7 +12,7 @@ struct SearchKnowledgeView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var showComments = false
     // @State private var knowledgeId = ""
-    @State private var currentKnowledge = Knowledge.empty
+    @State private var currentKnowledge: Knowledge? = Knowledge.empty
     let tags = Knowledge.tags
     var body: some View {
         VStack {
@@ -31,7 +31,7 @@ struct SearchKnowledgeView: View {
             .scrollBounceBehavior(.basedOnSize)
             .onChange(of: currentKnowledge) {} // IDK why but if I remove this, it crashes when open comments. Maybe it needs to reload when the value of knowledgeId changed
             .sheet(isPresented: $showComments) {
-                CommentsView(commentsVM: CommentsViewModel(knowledge: self.currentKnowledge))
+                CommentsView(commentsVM: CommentsViewModel(knowledge: self.currentKnowledge ?? .empty))
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

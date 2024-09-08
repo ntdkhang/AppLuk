@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddFriendView: View {
     @StateObject private var addFriendVM = AddFriendViewModel()
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
         VStack {
             Form {
@@ -56,9 +57,24 @@ struct AddFriendView: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden()
         .searchable(text: $addFriendVM.searchText)
         .disableAutocorrection(true)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.background)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    HStack {
+                        Image(systemName: "chevron.backward")
+                        Text("Back")
+                            .font(.com_subheadline)
+                    }
+                }
+                .foregroundColor(.white)
+            }
+        }
     }
 }

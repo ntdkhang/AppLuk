@@ -88,6 +88,6 @@ struct Knowledge: Codable, Identifiable, Equatable {
     }
 
     static var empty: Knowledge {
-        return Knowledge(postedById: "", title: "", contentPages: [""], imageUrls: [])
+        return Knowledge(postedById: "0KBb2kjXOkVQtpxUjkXg2Ss4aZA2", title: "you're not supposed to see this", contentPages: [""], imageUrls: [])
     }
 }

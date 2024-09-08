@@ -11,10 +11,11 @@ import SwiftUI
 
 struct MainProfileView: View {
     @ObservedObject var dataStorageManager = DataStorageManager.shared
-    @StateObject var viewModel = ProfileViewModel()
+    // @StateObject var viewModel = ProfileViewModel()
     @Environment(\.dismiss) var dismiss
 
-    @State private var showEditNameSheet: Bool = false
+    // @State private var showEditNameSheet: Bool = false
+
     var body: some View {
         Form {
             Section {
@@ -45,14 +46,25 @@ struct MainProfileView: View {
             .listRowSeparator(.hidden)
 
             Section(header: Text("General").font(.com_caption)) {
-                PhotosPicker(selection: $viewModel.selectedPhoto, matching: .images) {
-                    makeRow(iconName: "person.crop.circle", text: "Edit profile image")
-                }
+                // PhotosPicker(selection: $viewModel.selectedPhoto, matching: .images) {
+                //     makeRow(iconName: "person.crop.circle", text: "Edit profile image")
+                // }
+                //
+                // Button {
+                //     showEditNameSheet = true
+                // } label: {
+                //     makeRow(iconName: "tag", text: "Edit name")
+                // }
+                // .sheet(isPresented: $showEditNameSheet) {
+                //     UpdateProfileView(viewModel: viewModel)
+                //         .presentationDetents([.medium])
+                // }
 
-                Button {
-                    showEditNameSheet = true
+                NavigationLink {
+                    SavedKnowledgeListView()
+                    // Text("AYO")
                 } label: {
-                    makeRow(iconName: "tag", text: "Edit name")
+                    makeRow(iconName: "list.bullet.clipboard", text: "Saved posts")
                 }
 
                 NavigationLink {
@@ -108,10 +120,6 @@ struct MainProfileView: View {
         .scrollContentBackground(.hidden)
         .background(Color.background)
         .navigationBarBackButtonHidden()
-        .sheet(isPresented: $showEditNameSheet) {
-            UpdateProfileView(viewModel: viewModel)
-                .presentationDetents([.medium])
-        }
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
