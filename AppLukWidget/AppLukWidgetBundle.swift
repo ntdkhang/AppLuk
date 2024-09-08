@@ -14,11 +14,11 @@ import WidgetKit
 struct AppLukWidgetBundle: WidgetBundle {
     init() {
         FirebaseApp.configure()
-        do {
-            try Auth.auth().useUserAccessGroup("\(teamID).com.khang.nguyen.AppLuk.firebase")
-        } catch let error as NSError {
-            print("Error changing user access group in widget: \(error)")
-        }
+//        do {
+//            try Auth.auth().useUserAccessGroup("\(teamID).com.khang.nguyen.AppLuk.firebase")
+//        } catch let error as NSError {
+//            print("Error changing user access group in widget: \(error)")
+//        }
     }
 
     var body: some Widget {
