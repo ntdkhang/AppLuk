@@ -45,7 +45,7 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity)
 
                         NavigationLink {
-                            Text("SIKE")
+                            Text("Work in progress")
                         } label: {
                             Image.giftHeart
                                 .resizable()

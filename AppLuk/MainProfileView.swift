@@ -13,6 +13,8 @@ struct MainProfileView: View {
     @ObservedObject var dataStorageManager = DataStorageManager.shared
     @StateObject var viewModel = ProfileViewModel()
     @Environment(\.dismiss) var dismiss
+
+    @State private var showEditNameSheet: Bool = false
     var body: some View {
         Form {
             Section {
@@ -47,11 +49,12 @@ struct MainProfileView: View {
                     makeRow(iconName: "person.crop.circle", text: "Edit profile image")
                 }
 
-                NavigationLink {
-                    Text("Sike")
+                Button {
+                    showEditNameSheet = true
                 } label: {
                     makeRow(iconName: "tag", text: "Edit name")
                 }
+
                 NavigationLink {
                     Text("Work in progress")
                 } label: {
@@ -68,7 +71,7 @@ struct MainProfileView: View {
                 }
 
                 NavigationLink {
-                    Text("Sike")
+                    Text("Work in progress")
                 } label: {
                     makeRow(iconName: "person.2", text: "Friend list")
                 }
@@ -77,13 +80,13 @@ struct MainProfileView: View {
 
             Section(header: Text("Privacy & Security").font(.com_caption)) {
                 NavigationLink {
-                    Text("Sike")
+                    Text("Work in progress")
                 } label: {
                     makeRow(iconName: "lock.shield", text: "Privacy policy")
                 }
 
                 NavigationLink {
-                    Text("Sike")
+                    Text("Work in progress")
                 } label: {
                     makeRow(iconName: "trash", text: "Delete your account")
                 }
@@ -105,6 +108,10 @@ struct MainProfileView: View {
         .scrollContentBackground(.hidden)
         .background(Color.background)
         .navigationBarBackButtonHidden()
+        .sheet(isPresented: $showEditNameSheet) {
+            UpdateProfileView(viewModel: viewModel)
+                .presentationDetents([.medium])
+        }
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
@@ -127,6 +134,7 @@ struct MainProfileView: View {
             Text(text)
                 .font(.com_regular)
         }
+        .foregroundColor(.white)
     }
 
     func makeIcon(name: String) -> some View {

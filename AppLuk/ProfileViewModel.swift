@@ -12,9 +12,9 @@ import PhotosUI
 import SwiftUI
 
 class ProfileViewModel: ObservableObject {
-    @Published var name: String = ""
-    @Published var userName: String = ""
-    @Published var image: UIImage?
+    @Published var name: String = DataStorageManager.shared.currentUser?.name ?? ""
+    @Published var username: String = DataStorageManager.shared.currentUser?.userName ?? ""
+    @Published var usernameAvailable: Bool?
 
     let db = Firestore.firestore()
 
@@ -56,6 +56,46 @@ class ProfileViewModel: ObservableObject {
         }
     }
 
-    func downloadAvatar() {
+    func saveName() async -> SaveResult {
+        if username != DataStorageManager.shared.currentUser?.userName {
+            // new username
+            let countQuery = db.collection("users").whereField("userName", isEqualTo: username).count
+            do {
+                let snapshot = try await countQuery.getAggregation(source: .server)
+                if Int(truncating: snapshot.count) > 0 {
+                    usernameAvailable = false
+                    return .notAvailable
+                } else {
+                    usernameAvailable = true
+                    try await db.collection("users").document(DataStorageManager.shared.currentUserId).updateData([
+                        "name": name,
+                        "userName": username,
+                    ])
+
+                    return .success
+                }
+            } catch {
+                print("Error changing name and userName: \(error)")
+                return .other(error.localizedDescription)
+            }
+        } else {
+            // same username
+            // only change name
+            do {
+                try await db.collection("users").document(DataStorageManager.shared.currentUserId).updateData([
+                    "name": name,
+                ])
+                return .success
+            } catch {
+                print("Error changing name: \(error)")
+                return .other(error.localizedDescription)
+            }
+        }
+    }
+
+    enum SaveResult {
+        case success
+        case notAvailable
+        case other(String)
     }
 }
