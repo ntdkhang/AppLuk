@@ -117,21 +117,7 @@ struct CreateTitleView: View {
             .environment(\.editMode, .constant(EditMode.active))
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .navigationBarBackButtonHidden()
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    HStack {
-                        Image(systemName: "chevron.backward")
-                        Text("Back")
-                            .font(.com_subheadline)
-                    }
-                }
-                .foregroundColor(.white)
-            }
-
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     // prevent double clicking and posting twice

@@ -34,20 +34,7 @@ struct SavedKnowledgeListView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.background)
-        .navigationBarBackButtonHidden()
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    HStack {
-                        Image(systemName: "chevron.backward")
-                        Text("Back")
-                            .font(.com_subheadline)
-                    }
-                }
-                .foregroundColor(.white)
-            }
             ToolbarItem(placement: .principal) {
                 Text("Saved Knowledge")
                     .font(.com_title3)

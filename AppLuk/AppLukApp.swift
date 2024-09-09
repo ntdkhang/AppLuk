@@ -30,6 +30,11 @@ struct AppLukApp: App {
         WindowGroup {
             AuthenticatedView {
                 ContentView()
+                    .onAppear {
+                        // UINavigationBar.appearance().barTintColor = .red
+                        UIBarButtonItem.appearance().tintColor = .white
+                        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Comfortaa", size: 16)!], for: .normal)
+                    }
             }
             .preferredColorScheme(.dark)
         }

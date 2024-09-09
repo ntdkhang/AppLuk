@@ -119,21 +119,6 @@ struct MainProfileView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .scrollContentBackground(.hidden)
         .background(Color.background)
-        .navigationBarBackButtonHidden()
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    HStack {
-                        Image(systemName: "chevron.backward")
-                        Text("Back")
-                            .font(.com_regular_light)
-                    }
-                }
-                .foregroundColor(.white)
-            }
-        }
     }
 
     func makeRow(iconName: String, text: String) -> some View {
