@@ -181,6 +181,7 @@ extension AuthenticationViewModel {
 
     func signOut() {
         do {
+            DataStorageManager.shared = DataStorageManager() // remove all data in cache
             try Auth.auth().signOut()
         } catch {
             print(error)

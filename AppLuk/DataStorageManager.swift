@@ -18,6 +18,8 @@ class DataStorageManager: ObservableObject {
     @Published var savedKnowledges = [Knowledge]()
     @Published var avatar: Image?
 
+    @Published var usersCache = [User]()
+
     var currentUserId: String = "" // this ID is set from the Auth UID
 
     let db = Firestore.firestore()
@@ -181,10 +183,23 @@ class DataStorageManager: ObservableObject {
         if withId == currentUserId {
             return currentUser
         }
-        let user = friends.first(where: { user in
+
+        // Find in friends
+        var user = friends.first(where: { user in
             user.id == withId
         })
-        // TODO: if cannot find in friends, then query the User with that Id from users collection
+
+        // Find in cache
+        if user == nil {
+            user = usersCache.first(where: { user in
+                user.id == withId
+            })
+        }
+
+        // TODO:
+        // Still cannot find, so get it from db by calling fetchUser()
+        // But will it get in an infinite recursive loop?
+
         return user
     }
 
@@ -240,5 +255,24 @@ class DataStorageManager: ObservableObject {
         ref.updateData([
             "avatarUrl": newUrl,
         ])
+    }
+
+    func fetchUser(withId: String) {
+        if user(withId: withId) == nil {
+            db.collection("users").document(withId).getDocument { document, error in
+                guard let document = document else {
+                    print("Error fetching user: \(error?.localizedDescription ?? "nil")")
+                    return
+                }
+
+                do {
+                    let user = try document.data(as: User.self)
+                    self.objectWillChange.send()
+                    self.usersCache.append(user)
+                } catch {
+                    print("Error reading user: \(error)")
+                }
+            }
+        }
     }
 }

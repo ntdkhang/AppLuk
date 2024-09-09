@@ -85,9 +85,11 @@ struct CommentsView: View {
 
 struct CommentView: View {
     var comment: Comment
+    @ObservedObject private var dataStorageManager = DataStorageManager.shared
 
     var body: some View {
         VStack {
+            // let _ = Self._printChanges()
             HStack {
                 AsyncCachedImage(url: postedBy?.avatarURL) { image in
                     image
@@ -120,6 +122,6 @@ struct CommentView: View {
     }
 
     var postedBy: User? {
-        DataStorageManager.shared.user(withId: comment.postedById)
+        dataStorageManager.user(withId: comment.postedById)
     }
 }

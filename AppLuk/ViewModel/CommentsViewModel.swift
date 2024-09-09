@@ -30,7 +30,9 @@ class CommentsViewModel: ObservableObject {
 
                 let comments = documents.compactMap { document in
                     do {
-                        return try document.data(as: Comment.self)
+                        let comment = try document.data(as: Comment.self)
+                        DataStorageManager.shared.fetchUser(withId: comment.postedById)
+                        return comment
                     } catch {
                         return nil
                     }
