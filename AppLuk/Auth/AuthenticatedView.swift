@@ -40,6 +40,7 @@ struct AuthenticatedView<Content, Unauthenticated>: View where Content: View, Un
                 if let unauthenticated {
                     unauthenticated
                 } else {
+                    // TODO: Have logo app in here, while checking whether I'm logged in
                     Text("You're not logged in.")
                 }
                 Button("Tap here to log in") {

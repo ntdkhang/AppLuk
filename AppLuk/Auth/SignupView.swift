@@ -41,14 +41,14 @@ struct SignupView: View {
                     Image(systemName: "person.circle.fill")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(height: 50)
+                        .frame(height: 150, alignment: .center)
                         .clipShape(Circle())
                         .foregroundColor(.gray)
                 } else {
                     Image(uiImage: viewModel.image!)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(height: 50)
+                        .frame(height: 150, alignment: .center)
                         .clipShape(Circle())
                 }
             }

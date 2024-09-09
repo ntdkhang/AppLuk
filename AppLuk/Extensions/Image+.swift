@@ -44,4 +44,12 @@ extension Image {
     static var empty_ava: Image {
         Image("empty_ava")
     }
+    
+    static var owl_harry_potter: Image {
+        Image("owl_harry_potter")
+    }
+    
+    static var owl_round: Image {
+        Image("owl_round")
+    }
 }

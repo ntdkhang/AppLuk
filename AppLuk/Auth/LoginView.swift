@@ -29,10 +29,6 @@ struct LoginView: View {
 
     var body: some View {
         VStack {
-            Image("Login")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(minHeight: 300, maxHeight: 400)
             Text("Login")
                 .font(.largeTitle)
                 .fontWeight(.bold)
