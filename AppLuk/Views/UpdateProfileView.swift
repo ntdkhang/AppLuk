@@ -16,6 +16,9 @@ struct UpdateProfileView: View {
 
     var body: some View {
         VStack {
+            Text("Name")
+                .font(.com_caption)
+                .frame(maxWidth: .infinity, alignment: .leading)
             TextField("Name", text: $viewModel.name)
                 .font(.com_regular)
                 .padding()
@@ -23,8 +26,15 @@ struct UpdateProfileView: View {
                     RoundedRectangle(cornerRadius: 15)
                         .stroke()
                 }
+                .padding(.bottom, 8)
 
+            Text("Username")
+                .font(.com_caption)
+                .frame(maxWidth: .infinity, alignment: .leading)
             TextField("username", text: $viewModel.username)
+                .onChange(of: viewModel.username) {
+                    viewModel.username = viewModel.username.replacing(" ", with: "")
+                }
                 .font(.com_regular)
                 .padding()
                 .background {
