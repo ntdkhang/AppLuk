@@ -89,8 +89,9 @@ struct CommentView: View {
 
     var body: some View {
         VStack {
-            // let _ = Self._printChanges()
             HStack {
+                // If you want the image to load immediately, use AsyncImage
+                // Using AsyncCachedImage requires you to go out and go back in to show image
                 AsyncCachedImage(url: postedBy?.avatarURL) { image in
                     image
                         .resizable()

@@ -1,6 +1,11 @@
+
+# firebase cloud functions
+firebase_function/functions/venv/
+
 # xcodebuild
-Secrets.swift
 .nvim/
+
+Secrets.swift
 
 GoogleService-Info.plist
 .DS_Store

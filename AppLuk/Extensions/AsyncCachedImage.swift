@@ -40,12 +40,10 @@ struct AsyncCachedImage<ImageView: View, PlaceholderView: View>: View {
                 content(Image(uiImage: uiImage))
             } else {
                 placeholder()
-                    .onAppear {
-                        Task {
-                            await viewModel.downloadPhoto(url: url)
-                        }
-                    }
             }
+        }
+        .task {
+            await viewModel.downloadPhoto(url: url)
         }
     }
 }
