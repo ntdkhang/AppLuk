@@ -6,6 +6,7 @@
 //
 
 import FirebaseFirestore
+import FirebaseFunctions
 import Foundation
 
 class AddFriendViewModel: ObservableObject {

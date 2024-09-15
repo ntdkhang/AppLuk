@@ -63,19 +63,21 @@ class DataStorageManager: ObservableObject {
             print("Other person id is nil")
             return
         }
-        // let ref = db.collection("friendRequests").document()
-        // let friendRequest = FriendRequest(fromId: currentUserId, toId: userId)
-        //
-        // do {
-        //     try ref.setData(from: friendRequest)
-        // } catch {
-        //     print("Error sending friend request: \(error)")
-        //     return
-        // }
-        let ref = db.collection("users").document(currentUserId)
-        ref.updateData([
-            "friendsId": FieldValue.arrayUnion([userId]),
-        ])
+
+        let ref = db.collection("friendRequests").document()
+        let friendRequest = FriendRequest(fromId: currentUserId, toId: userId)
+
+        do {
+            try ref.setData(from: friendRequest)
+        } catch {
+            print("Error sending friend request: \(error)")
+            return
+        }
+
+        // let ref = db.collection("users").document(currentUserId)
+        // ref.updateData([
+        //     "friendsId": FieldValue.arrayUnion([userId]),
+        // ])
     }
 
     func getSavedKnowledes() {
