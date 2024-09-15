@@ -5,6 +5,7 @@
 //  Created by Khang Nguyen on 8/29/24.
 //
 
+import CachedAsyncImage
 import FirebaseAuth
 import PhotosUI
 import SwiftUI
@@ -19,7 +20,7 @@ struct MainProfileView: View {
     var body: some View {
         Form {
             Section {
-                AsyncImage(url: dataStorageManager.currentUserAvatarUrl) { image in
+                CachedAsyncImage(url: dataStorageManager.currentUserAvatarUrl) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fit)

@@ -70,6 +70,7 @@
 		42C6A8F82C95261700A28FAA /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 42C6A8F72C95261700A28FAA /* FirebaseMessaging */; };
 		42C6A8FA2C971D2000A28FAA /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8F92C971D2000A28FAA /* NotificationsManager.swift */; };
 		42C6A8FC2C972F6200A28FAA /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 42C6A8FB2C972F6200A28FAA /* FirebaseFunctions */; };
+		42C6A9002C974DD600A28FAA /* FriendRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8FF2C974DD600A28FAA /* FriendRequestsView.swift */; };
 		42EDD2BB2C78EEA800D99EDE /* AsyncCachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */; };
 /* End PBXBuildFile section */
 
@@ -149,6 +150,7 @@
 		42C6A8EF2C8B6DFD00A28FAA /* Image+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+.swift"; sourceTree = "<group>"; };
 		42C6A8F12C8CDA0300A28FAA /* UpdateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileView.swift; sourceTree = "<group>"; };
 		42C6A8F92C971D2000A28FAA /* NotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
+		42C6A8FF2C974DD600A28FAA /* FriendRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestsView.swift; sourceTree = "<group>"; };
 		42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncCachedImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -291,6 +293,7 @@
 			children = (
 				42C6A8A32C80C55C00A28FAA /* MainProfileView.swift */,
 				42C6A8A52C81067400A28FAA /* SearchKnowledgeView.swift */,
+				42C6A8FF2C974DD600A28FAA /* FriendRequestsView.swift */,
 				42C6A8F12C8CDA0300A28FAA /* UpdateProfileView.swift */,
 				42C6A8A92C8162A900A28FAA /* SearchView.swift */,
 				42C6A8AB2C81FAB300A28FAA /* AddFriendView.swift */,
@@ -475,6 +478,7 @@
 				42C6A8A42C80C55D00A28FAA /* MainProfileView.swift in Sources */,
 				42B598192C6FC93200C37F66 /* LoginView.swift in Sources */,
 				42C6A8A82C810AAF00A28FAA /* SearchKnowledgeViewModel.swift in Sources */,
+				42C6A9002C974DD600A28FAA /* FriendRequestsView.swift in Sources */,
 				428AAAC52C5D3259006B6647 /* Knowledge.swift in Sources */,
 				425307F02C7656B000CF16DA /* CommentsViewModel.swift in Sources */,
 				42B598342C70482900C37F66 /* DataStorageManager.swift in Sources */,

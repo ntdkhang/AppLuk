@@ -92,9 +92,10 @@ struct CommentView: View {
             HStack {
                 // If you want the image to load immediately, use AsyncImage
                 // Using AsyncCachedImage requires you to go out and go back in to show image
-                AsyncCachedImage(url: postedBy?.avatarURL) { image in
+                CachedAsyncImage(url: postedBy?.avatarURL) { image in
                     image
                         .resizable()
+                        .aspectRatio(contentMode: .fill)
                         .clipShape(Circle())
                 } placeholder: {
                     Color.gray

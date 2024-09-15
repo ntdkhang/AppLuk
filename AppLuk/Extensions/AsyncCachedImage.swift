@@ -14,69 +14,71 @@
 import Foundation
 import SwiftUI
 
-@MainActor
-struct AsyncCachedImage<ImageView: View, PlaceholderView: View>: View {
-    // Input dependencies
-    var url: URL?
-    @ViewBuilder var content: (Image) -> ImageView
-    @ViewBuilder var placeholder: () -> PlaceholderView
+/*
+ @MainActor
+ struct AsyncCachedImage<ImageView: View, PlaceholderView: View>: View {
+     // Input dependencies
+     var url: URL?
+     @ViewBuilder var content: (Image) -> ImageView
+     @ViewBuilder var placeholder: () -> PlaceholderView
 
-    // Downloaded image
-    @StateObject private var viewModel = CacheImageViewModel()
+     // Downloaded image
+     @StateObject private var viewModel = CacheImageViewModel()
 
-    init(
-        url: URL?,
-        @ViewBuilder content: @escaping (Image) -> ImageView,
-        @ViewBuilder placeholder: @escaping () -> PlaceholderView
-    ) {
-        self.url = url
-        self.content = content
-        self.placeholder = placeholder
-    }
+     init(
+         url: URL?,
+         @ViewBuilder content: @escaping (Image) -> ImageView,
+         @ViewBuilder placeholder: @escaping () -> PlaceholderView
+     ) {
+         self.url = url
+         self.content = content
+         self.placeholder = placeholder
+     }
 
-    var body: some View {
-        VStack {
-            if let imageData = viewModel.imageData, let uiImage = UIImage(data: imageData) {
-                content(Image(uiImage: uiImage))
-            } else {
-                placeholder()
-            }
-        }
-        .task {
-            await viewModel.downloadPhoto(url: url)
-        }
-    }
-}
+     var body: some View {
+         VStack {
+             if let imageData = viewModel.imageData, let uiImage = UIImage(data: imageData) {
+                 content(Image(uiImage: uiImage))
+             } else {
+                 placeholder()
+             }
+         }
+         .task {
+             await viewModel.downloadPhoto(url: url)
+         }
+     }
+ }
 
-class CacheImageViewModel: ObservableObject {
-    @Published var image: UIImage? = nil
-    @Published var imageData: Data?
+ class CacheImageViewModel: ObservableObject {
+     @Published var image: UIImage? = nil
+     @Published var imageData: Data?
 
-    // Downloads if the image is not cached already
-    // Otherwise returns from the cache
-    func downloadPhoto(url: URL?) async {
-        do {
-            guard let url else { return }
+     // Downloads if the image is not cached already
+     // Otherwise returns from the cache
+     func downloadPhoto(url: URL?) async {
+         do {
+             guard let url else { return }
 
-            // Check if the image is cached already
-            if let cachedResponse = URLCache.shared.cachedResponse(for: .init(url: url)) {
-                imageData = cachedResponse.data
-                // image = UIImage(data: cachedResponse.data)
-            } else {
-                let (data, response) = try await URLSession.shared.data(from: url)
+             // Check if the image is cached already
+             if let cachedResponse = URLCache.shared.cachedResponse(for: .init(url: url)) {
+                 imageData = cachedResponse.data
+                 // image = UIImage(data: cachedResponse.data)
+             } else {
+                 let (data, response) = try await URLSession.shared.data(from: url)
 
-                // Save returned image data into the cache
-                URLCache.shared.storeCachedResponse(.init(response: response, data: data), for: .init(url: url))
-                imageData = data
+                 // Save returned image data into the cache
+                 URLCache.shared.storeCachedResponse(.init(response: response, data: data), for: .init(url: url))
+                 imageData = data
 
-                // guard let image = UIImage(data: data) else {
-                //     return
-                // }
-                // self.image = image
-            }
-        } catch {
-            print("Error downloading: \(error)")
-            return
-        }
-    }
-}
+                 // guard let image = UIImage(data: data) else {
+                 //     return
+                 // }
+                 // self.image = image
+             }
+         } catch {
+             print("Error downloading: \(error)")
+             return
+         }
+     }
+ }
+ */

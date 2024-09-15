@@ -5,6 +5,7 @@
 //  Created by Khang Nguyen on 7/28/24.
 //
 
+import CachedAsyncImage
 import SwiftUI
 
 struct ContentView: View {
@@ -29,7 +30,7 @@ struct ContentView: View {
                         NavigationLink {
                             MainProfileView()
                         } label: {
-                            AsyncImage(url: dataStorageManager.currentUserAvatarUrl) { image in
+                            CachedAsyncImage(url: dataStorageManager.currentUserAvatarUrl) { image in
                                 image
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)

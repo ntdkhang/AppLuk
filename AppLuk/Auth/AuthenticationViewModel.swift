@@ -6,6 +6,8 @@
 //
 
 import FirebaseAuth
+import FirebaseFirestore
+import FirebaseMessaging
 import FirebaseStorage
 import Foundation
 import PhotosUI
@@ -80,6 +82,17 @@ class AuthenticationViewModel: ObservableObject {
             authStateHandler = Auth.auth().addStateDidChangeListener { _, user in
                 if user != nil {
                     DataStorageManager.shared.currentUserId = user!.uid
+                    Messaging.messaging().token { token, error in
+                        if let error = error {
+                            print("Error fetching FCM registration token: \(error)")
+                        } else if let token = token {
+                            let db = Firestore.firestore()
+                            db.collection("fcmTokens").document(DataStorageManager.shared.currentUserId).setData([
+                                "token": token,
+                            ])
+                        }
+                    }
+
                     DataStorageManager.shared.fetchCurrentUser()
                 }
                 self.user = user

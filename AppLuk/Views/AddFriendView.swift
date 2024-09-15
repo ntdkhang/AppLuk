@@ -5,6 +5,7 @@
 //  Created by Khang Nguyen on 8/30/24.
 //
 
+import CachedAsyncImage
 import SwiftUI
 
 struct AddFriendView: View {
@@ -15,7 +16,7 @@ struct AddFriendView: View {
             Form {
                 ForEach(addFriendVM.searchResults) { user in
                     HStack {
-                        AsyncImage(url: user.avatarURL) { image in
+                        CachedAsyncImage(url: user.avatarURL) { image in
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)

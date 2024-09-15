@@ -12,9 +12,11 @@ import Foundation
 class AddFriendViewModel: ObservableObject {
     @Published var searchResults: [User] = []
     @Published var requestsSent: [FriendRequest] = [] // array of IDs of users who the current user has sent a friend request
+    @Published var requestsReceived: [FriendRequest] = [] // array of IDs of users who the current user has received a friend request from
 
     init() {
-        fetchFriendRequests()
+        fetchFriendRequestsSent()
+        fetchFriendRequestsReceived()
     }
 
     @Published var searchText: String = "" {
@@ -67,7 +69,7 @@ class AddFriendViewModel: ObservableObject {
         return false
     }
 
-    func fetchFriendRequests() {
+    func fetchFriendRequestsSent() {
         Firestore.firestore().collection("friendRequests")
             .whereField("fromId", isEqualTo: DataStorageManager.shared.currentUserId)
             .addSnapshotListener { snapshot, error in
@@ -90,7 +92,34 @@ class AddFriendViewModel: ObservableObject {
             }
     }
 
-    func didSendFriendRequest(userId: String) -> Bool {
+    func didSendFriendRequestTo(userId: String) -> Bool {
         return requestsSent.contains { $0.toId == userId }
+    }
+
+    func didReceiveFriendRequestFrom(userId: String) -> Bool {
+        return requestsReceived.contains { $0.fromId == userId }
+    }
+
+    func fetchFriendRequestsReceived() {
+        Firestore.firestore().collection("friendRequests")
+            .whereField("toId", isEqualTo: DataStorageManager.shared.currentUserId)
+            .addSnapshotListener { snapshot, error in
+                guard let documents = snapshot?.documents else {
+                    print("Error fetching friend requests \(error!)")
+                    return
+                }
+
+                let requests = documents.compactMap { document in
+                    do {
+                        let request = try document.data(as: FriendRequest.self)
+                        return request
+                    } catch {
+                        print("Error reading friend request: \(error)")
+                        return nil
+                    }
+                }
+
+                self.requestsReceived = requests
+            }
     }
 }

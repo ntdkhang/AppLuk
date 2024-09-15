@@ -73,11 +73,6 @@ class DataStorageManager: ObservableObject {
             print("Error sending friend request: \(error)")
             return
         }
-
-        // let ref = db.collection("users").document(currentUserId)
-        // ref.updateData([
-        //     "friendsId": FieldValue.arrayUnion([userId]),
-        // ])
     }
 
     func getSavedKnowledes() {
