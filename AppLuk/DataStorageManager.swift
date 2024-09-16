@@ -21,6 +21,7 @@ class DataStorageManager: ObservableObject {
     @Published var usersCache = [User]()
 
     var currentUserId: String = "" // this ID is set from the Auth UID
+    var fcmToken: String = ""
 
     let db = Firestore.firestore()
 
