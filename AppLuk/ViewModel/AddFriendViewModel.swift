@@ -21,7 +21,6 @@ class AddFriendViewModel: ObservableObject {
         fetchFriendRequestsReceived()
     }
 
-    
     @Published var searchText: String = "" {
         didSet {
             Task {
@@ -153,14 +152,17 @@ class AddFriendViewModel: ObservableObject {
 
                     let users = documents.compactMap { document in
                         do {
-                            let request = try document.data(as: User.self)
-                            return request
+                            let user = try document.data(as: User.self)
+                            if DataStorageManager.shared.friends.firstIndex(of: user) != nil {
+                                return user
+                            } else {
+                                return nil
+                            }
                         } catch {
                             print("Error reading request user: \(error)")
                             return nil
                         }
                     }
-
                     self.requestedUsers = users
                     if self.searchText == "" {
                         self.searchResults = self.requestedUsers
