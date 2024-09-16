@@ -80,7 +80,7 @@ struct MainProfileView: View {
                 }
 
                 NavigationLink {
-                    Text("Work in progress")
+                    FriendListView()
                 } label: {
                     makeRow(iconName: "person.2", text: "Friend list")
                 }

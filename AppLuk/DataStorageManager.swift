@@ -155,25 +155,27 @@ class DataStorageManager: ObservableObject {
     }
 
     func getFriends() {
-        db.collection("users")
-            .whereField(FieldPath.documentID(), in: friendsAndSelfId)
-            .addSnapshotListener { querySnapshot, error in
-                guard let documents = querySnapshot?.documents else {
-                    print("Error fetching documents: \(error!)")
-                    return
-                }
-                let friends = documents.compactMap { document in
-                    do {
-                        let friend = try document.data(as: User.self)
-                        return friend
-                    } catch {
-                        print("Error reading friends: \(error)")
-                        return nil
+        if let friendsId = currentUser?.friendsId, friendsId.count > 0 {
+            db.collection("users")
+                .whereField(FieldPath.documentID(), in: friendsId)
+                .addSnapshotListener { querySnapshot, error in
+                    guard let documents = querySnapshot?.documents else {
+                        print("Error fetching documents: \(error!)")
+                        return
                     }
+                    let friends = documents.compactMap { document in
+                        do {
+                            let friend = try document.data(as: User.self)
+                            return friend
+                        } catch {
+                            print("Error reading friends: \(error)")
+                            return nil
+                        }
+                    }
+                    self.friends = friends
+                    self.getKnowledges()
                 }
-                self.friends = friends
-                self.getKnowledges()
-            }
+        }
     }
 
     func user(withId: String) -> User? {
@@ -270,6 +272,14 @@ class DataStorageManager: ObservableObject {
                     print("Error reading user: \(error)")
                 }
             }
+        }
+    }
+
+    func removeFriend(user: User) {
+        if let id = user.id {
+            db.collection("users").document(currentUserId).updateData([
+                "friendsId": FieldValue.arrayRemove([id]),
+            ])
         }
     }
 }

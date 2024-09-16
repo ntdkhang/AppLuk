@@ -14,16 +14,23 @@ class AddFriendViewModel: ObservableObject {
     @Published var requestsSent: [FriendRequest] = [] // array of IDs of users who the current user has sent a friend request
     @Published var requestsReceived: [FriendRequest] = [] // array of IDs of users who the current user has received a friend request from
 
+    @Published var requestedUsers: [User] = []
+
     init() {
         fetchFriendRequestsSent()
         fetchFriendRequestsReceived()
     }
 
+    
     @Published var searchText: String = "" {
         didSet {
             Task {
                 if searchText.count > 2 {
                     await queryUsers()
+                } else if searchText == "" {
+                    DispatchQueue.main.sync {
+                        searchResults = requestedUsers
+                    }
                 }
             }
         }
@@ -44,7 +51,7 @@ class AddFriendViewModel: ObservableObject {
                     let user = try document.data(as: User.self)
                     searchedUsers.append(user)
                 } catch {
-                    print("Error mapping to saved Knowledge: \(error)")
+                    print("Error mapping to searched user: \(error)")
                 }
             }
 
@@ -67,6 +74,20 @@ class AddFriendViewModel: ObservableObject {
         }
 
         return false
+    }
+
+    func didSendRequestTo(_ user: User) -> Bool {
+        guard let id = user.id else {
+            return false
+        }
+        return requestsSent.contains { $0.toId == id }
+    }
+
+    func didReceiveRequestFrom(_ user: User) -> Bool {
+        guard let id = user.id else {
+            return false
+        }
+        return requestsReceived.contains { $0.fromId == id }
     }
 
     func fetchFriendRequestsSent() {
@@ -92,14 +113,6 @@ class AddFriendViewModel: ObservableObject {
             }
     }
 
-    func didSendFriendRequestTo(userId: String) -> Bool {
-        return requestsSent.contains { $0.toId == userId }
-    }
-
-    func didReceiveFriendRequestFrom(userId: String) -> Bool {
-        return requestsReceived.contains { $0.fromId == userId }
-    }
-
     func fetchFriendRequestsReceived() {
         Firestore.firestore().collection("friendRequests")
             .whereField("toId", isEqualTo: DataStorageManager.shared.currentUserId)
@@ -120,6 +133,39 @@ class AddFriendViewModel: ObservableObject {
                 }
 
                 self.requestsReceived = requests
+                DispatchQueue.main.async {
+                    self.fetchUsersRequest()
+                }
             }
+    }
+
+    @MainActor
+    func fetchUsersRequest() {
+        let requestsFromUserIds = requestsReceived.compactMap { $0.fromId }
+        if requestsFromUserIds.count > 0 {
+            Firestore.firestore().collection("users")
+                .whereField(FieldPath.documentID(), in: requestsFromUserIds)
+                .addSnapshotListener { snapshot, error in
+                    guard let documents = snapshot?.documents else {
+                        print("Error fetching requested users: \(error!)")
+                        return
+                    }
+
+                    let users = documents.compactMap { document in
+                        do {
+                            let request = try document.data(as: User.self)
+                            return request
+                        } catch {
+                            print("Error reading request user: \(error)")
+                            return nil
+                        }
+                    }
+
+                    self.requestedUsers = users
+                    if self.searchText == "" {
+                        self.searchResults = self.requestedUsers
+                    }
+                }
+        }
     }
 }

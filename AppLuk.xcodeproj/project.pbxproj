@@ -71,6 +71,7 @@
 		42C6A8FA2C971D2000A28FAA /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8F92C971D2000A28FAA /* NotificationsManager.swift */; };
 		42C6A8FC2C972F6200A28FAA /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 42C6A8FB2C972F6200A28FAA /* FirebaseFunctions */; };
 		42C6A9002C974DD600A28FAA /* FriendRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8FF2C974DD600A28FAA /* FriendRequestsView.swift */; };
+		42C6A9022C97E3F400A28FAA /* FriendListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A9012C97E3F300A28FAA /* FriendListView.swift */; };
 		42EDD2BB2C78EEA800D99EDE /* AsyncCachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */; };
 /* End PBXBuildFile section */
 
@@ -151,6 +152,7 @@
 		42C6A8F12C8CDA0300A28FAA /* UpdateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileView.swift; sourceTree = "<group>"; };
 		42C6A8F92C971D2000A28FAA /* NotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
 		42C6A8FF2C974DD600A28FAA /* FriendRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestsView.swift; sourceTree = "<group>"; };
+		42C6A9012C97E3F300A28FAA /* FriendListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListView.swift; sourceTree = "<group>"; };
 		42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncCachedImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -301,6 +303,7 @@
 				427631662C67A812005BF2CA /* KnowledgeView.swift */,
 				42C6A8A12C80BD8100A28FAA /* SavedKnowledgeListView.swift */,
 				425307F32C7665C900CF16DA /* CommentsView.swift */,
+				42C6A9012C97E3F300A28FAA /* FriendListView.swift */,
 				4276316C2C6A506D005BF2CA /* CreateKnowledgeView.swift */,
 			);
 			path = Views;
@@ -466,6 +469,7 @@
 				42B598422C726B6800C37F66 /* KnowledgeViewModel.swift in Sources */,
 				42C6A8FA2C971D2000A28FAA /* NotificationsManager.swift in Sources */,
 				42C6A8A62C81067400A28FAA /* SearchKnowledgeView.swift in Sources */,
+				42C6A9022C97E3F400A28FAA /* FriendListView.swift in Sources */,
 				4212EDD02C56D9E400F30DD2 /* AppLukApp.swift in Sources */,
 				42C6A8F02C8B6DFD00A28FAA /* Image+.swift in Sources */,
 				4276316D2C6A506D005BF2CA /* CreateKnowledgeView.swift in Sources */,
