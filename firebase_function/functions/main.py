@@ -42,8 +42,8 @@ def addFriend(event: firestore_fn.Event[firestore_fn.DocumentSnapshot | None]) -
         myDoc = db.collection("users").document(fromId)
         myDoc.update({"friendsId": firestore.firestore.ArrayUnion([toId])})
 
-        batch = db.batch()
-        batch.delete(event.data.reference)
+        event.data.reference.delete()
+        docs.get()[0].reference.delete()
 
         # Send notification to say that user accepted your friend request
         if token.exists:
