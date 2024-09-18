@@ -153,11 +153,7 @@ class AddFriendViewModel: ObservableObject {
                     let users = documents.compactMap { document in
                         do {
                             let user = try document.data(as: User.self)
-                            if DataStorageManager.shared.friends.firstIndex(of: user) != nil {
-                                return user
-                            } else {
-                                return nil
-                            }
+                            return user
                         } catch {
                             print("Error reading request user: \(error)")
                             return nil
