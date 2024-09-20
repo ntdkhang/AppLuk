@@ -117,7 +117,7 @@ struct CommentView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .accessibilityElement(children: .combine)
 
-            Text(comment.text)
+            Text(LocalizedStringKey(comment.text))
                 .font(.com_regular)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
