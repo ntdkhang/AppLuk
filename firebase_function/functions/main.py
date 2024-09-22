@@ -9,6 +9,7 @@ from google.cloud.firestore_v1.base_query import FieldFilter
 
 
 app = firebase_admin.initialize_app()
+applink = "appluk://"
 
 
 @firestore_fn.on_document_created(document="friendRequests/{requestId}")
@@ -64,12 +65,13 @@ def addFriend(event: firestore_fn.Event[firestore_fn.DocumentSnapshot | None]) -
         if token.exists:
             token_dict = token.to_dict()
             if token_dict != None and fromUser != None:
+                link = applink + "friendRequest"
                 fcm_token = token_dict["token"]
                 notification = messaging.Notification(
                         title="New friend request",
                         body=f"{fromUser["name"]} sent a friend request",
                         )
-                msg = messaging.Message(token=fcm_token, notification=notification)
+                msg = messaging.Message(token=fcm_token, notification=notification, data = {"link": link})
                 messaging.send(msg)
 
 
@@ -98,12 +100,13 @@ def newCommentNoti(event: firestore_fn.Event[firestore_fn.DocumentSnapshot | Non
         if token.exists:
             token_dict = token.to_dict()
             if token_dict is not None and commenterId != knowledgeOnwerId and commenter is not None:
+                link = applink + "comment?knowledgeId=" + knowledgeId
                 fcm_token = token_dict["token"]
                 notification = messaging.Notification(
                         title="New comment",
                         body=f"{commenter["name"]} commented on your post",
                         )
-                msg = messaging.Message(token=fcm_token, notification=notification)
+                msg = messaging.Message(token=fcm_token, notification=notification, data = {"link": link})
                 messaging.send(msg)
 
         # Notify all users who commented on this post
@@ -116,12 +119,13 @@ def newCommentNoti(event: firestore_fn.Event[firestore_fn.DocumentSnapshot | Non
                 if token.exists:
                     token_dict = token.to_dict()
                     if token_dict is not None and commenter is not None:
+                        link = applink + "comment?knowledgeId=" + knowledgeId
                         fcm_token = token_dict["token"]
                         notification = messaging.Notification(
                                 title="New comment",
                                 body=f"{commenter["name"]} commented on a post you interacted with",
                                 )
-                        msg = messaging.Message(token=fcm_token, notification=notification)
+                        msg = messaging.Message(token=fcm_token, notification=notification, data = {"link": link})
                         messaging.send(msg)
 
 
