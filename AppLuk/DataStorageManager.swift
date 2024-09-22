@@ -196,9 +196,9 @@ class DataStorageManager: ObservableObject {
             })
         }
 
-        // TODO:
-        // Still cannot find, so get it from db by calling fetchUser()
-        // But will it get in an infinite recursive loop?
+        if user == nil {
+            fetchUser(withId: withId)
+        }
 
         return user
     }
@@ -257,8 +257,16 @@ class DataStorageManager: ObservableObject {
         ])
     }
 
+    private func isUserInCached(withId: String) -> Bool {
+        return usersCache.contains { user in
+            user.id == withId
+        }
+
+        return false
+    }
+
     func fetchUser(withId: String) {
-        if user(withId: withId) == nil {
+        if !isUserInCached(withId: withId) {
             db.collection("users").document(withId).getDocument { document, error in
                 guard let document = document else {
                     print("Error fetching user: \(error?.localizedDescription ?? "nil")")
@@ -281,6 +289,22 @@ class DataStorageManager: ObservableObject {
             db.collection("users").document(currentUserId).updateData([
                 "friendsId": FieldValue.arrayRemove([id]),
             ])
+        }
+    }
+
+    func fetchKnowledge(withId: String, completion: @escaping (Knowledge) -> Void) {
+        db.collection("knowledges").document(withId).getDocument { document, error in
+            guard let document = document else {
+                print("Error fetching knowledge: \(error?.localizedDescription ?? "nil")")
+                return
+            }
+
+            do {
+                let knowledge = try document.data(as: Knowledge.self)
+                completion(knowledge)
+            } catch {
+                print("Error reading knowledge: \(error)")
+            }
         }
     }
 }

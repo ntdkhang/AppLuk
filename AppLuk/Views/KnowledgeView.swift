@@ -9,6 +9,7 @@ import CachedAsyncImage
 import SwiftUI
 
 struct KnowledgeView: View {
+    @ObservedObject var dataStorageManager = DataStorageManager.shared
     var knowledge: Knowledge
     @Binding var showComments: Bool
     @Binding var currentKnowledge: Knowledge?
@@ -79,9 +80,30 @@ struct SaveAndReactView: View {
                         .foregroundColor(.white)
                 }
             }
-            .offset(y: -10)
+            // .offset(y: -10)
 
             Spacer()
+
+            // Button {
+            // } label: {
+            //     Image(systemName: "chevron.up")
+            //         .resizable()
+            //         .aspectRatio(contentMode: .fit)
+            //         .frame(width: 30)
+            // }
+            // .foregroundColor(.lightButton)
+            // .padding(.vertical)
+            //
+            // Button {
+            // } label: {
+            //     Image(systemName: "chevron.down")
+            //         .resizable()
+            //         .aspectRatio(contentMode: .fit)
+            //         .frame(width: 30)
+            // }
+            // .foregroundColor(.lightButton)
+            // .padding(.vertical)
+            // .padding(.horizontal, 8)
 
             // TODO: move show comment button somewhere else
             Button {
@@ -94,26 +116,6 @@ struct SaveAndReactView: View {
                     .frame(height: 40)
             }
             .foregroundColor(.white)
-
-            /*
-             Button {
-             } label: {
-                 Image(systemName: "arrow.up")
-                     .resizable()
-                     .aspectRatio(contentMode: .fit)
-                     .frame(width: 30)
-             }
-             .foregroundColor(.lightButton)
-
-             Button {
-             } label: {
-                 Image(systemName: "arrow.down")
-                     .resizable()
-                     .aspectRatio(contentMode: .fit)
-                     .frame(width: 30)
-             }
-             .foregroundColor(.lightButton)
-             */
         }
         .padding()
     }

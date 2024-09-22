@@ -41,6 +41,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     {
         return [.sound, .badge, .banner, .list]
     }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+        if let deeplink = response.notification.request.content.userInfo["link"] as? String {
+        }
+    }
 }
 
 extension AppDelegate: MessagingDelegate {
@@ -49,7 +54,7 @@ extension AppDelegate: MessagingDelegate {
     }
 
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        print("Firebase registration token: \(String(describing: fcmToken))")
+        // print("Firebase registration token: \(String(describing: fcmToken))")
         // DataStorageManager.shared.fcmToken = fcmToken ?? ""
         if let id = Auth.auth().getUserID() {
             let db = Firestore.firestore()
@@ -70,14 +75,19 @@ extension AppDelegate: MessagingDelegate {
 @main
 struct AppLukApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject var deeplinkVM = DeepLinkViewModel()
     var body: some Scene {
         WindowGroup {
             AuthenticatedView {
                 ContentView()
+                    .environmentObject(deeplinkVM)
                     .onAppear {
                         // UINavigationBar.appearance().barTintColor = .red
                         UIBarButtonItem.appearance().tintColor = .white
                         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Comfortaa", size: 16)!], for: .normal)
+                    }
+                    .onOpenURL {
+                        deeplinkVM.handleUrl($0)
                     }
             }
             .preferredColorScheme(.dark)
