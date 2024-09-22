@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct DeepLinkedKnowledgeView: View {
+    @ObservedObject var deepLinkVM: DeepLinkViewModel
+
     @State private var presentCreateView = false
-    @State private var showComments = false
-    @EnvironmentObject var deepLinkVM: DeepLinkViewModel
+    @State private var showComments = true
+    @ObservedObject private var dataStorageManager = DataStorageManager.shared
     // @State private var knowledgeId = ""
     var body: some View {
         NavigationStack {
@@ -24,7 +26,7 @@ struct DeepLinkedKnowledgeView: View {
             .ignoresSafeArea()
             // .onChange(of: currentKnowledge) {} // IDK why but if I remove this, it crashes when open comments. Maybe it needs to reload when the value of knowledgeId changed
             .sheet(isPresented: $showComments) {
-                CommentsView(commentsVM: CommentsViewModel(knowledge: deepLinkVM.knowledge ?? .empty))
+                CommentsView(commentsVM: CommentsViewModel(knowledgeId: deepLinkVM.knowledgeId))
             }
             .background(Color.background)
             .toolbar {
@@ -45,10 +47,6 @@ struct DeepLinkedKnowledgeView: View {
             }
         }
     }
-}
-
-#Preview {
-    DeepLinkedKnowledgeView()
 }
 
 /*

@@ -5,6 +5,7 @@
 //  Created by Khang Nguyen on 9/20/24.
 //
 
+import FirebaseFirestore
 import Foundation
 
 class DeepLinkViewModel: ObservableObject {
@@ -36,6 +37,25 @@ class DeepLinkViewModel: ObservableObject {
             self.knowledge = knowledge
         }
     }
+
+    // func fetchKnowledge(withId: String, completion: @escaping (Knowledge, Comment) -> Void) {
+    //     // let db =
+    //     let knowledgeRef = db.collection("knowledges").document(withId)
+    //     knowledgeRef.getDocument { document, error in
+    //         guard let document = document else {
+    //             print("Error fetching knowledge: \(error?.localizedDescription ?? "nil")")
+    //             return
+    //         }
+    //
+    //         do {
+    //             let knowledge = try document.data(as: Knowledge.self)
+    //             knowledgeRef.collection("comments")
+    //             completion(knowledge)
+    //         } catch {
+    //             print("Error reading knowledge: \(error)")
+    //         }
+    //     }
+    // }
 }
 
 enum DeepLinkTab: Hashable {

@@ -15,13 +15,15 @@ struct ContentView: View {
             NavigationStack {
                 HomeView()
             }
-            .toolbar(.hidden, for: .tabBar)
             .tag(DeepLinkTab.home)
+            .toolbar(.hidden, for: .tabBar)
 
-            DeepLinkedKnowledgeView()
-                .toolbar(.hidden, for: .tabBar)
+            DeepLinkedKnowledgeView(deepLinkVM: deeplinkVM)
+                // .environment(deeplinkVM)
                 .tag(DeepLinkTab.comment)
+                .toolbar(.hidden, for: .tabBar)
         }
+        .toolbar(.hidden, for: .tabBar)
         .background(Color.background)
     }
 }
