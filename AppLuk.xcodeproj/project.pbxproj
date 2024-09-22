@@ -74,6 +74,7 @@
 		42C6A9022C97E3F400A28FAA /* FriendListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A9012C97E3F300A28FAA /* FriendListView.swift */; };
 		42C6A9042C9E536C00A28FAA /* DeepLinkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A9032C9E536C00A28FAA /* DeepLinkViewModel.swift */; };
 		42C6A9062CA04EFA00A28FAA /* DeepLinkedKnowledgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A9052CA04EFA00A28FAA /* DeepLinkedKnowledgeView.swift */; };
+		42C6A9082CA0DF3C00A28FAA /* DeepLinkedAddFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A9072CA0DF3C00A28FAA /* DeepLinkedAddFriendView.swift */; };
 		42EDD2BB2C78EEA800D99EDE /* AsyncCachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */; };
 /* End PBXBuildFile section */
 
@@ -157,6 +158,7 @@
 		42C6A9012C97E3F300A28FAA /* FriendListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListView.swift; sourceTree = "<group>"; };
 		42C6A9032C9E536C00A28FAA /* DeepLinkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkViewModel.swift; sourceTree = "<group>"; };
 		42C6A9052CA04EFA00A28FAA /* DeepLinkedKnowledgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkedKnowledgeView.swift; sourceTree = "<group>"; };
+		42C6A9072CA0DF3C00A28FAA /* DeepLinkedAddFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkedAddFriendView.swift; sourceTree = "<group>"; };
 		42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncCachedImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -217,6 +219,7 @@
 				42B597CD2C6EEF7500C37F66 /* GoogleService-Info.plist */,
 				4212EDCF2C56D9E400F30DD2 /* AppLukApp.swift */,
 				42C6A9032C9E536C00A28FAA /* DeepLinkViewModel.swift */,
+				42C6A9072CA0DF3C00A28FAA /* DeepLinkedAddFriendView.swift */,
 				42C6A9052CA04EFA00A28FAA /* DeepLinkedKnowledgeView.swift */,
 				42C6A8F92C971D2000A28FAA /* NotificationsManager.swift */,
 				42C6A8E82C89102D00A28FAA /* Secrets.swift */,
@@ -474,6 +477,7 @@
 				42C6A9042C9E536C00A28FAA /* DeepLinkViewModel.swift in Sources */,
 				425307F22C76570300CF16DA /* Comment.swift in Sources */,
 				42B598422C726B6800C37F66 /* KnowledgeViewModel.swift in Sources */,
+				42C6A9082CA0DF3C00A28FAA /* DeepLinkedAddFriendView.swift in Sources */,
 				42C6A8FA2C971D2000A28FAA /* NotificationsManager.swift in Sources */,
 				42C6A8A62C81067400A28FAA /* SearchKnowledgeView.swift in Sources */,
 				42C6A9062CA04EFA00A28FAA /* DeepLinkedKnowledgeView.swift in Sources */,

@@ -9,19 +9,25 @@ import CachedAsyncImage
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var deeplinkVM: DeepLinkViewModel
+    @EnvironmentObject var deepLinkVM: DeepLinkViewModel
     var body: some View {
-        TabView(selection: $deeplinkVM.selectedTab) {
+        TabView(selection: $deepLinkVM.selectedTab) {
             NavigationStack {
                 HomeView()
             }
             .tag(DeepLinkTab.home)
             .toolbar(.hidden, for: .tabBar)
 
-            DeepLinkedKnowledgeView(deepLinkVM: deeplinkVM)
+            DeepLinkedKnowledgeView(deepLinkVM: deepLinkVM)
                 // .environment(deeplinkVM)
                 .tag(DeepLinkTab.comment)
                 .toolbar(.hidden, for: .tabBar)
+
+            NavigationStack {
+                DeepLinkedAddFriendView(deepLinkVM: deepLinkVM)
+            }
+            .tag(DeepLinkTab.friendRequest)
+            .toolbar(.hidden, for: .tabBar)
         }
         .toolbar(.hidden, for: .tabBar)
         .background(Color.background)

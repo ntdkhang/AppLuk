@@ -18,6 +18,10 @@ extension Font {
         Font.custom("Comfortaa", size: 15)
     }
 
+    static var com_back_button: Font {
+        Font.custom("Comfortaa", size: 16)
+    }
+
     static var com_caption: Font {
         Font.custom("Comfortaa", size: 13)
     }

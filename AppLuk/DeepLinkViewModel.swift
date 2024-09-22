@@ -21,22 +21,29 @@ class DeepLinkViewModel: ObservableObject {
             return
         }
 
-        guard let action = components.host, action == "comment" else {
+        guard let action = components.host else {
             print("Error: invalid url host")
             return
         }
 
-        guard let knowledgeId = components.queryItems?.first(where: { $0.name == "knowledgeId" })?.value else {
-            print("Error cannot retreive knowledgeId from URL: \(url)")
+        if action == "friendRequest" {
+            selectedTab = .friendRequest
             return
-        }
+        } else if action == "comment" {
+            guard let knowledgeId = components.queryItems?.first(where: { $0.name == "knowledgeId" })?.value else {
+                print("Error cannot retreive knowledgeId from URL: \(url)")
+                return
+            }
 
-        selectedTab = .comment
-        self.knowledgeId = knowledgeId
+            selectedTab = .comment
+            self.knowledgeId = knowledgeId
 
-        DataStorageManager.shared.fetchKnowledge(withId: self.knowledgeId) { knowledge in
-            self.knowledge = knowledge
-            self.showComments = true
+            DataStorageManager.shared.fetchKnowledge(withId: knowledgeId) { knowledge in
+                self.knowledge = knowledge
+                self.showComments = true
+            }
+        } else {
+            print("Error: invalid action")
         }
     }
 }
@@ -44,5 +51,5 @@ class DeepLinkViewModel: ObservableObject {
 enum DeepLinkTab: Hashable {
     case home
     case comment
-    case addFriend
+    case friendRequest
 }

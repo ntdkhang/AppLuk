@@ -38,7 +38,7 @@ struct DeepLinkedKnowledgeView: View {
                         HStack {
                             Image(systemName: "chevron.left")
                             Text("Back")
-                                .font(.com_subheadline)
+                                .font(.com_back_button)
                         }
                         .foregroundColor(.white)
                     }
