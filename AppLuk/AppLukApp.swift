@@ -12,6 +12,7 @@ import FirebaseMessaging
 import SwiftUI
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+    var app: AppLukApp?
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool
     {
@@ -43,7 +44,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
-        if let deeplink = response.notification.request.content.userInfo["link"] as? String {
+        if let deeplink = response.notification.request.content.userInfo["link"] as? String,
+           let url = URL(string: deeplink)
+        {
+            app?.deeplinkVM.handleUrl(url)
         }
     }
 }
@@ -83,6 +87,7 @@ struct AppLukApp: App {
                     .environmentObject(deeplinkVM)
                     .onAppear {
                         // UINavigationBar.appearance().barTintColor = .red
+                        delegate.app = self
                         UIBarButtonItem.appearance().tintColor = .white
                         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Comfortaa", size: 16)!], for: .normal)
                     }
