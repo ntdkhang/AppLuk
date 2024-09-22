@@ -11,22 +11,21 @@ struct DeepLinkedKnowledgeView: View {
     @ObservedObject var deepLinkVM: DeepLinkViewModel
 
     @State private var presentCreateView = false
-    @State private var showComments = true
     @ObservedObject private var dataStorageManager = DataStorageManager.shared
     // @State private var knowledgeId = ""
     var body: some View {
         NavigationStack {
             VStack {
                 if let knowledge = deepLinkVM.knowledge {
-                    KnowledgeView(knowledge: knowledge, showComments: $showComments, currentKnowledge: $deepLinkVM.knowledge)
+                    KnowledgeView(knowledge: knowledge, showComments: $deepLinkVM.showComments, currentKnowledge: $deepLinkVM.knowledge)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .containerRelativeFrame(.vertical)
                 }
             }
             .ignoresSafeArea()
             // .onChange(of: currentKnowledge) {} // IDK why but if I remove this, it crashes when open comments. Maybe it needs to reload when the value of knowledgeId changed
-            .sheet(isPresented: $showComments) {
-                CommentsView(commentsVM: CommentsViewModel(knowledgeId: deepLinkVM.knowledgeId))
+            .sheet(isPresented: $deepLinkVM.showComments) {
+                CommentsView(commentsVM: CommentsViewModel(knowledge: deepLinkVM.knowledge ?? .empty))
             }
             .background(Color.background)
             .toolbar {
@@ -48,7 +47,3 @@ struct DeepLinkedKnowledgeView: View {
         }
     }
 }
-
-/*
- appluk://comment?knowledgeId=1Akp7dDL2i6XlUpGpylL
- */

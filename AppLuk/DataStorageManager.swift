@@ -261,8 +261,6 @@ class DataStorageManager: ObservableObject {
         return usersCache.contains { user in
             user.id == withId
         }
-
-        return false
     }
 
     func fetchUser(withId: String) {

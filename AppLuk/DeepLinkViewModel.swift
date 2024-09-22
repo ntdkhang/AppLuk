@@ -12,6 +12,7 @@ class DeepLinkViewModel: ObservableObject {
     @Published var selectedTab: DeepLinkTab = .home
     @Published var knowledgeId: String = ""
     @Published var knowledge: Knowledge?
+    @Published var showComments = false
 
     func handleUrl(_ url: URL) {
         print("HandleUrl: \(url)")
@@ -35,6 +36,7 @@ class DeepLinkViewModel: ObservableObject {
 
         DataStorageManager.shared.fetchKnowledge(withId: self.knowledgeId) { knowledge in
             self.knowledge = knowledge
+            self.showComments = true
         }
     }
 }
