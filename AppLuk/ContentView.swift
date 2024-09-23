@@ -43,23 +43,27 @@ struct HomeView: View {
                 bottomTabView
             }
             .frame(maxHeight: .infinity, alignment: .bottom)
+            .padding(.bottom, 8)
             .ignoresSafeArea()
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    NavigationLink {
+                        SearchKnowledgeView()
+                    } label: {
+                        Image.magnifier
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 50)
+                            .foregroundColor(.white)
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+            }
         }
     }
 
     var bottomTabView: some View {
         HStack {
-            NavigationLink {
-                SearchKnowledgeView()
-            } label: {
-                Image.magnifier
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 60)
-                    .foregroundColor(.white)
-            }
-            .frame(maxWidth: .infinity)
-
             NavigationLink {
                 MainProfileView()
             } label: {
@@ -76,19 +80,19 @@ struct HomeView: View {
                 }
                 .frame(height: 40)
             }
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, alignment: .center)
 
-            NavigationLink {
-                Text("Work in progress")
-            } label: {
-                Image.giftHeart
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 60)
-                    .foregroundColor(.white)
-                    .offset(x: 0, y: -5)
-            }
-            .frame(maxWidth: .infinity)
+            // NavigationLink {
+            //     Text("Work in progress")
+            // } label: {
+            //     Image.giftHeart
+            //         .resizable()
+            //         .aspectRatio(contentMode: .fit)
+            //         .frame(height: 60)
+            //         .foregroundColor(.white)
+            //         .offset(x: 0, y: -5)
+            // }
+            // .frame(maxWidth: .infinity)
         }
         .background(Color.background)
         .padding(.bottom, 12)

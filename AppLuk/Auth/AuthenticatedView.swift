@@ -37,21 +37,21 @@ struct AuthenticatedView<Content, Unauthenticated>: View where Content: View, Un
         switch viewModel.authenticationState {
         case .unauthenticated, .authenticating:
             VStack {
-                if let unauthenticated {
-                    unauthenticated
-                } else {
-                    // TODO: Have logo app in here, while checking whether I'm logged in
-                    Text("You're not logged in.")
-                }
-                Button("Tap here to log in") {
-                    viewModel.reset()
-                    presentingLoginScreen.toggle()
-                }
-            }
-            .sheet(isPresented: $presentingLoginScreen) {
+                // if let unauthenticated {
+                //     unauthenticated
+                // } else {
+                //     // TODO: Have logo app in here, while checking whether I'm logged in
+                //     Text("You're not logged in.")
+                // }
+                // Button("Tap here to log in") {
+                //     viewModel.reset()
+                //     presentingLoginScreen.toggle()
+                // }
                 AuthenticationView()
                     .environmentObject(viewModel)
             }
+        // .sheet(isPresented: $presentingLoginScreen) {
+        // }
         case .authenticated:
             VStack {
                 content()

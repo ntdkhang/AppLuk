@@ -64,11 +64,11 @@ struct MainProfileView: View {
                     makeRow(iconName: "list.bullet.clipboard", text: "Saved posts")
                 }
 
-                NavigationLink {
-                    Text("Work in progress")
-                } label: {
-                    makeRow(iconName: "plus.square.dashed", text: "How to add Widget")
-                }
+                // NavigationLink {
+                //     Text("Work in progress")
+                // } label: {
+                //     makeRow(iconName: "plus.square.dashed", text: "How to add Widget")
+                // }
             }
             .listRowBackground(Color.gray.opacity(0.2))
 
@@ -88,17 +88,17 @@ struct MainProfileView: View {
             .listRowBackground(Color.gray.opacity(0.2))
 
             Section(header: Text("Privacy & Security").font(.com_caption)) {
-                NavigationLink {
-                    Text("Work in progress")
-                } label: {
-                    makeRow(iconName: "lock.shield", text: "Privacy policy")
-                }
-
-                NavigationLink {
-                    Text("Work in progress")
-                } label: {
-                    makeRow(iconName: "trash", text: "Delete your account")
-                }
+                // NavigationLink {
+                //     Text("Work in progress")
+                // } label: {
+                //     makeRow(iconName: "lock.shield", text: "Privacy policy")
+                // }
+                //
+                // NavigationLink {
+                //     Text("Work in progress")
+                // } label: {
+                //     makeRow(iconName: "trash", text: "Delete your account")
+                // }
 
                 Button {
                     do {

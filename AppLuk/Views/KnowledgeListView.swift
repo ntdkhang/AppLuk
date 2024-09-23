@@ -39,7 +39,7 @@ struct KnowledgeListView: View {
                 Button {
                     presentCreateView = true
                 } label: {
-                    Image("hut_bong")
+                    Image.createPen
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(height: 35)
