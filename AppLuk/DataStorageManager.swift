@@ -305,4 +305,17 @@ class DataStorageManager: ObservableObject {
             }
         }
     }
+
+    func signOut() {
+        friends = []
+        currentUser = nil
+        knowledges = []
+        savedKnowledges = [Knowledge]()
+        avatar = nil
+
+        usersCache = [User]()
+
+        currentUserId = ""
+        fcmToken = ""
+    }
 }

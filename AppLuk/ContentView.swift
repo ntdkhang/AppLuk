@@ -43,7 +43,7 @@ struct HomeView: View {
                 bottomTabView
             }
             .frame(maxHeight: .infinity, alignment: .bottom)
-            .padding(.bottom, 8)
+            .padding(.bottom, 12)
             .ignoresSafeArea()
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
