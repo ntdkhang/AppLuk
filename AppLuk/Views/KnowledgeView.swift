@@ -57,6 +57,7 @@ struct SaveAndReactView: View {
     let knowledge: Knowledge
     @Binding var showComments: Bool
     @Binding var currentKnowledge: Knowledge?
+    @State private var presentEditView: Bool = false
     var body: some View {
         HStack {
             Button {
@@ -80,7 +81,19 @@ struct SaveAndReactView: View {
                         .foregroundColor(.white)
                 }
             }
-            // .offset(y: -10)
+
+            if knowledge.isCurrentUserPosted {
+                NavigationLink {
+                    EditKnowledgeView(knowledge: knowledge, isPresented: $presentEditView)
+                } label: {
+                    Image(systemName: "rectangle.and.pencil.and.ellipsis")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 35)
+                        .foregroundColor(.white)
+                }
+                .padding(.horizontal, 8)
+            }
 
             Spacer()
 
@@ -123,7 +136,6 @@ struct SaveAndReactView: View {
 
 struct PostedByView: View {
     var knowledge: Knowledge
-    @State private var presentEditView: Bool = false
     var body: some View {
         HStack {
             VStack {
@@ -150,15 +162,7 @@ struct PostedByView: View {
                 }
             }
             .accessibilityElement(children: .combine)
-            .frame(width: .infinity, alignment: .center)
-
-            if knowledge.isCurrentUserPosted {
-                NavigationLink {
-                    EditKnowledgeView(knowledge: knowledge, isPresented: $presentEditView)
-                } label: {
-                    Text("Edit")
-                }
-            }
+            .frame(maxWidth: .infinity, alignment: .center)
         }
     }
 }
