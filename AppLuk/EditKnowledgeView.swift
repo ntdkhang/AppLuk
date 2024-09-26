@@ -10,41 +10,42 @@ import SwiftUI
 
 struct EditKnowledgeView: View {
     @StateObject var knowledgeVM: EditKnowledgeViewModel
+    @State var disablePostButton = false
     @Environment(\.dismiss) private var dismiss
-    @Binding var isPresented: Bool
+    // @Binding var isPresented: Bool
     let tags = ["Health", "Psychology", "Philosophy", "Science", "Math", "Life", "Relationship"]
 
     init(knowledge: Knowledge, isPresented: Binding<Bool>) {
         _knowledgeVM = StateObject(wrappedValue: EditKnowledgeViewModel(knowledge: knowledge))
-        _isPresented = isPresented
+        // _isPresented = isPresented
     }
 
     var body: some View {
         VStack {
-            EditImageCarouselView(knowledgeVM: knowledgeVM)
-                .frame(maxWidth: .infinity)
-        }
-        .navigationBarBackButtonHidden(true)
-        .frame(maxHeight: .infinity, alignment: .top)
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    Text("Cancel")
-                        .font(.com_subheadline)
-                        .foregroundColor(.white)
-                }
-            }
+            ScrollView {
+                EditImageCarouselView(knowledgeVM: knowledgeVM)
 
+                TextField("Your knowledge title here", text: $knowledgeVM.title)
+                    .font(.com_title2)
+                    .padding()
+            }
+        }
+        // .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink {
-                    EditTitleView(knowledgeVM: knowledgeVM, isPresented: $isPresented)
+                Button {
+                    // prevent double clicking and posting twice
+                    disablePostButton = true
+                    knowledgeVM.edit {
+                        dismiss()
+                    }
                 } label: {
-                    Text("Next")
+                    Text("Edit")
                         .font(.com_subheadline)
-                        .foregroundColor(.white)
+                        .foregroundColor(disablePostButton ? .gray : .white)
                 }
+                .disabled(disablePostButton)
             }
         }
         .simultaneousGesture(
@@ -57,51 +58,6 @@ struct EditKnowledgeView: View {
                 )
             }
         )
-        .background(
-            Color.background
-        )
-    }
-}
-
-struct EditTitleView: View {
-    @ObservedObject var knowledgeVM: EditKnowledgeViewModel
-    @Binding var isPresented: Bool
-    @Environment(\.dismiss) private var dismiss
-    @State var disablePostButton = false
-
-    let items = Knowledge.tags
-
-    var body: some View {
-        VStack {
-            TextField("Your knowledge title here", text: $knowledgeVM.title)
-                .font(.com_title2)
-                .padding()
-            List(items, id: \.self, selection: $knowledgeVM.tagsSelection) {
-                Text("\($0)")
-                    .font(.com_regular)
-                    .listRowBackground(Color.background)
-            }
-            .listStyle(.plain)
-            .scrollContentBackground(.hidden)
-            .environment(\.editMode, .constant(EditMode.active))
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    // prevent double clicking and posting twice
-                    disablePostButton = true
-                    knowledgeVM.create {
-                        isPresented = false
-                    }
-                } label: {
-                    Text("Post")
-                        .font(.com_subheadline)
-                        .foregroundColor(disablePostButton ? .gray : .white)
-                }
-                .disabled(disablePostButton)
-            }
-        }
         .background(
             Color.background
         )

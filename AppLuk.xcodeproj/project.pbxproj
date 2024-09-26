@@ -52,7 +52,6 @@
 		42C6A8C52C835E4000A28FAA /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A8C42C835E4000A28FAA /* AppIntent.swift */; };
 		42C6A8C72C835E4300A28FAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C6A8C62C835E4300A28FAA /* Assets.xcassets */; };
 		42C6A8CB2C835E4300A28FAA /* AppLukWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 42C6A8BA2C835E4000A28FAA /* AppLukWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		42C6A8D12C83636800A28FAA /* Knowledge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428AAAC42C5D3259006B6647 /* Knowledge.swift */; };
 		42C6A8D32C8365B200A28FAA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 42C6A8D22C8365B200A28FAA /* FirebaseAuth */; };
 		42C6A8D52C8365B200A28FAA /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 42C6A8D42C8365B200A28FAA /* FirebaseFirestore */; };
 		42C6A8D62C83776700A28FAA /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B598472C73927500C37F66 /* Color+.swift */; };
@@ -77,6 +76,7 @@
 		42C6A9082CA0DF3C00A28FAA /* DeepLinkedAddFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A9072CA0DF3C00A28FAA /* DeepLinkedAddFriendView.swift */; };
 		42C6A90A2CA4B0F500A28FAA /* EditKnowledgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A9092CA4B0F400A28FAA /* EditKnowledgeView.swift */; };
 		42C6A90C2CA4D16D00A28FAA /* EditKnowledgeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A90B2CA4D16C00A28FAA /* EditKnowledgeViewModel.swift */; };
+		42C6A9102CA4E19900A28FAA /* Knowledge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A90E2CA4E17E00A28FAA /* Knowledge.swift */; };
 		42EDD2BB2C78EEA800D99EDE /* AsyncCachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */; };
 /* End PBXBuildFile section */
 
@@ -163,6 +163,7 @@
 		42C6A9072CA0DF3C00A28FAA /* DeepLinkedAddFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkedAddFriendView.swift; sourceTree = "<group>"; };
 		42C6A9092CA4B0F400A28FAA /* EditKnowledgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditKnowledgeView.swift; sourceTree = "<group>"; };
 		42C6A90B2CA4D16C00A28FAA /* EditKnowledgeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditKnowledgeViewModel.swift; sourceTree = "<group>"; };
+		42C6A90E2CA4E17E00A28FAA /* Knowledge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Knowledge.swift; sourceTree = "<group>"; };
 		42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncCachedImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -284,6 +285,7 @@
 			children = (
 				42C6A8C02C835E4000A28FAA /* AppLukWidgetBundle.swift */,
 				42C6A8EB2C89F3CC00A28FAA /* WidgetDataManager.swift */,
+				42C6A90E2CA4E17E00A28FAA /* Knowledge.swift */,
 				42C6A8C22C835E4000A28FAA /* AppLukWidget.swift */,
 				42C6A8C42C835E4000A28FAA /* AppIntent.swift */,
 				42C6A8C62C835E4300A28FAA /* Assets.xcassets */,
@@ -526,10 +528,10 @@
 				42C6A8C32C835E4000A28FAA /* AppLukWidget.swift in Sources */,
 				42C6A8DB2C8377C100A28FAA /* Font+.swift in Sources */,
 				42C6A8EA2C89109400A28FAA /* Secrets.swift in Sources */,
+				42C6A9102CA4E19900A28FAA /* Knowledge.swift in Sources */,
 				42C6A8D62C83776700A28FAA /* Color+.swift in Sources */,
 				42C6A8C12C835E4000A28FAA /* AppLukWidgetBundle.swift in Sources */,
 				42C6A8C52C835E4000A28FAA /* AppIntent.swift in Sources */,
-				42C6A8D12C83636800A28FAA /* Knowledge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -123,30 +123,43 @@ struct SaveAndReactView: View {
 
 struct PostedByView: View {
     var knowledge: Knowledge
+    @State private var presentEditView: Bool = false
     var body: some View {
-        VStack {
-            CachedAsyncImage(url: DataStorageManager.shared.getFriendAvatarUrl(withId: knowledge.postedById)) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .clipShape(Circle())
-            } placeholder: {
-                Color.gray
-                    .aspectRatio(contentMode: .fit)
-                    .clipShape(Circle())
-                // .frame(width: 40)
-            }
-            .frame(width: 40, height: 40)
-            .accessibilityLabel("Avatar")
-            HStack(alignment: .firstTextBaseline) {
-                Text(DataStorageManager.shared.getFriendName(withId: knowledge.postedById))
-                    .font(.com_title3)
+        HStack {
+            VStack {
+                CachedAsyncImage(url: DataStorageManager.shared.getFriendAvatarUrl(withId: knowledge.postedById)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .clipShape(Circle())
+                } placeholder: {
+                    Color.gray
+                        .aspectRatio(contentMode: .fit)
+                        .clipShape(Circle())
+                    // .frame(width: 40)
+                }
+                .frame(width: 40, height: 40)
+                .accessibilityLabel("Avatar")
 
-                Text(knowledge.relativeTimeString)
-                    .font(.com_subheadline)
+                HStack(alignment: .firstTextBaseline) {
+                    Text(DataStorageManager.shared.getFriendName(withId: knowledge.postedById))
+                        .font(.com_title3)
+
+                    Text(knowledge.relativeTimeString)
+                        .font(.com_subheadline)
+                }
+            }
+            .accessibilityElement(children: .combine)
+            .frame(width: .infinity, alignment: .center)
+
+            if knowledge.isCurrentUserPosted {
+                NavigationLink {
+                    EditKnowledgeView(knowledge: knowledge, isPresented: $presentEditView)
+                } label: {
+                    Text("Edit")
+                }
             }
         }
-        .accessibilityElement(children: .combine)
     }
 }
 

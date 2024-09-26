@@ -37,11 +37,10 @@ class EditKnowledgeViewModel: ObservableObject {
         contentPages.count
     }
 
-    func create(completion: @escaping () -> Void) {
+    func edit(completion: @escaping () -> Void) {
         let db = Firestore.firestore()
 
-        let knowledgeRef = db.collection("knowledges").document()
-        // let knowledgeId = knowledgeRef.documentID
+        let knowledgeRef = db.collection("knowledges").document(knowledge.id ?? "")
 
         // post to database
         knowledgeRef.updateData([

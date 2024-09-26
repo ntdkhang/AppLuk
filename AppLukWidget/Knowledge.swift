@@ -2,7 +2,7 @@
 //  Knowledge.swift
 //  AppLuk
 //
-//  Created by Khang Nguyen on 8/2/24.
+//  Created by Khang Nguyen on 9/25/24.
 //
 
 import FirebaseFirestore
@@ -55,10 +55,6 @@ struct Knowledge: Codable, Identifiable, Equatable {
             temp.append(nil)
             return temp
         }
-    }
-
-    var isCurrentUserPosted: Bool {
-        return postedById == DataStorageManager.shared.currentUserId
     }
 
     static var tags: [String] {
