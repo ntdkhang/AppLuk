@@ -75,6 +75,8 @@
 		42C6A9042C9E536C00A28FAA /* DeepLinkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A9032C9E536C00A28FAA /* DeepLinkViewModel.swift */; };
 		42C6A9062CA04EFA00A28FAA /* DeepLinkedKnowledgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A9052CA04EFA00A28FAA /* DeepLinkedKnowledgeView.swift */; };
 		42C6A9082CA0DF3C00A28FAA /* DeepLinkedAddFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A9072CA0DF3C00A28FAA /* DeepLinkedAddFriendView.swift */; };
+		42C6A90A2CA4B0F500A28FAA /* EditKnowledgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A9092CA4B0F400A28FAA /* EditKnowledgeView.swift */; };
+		42C6A90C2CA4D16D00A28FAA /* EditKnowledgeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A90B2CA4D16C00A28FAA /* EditKnowledgeViewModel.swift */; };
 		42EDD2BB2C78EEA800D99EDE /* AsyncCachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */; };
 /* End PBXBuildFile section */
 
@@ -159,6 +161,8 @@
 		42C6A9032C9E536C00A28FAA /* DeepLinkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkViewModel.swift; sourceTree = "<group>"; };
 		42C6A9052CA04EFA00A28FAA /* DeepLinkedKnowledgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkedKnowledgeView.swift; sourceTree = "<group>"; };
 		42C6A9072CA0DF3C00A28FAA /* DeepLinkedAddFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkedAddFriendView.swift; sourceTree = "<group>"; };
+		42C6A9092CA4B0F400A28FAA /* EditKnowledgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditKnowledgeView.swift; sourceTree = "<group>"; };
+		42C6A90B2CA4D16C00A28FAA /* EditKnowledgeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditKnowledgeViewModel.swift; sourceTree = "<group>"; };
 		42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncCachedImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -232,6 +236,8 @@
 				42B598122C6FC92600C37F66 /* Auth */,
 				42B597832C6D828400C37F66 /* Posts */,
 				4212EDD32C56D9E500F30DD2 /* Assets.xcassets */,
+				42C6A9092CA4B0F400A28FAA /* EditKnowledgeView.swift */,
+				42C6A90B2CA4D16C00A28FAA /* EditKnowledgeViewModel.swift */,
 				4212EDD52C56D9E600F30DD2 /* Preview Content */,
 			);
 			path = AppLuk;
@@ -483,6 +489,7 @@
 				42C6A9062CA04EFA00A28FAA /* DeepLinkedKnowledgeView.swift in Sources */,
 				42C6A9022C97E3F400A28FAA /* FriendListView.swift in Sources */,
 				4212EDD02C56D9E400F30DD2 /* AppLukApp.swift in Sources */,
+				42C6A90A2CA4B0F500A28FAA /* EditKnowledgeView.swift in Sources */,
 				42C6A8F02C8B6DFD00A28FAA /* Image+.swift in Sources */,
 				4276316D2C6A506D005BF2CA /* CreateKnowledgeView.swift in Sources */,
 				42C6A8AA2C8162A900A28FAA /* SearchView.swift in Sources */,
@@ -498,6 +505,7 @@
 				428AAAC52C5D3259006B6647 /* Knowledge.swift in Sources */,
 				425307F02C7656B000CF16DA /* CommentsViewModel.swift in Sources */,
 				42B598342C70482900C37F66 /* DataStorageManager.swift in Sources */,
+				42C6A90C2CA4D16D00A28FAA /* EditKnowledgeViewModel.swift in Sources */,
 				42B5981C2C6FC93200C37F66 /* AuthenticationView.swift in Sources */,
 				42B598092C6F7FE200C37F66 /* User.swift in Sources */,
 				42C6A8B52C828F8100A28FAA /* Font+.swift in Sources */,
