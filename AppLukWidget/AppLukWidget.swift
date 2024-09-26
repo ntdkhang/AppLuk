@@ -12,11 +12,11 @@ import WidgetKit
 
 struct Provider: AppIntentTimelineProvider {
     func placeholder(in _: Context) -> KnowledgeEntry {
-        KnowledgeEntry(date: .now, knowledge: Knowledge(postedById: "", title: "", contentPages: [], imageUrls: []))
+        KnowledgeEntry(date: .now, knowledge: WidgetKnowledge(postedById: "", title: "", contentPages: [], imageUrls: []))
     }
 
     func snapshot(for _: ConfigurationAppIntent, in _: Context) async -> KnowledgeEntry {
-        KnowledgeEntry(date: .now, knowledge: Knowledge(postedById: "", title: "", contentPages: [], imageUrls: []))
+        KnowledgeEntry(date: .now, knowledge: WidgetKnowledge(postedById: "", title: "", contentPages: [], imageUrls: []))
     }
 
     func timeline(for _: ConfigurationAppIntent, in _: Context) async -> Timeline<KnowledgeEntry> {
@@ -25,52 +25,68 @@ struct Provider: AppIntentTimelineProvider {
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
         let nextUpdate = Calendar.current.date(byAdding: .minute, value: 1, to: currentDate)!
+        let friendsId = await fetchFriendsId(userId: Auth.auth().currentUser?.uid)
+        let knowledge = await fetchKnowledge(friendsId: friendsId)
+        var uiImage: UIImage?
+        if let urlString = knowledge?.imageUrls.first ?? nil {
+            uiImage = await downloadImage(from: urlString)
+        }
 
-        let imageUrl = "https://firebasestorage.googleapis.com:443/v0/b/blessed-by-knowledge-33707.appspot.com/o/knowledge_images%2Fu7qvNbXhU4cCCuUfY0fe0?alt=media&token=57339dac-df39-45fc-a91a-f07acfd8ff55"
-        let knowledge = Knowledge(postedById: "", title: Auth.auth().currentUser?.uid ?? "nil", contentPages: [
-            "\(Auth.auth().currentUser?.uid ?? "nil")"], imageUrls:
-        [imageUrl])
-
-        let entry = KnowledgeEntry(date: currentDate, knowledge: knowledge)
+        let entry = KnowledgeEntry(date: currentDate, knowledge: knowledge, uiImage: uiImage ?? UIImage(named: "aussie")!)
         entries.append(entry)
-
-//        fetchKnowledge { knowledge in
-//            let entry = KnowledgeEntry(date: currentDate, knowledge: knowledge)
-//
-//            entries.append(entry)
-//        }
 
         return Timeline(entries: entries, policy: .after(nextUpdate))
     }
 
-//    func fetchKnowledge(completion: @escaping (Knowledge) -> Void) {
-//        Firestore.firestore().collection("knowledges")
-//            .whereField("postedById", in: ["0KBb2kjXOkVQtpxUjkXg2Ss4aZA2"])
-//            .order(by: "timePosted", descending: true)
-//            .getDocuments(completion: { querySnapshot, error in
-//                guard let documents = querySnapshot?.documents else {
-//                    print("Error fetching knowledges: \(error!)")
-//                    return
-//                }
-//                do {
-//                    let knowledge = try documents.first?.data(as: Knowledge.self)
-//                    completion(knowledge!)
-//                } catch {
-//                    print("Error reading knowledge for widget: \(error)")
-//                    return
-//                }
-//            })
-//    }
+    func downloadImage(from urlString: String) async -> UIImage? {
+        guard let url = URL(string: urlString) else { return nil }
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+        } catch {
+            print("Error downloading Image for widget: \(error)")
+            return nil
+        }
+    }
+
+    func fetchKnowledge(friendsId: [String]) async -> WidgetKnowledge? {
+        do {
+            if friendsId.isEmpty { return nil }
+            let querySnapshot = try await Firestore.firestore().collection("knowledges")
+                .whereField("postedById", in: friendsId)
+                .order(by: "timePosted", descending: true)
+                .getDocuments()
+
+            guard let document = querySnapshot.documents.first else { return nil }
+            let knowledge = try document.data(as: WidgetKnowledge.self)
+            return knowledge
+        } catch {
+            print("Error reading knowledge for widget: \(error)")
+            return nil
+        }
+    }
+
+    func fetchFriendsId(userId: String?) async -> [String] {
+        guard let userId = userId else { return [] }
+        let docRef = Firestore.firestore().collection("users").document(userId)
+        do {
+            let user = try await docRef.getDocument(as: WidgetUser.self)
+            return user.friendsId
+        } catch {
+            print("Error reading user for widget: \(error)")
+            return []
+        }
+    }
 }
 
 struct KnowledgeEntry: TimelineEntry {
     let date: Date
-    let knowledge: Knowledge
+    let knowledge: WidgetKnowledge?
+    let uiImage: UIImage
 }
 
 struct AppLukWidgetEntryView: View {
-    var imageUrl: String?
-    var pageContent: String
+    var knowledge: WidgetKnowledge?
+    var uiImage: UIImage
 
     var body: some View {
         VStack {
@@ -89,15 +105,25 @@ struct AppLukWidgetEntryView: View {
             .aspectRatio(1.0, contentMode: .fit)
             .clipShape(RoundedRectangle(cornerRadius: 20))
 
-            Text("Title")
+            Text(knowledge?.title ?? "")
+                .font(.com_regular)
+                .lineLimit(1)
         }
+    }
+
+    var pageContent: String {
+        if let knowledge = knowledge, let content = knowledge.contentPages.first {
+            return content
+        }
+
+        return ""
     }
 
     var clippedImage: some View {
         Color.clear
             .aspectRatio(1.0, contentMode: .fit)
             .overlay(
-                Image("aussie")
+                Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFill()
             )
@@ -111,7 +137,7 @@ struct AppLukWidget: Widget {
 
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
-            AppLukWidgetEntryView(imageUrl: entry.knowledge.imageUrls.first ?? "", pageContent: entry.knowledge.contentPages.first ?? "")
+            AppLukWidgetEntryView(knowledge: entry.knowledge, uiImage: entry.uiImage)
                 .containerBackground(.fill.tertiary, for: .widget)
         }
         .supportedFamilies([.systemLarge])

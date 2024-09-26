@@ -1,5 +1,5 @@
 //
-//  Knowledge.swift
+//  WidgetKnowledge.swift
 //  AppLuk
 //
 //  Created by Khang Nguyen on 9/25/24.
@@ -8,7 +8,7 @@
 import FirebaseFirestore
 import Foundation
 
-struct Knowledge: Codable, Identifiable, Equatable {
+struct WidgetKnowledge: Codable, Identifiable, Equatable {
     @DocumentID var id: String?
     var timePosted: Date = .now
     var postedById: String
@@ -57,37 +57,7 @@ struct Knowledge: Codable, Identifiable, Equatable {
         }
     }
 
-    static var tags: [String] {
-        return [
-            "Mental",
-            "Spiritual",
-            "Art",
-            "Social",
-            "Toolset",
-            "Skillset",
-            "Mindset",
-            "Mindfulness",
-            "Book",
-            "Fact",
-            "ScientificResearch",
-            "Course",
-            "Survival",
-            "Tips",
-            "Cooking",
-            "Handcraft",
-            "Language",
-            "Human",
-            "Healthcare",
-            "Influencer",
-            "Beautycare",
-            "Sport",
-            "SoftSkills",
-            "Others",
-        ]
-        .sorted()
-    }
-
-    static var empty: Knowledge {
-        return Knowledge(postedById: "0KBb2kjXOkVQtpxUjkXg2Ss4aZA2", title: "you're not supposed to see this", contentPages: [""], imageUrls: [])
+    static var empty: WidgetKnowledge {
+        return WidgetKnowledge(postedById: "0KBb2kjXOkVQtpxUjkXg2Ss4aZA2", title: "you're not supposed to see this", contentPages: [""], imageUrls: [])
     }
 }
