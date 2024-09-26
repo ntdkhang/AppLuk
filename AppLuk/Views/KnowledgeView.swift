@@ -198,6 +198,7 @@ struct ImageCarouselView: View {
 struct PageView: View {
     var imageUrl: String?
     var pageContent: String
+    @State var textBlurOpacity: Double = 1.0
 
     var body: some View {
         ZStack {
@@ -207,6 +208,8 @@ struct PageView: View {
                 .fill(
                     Color.imageBlur.gradient.shadow(.inner(color: .black, radius: 10))
                 )
+                .opacity(textBlurOpacity)
+
             ScrollView(.vertical) {
                 Text(LocalizedStringKey(pageContent))
                     .font(.com_regular)
@@ -215,9 +218,22 @@ struct PageView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     .padding(16)
             }
+            .opacity(textBlurOpacity)
         }
         .aspectRatio(1.0, contentMode: .fit)
-        // .clipShape(RoundedRectangle(cornerRadius: 30))
+        .onTapGesture {
+            if imageUrl != nil {
+                if textBlurOpacity == 0.0 {
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        textBlurOpacity = 1.0
+                    }
+                } else {
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        textBlurOpacity = 0.0
+                    }
+                }
+            }
+        }
     }
 
     var clippedImage: some View {
