@@ -27,12 +27,12 @@ struct Provider: AppIntentTimelineProvider {
         let nextUpdate = Calendar.current.date(byAdding: .minute, value: 1, to: currentDate)!
         let friendsId = await fetchFriendsId(userId: Auth.auth().currentUser?.uid)
         let knowledge = await fetchKnowledge(friendsId: friendsId)
-        var uiImage: UIImage?
+        var uiImage: UIImage? = nil
         if let urlString = knowledge?.imageUrls.first ?? nil {
             uiImage = await downloadImage(from: urlString)
         }
 
-        let entry = KnowledgeEntry(date: currentDate, knowledge: knowledge, uiImage: uiImage ?? UIImage(named: "aussie")!)
+        let entry = KnowledgeEntry(date: currentDate, knowledge: knowledge, uiImage: uiImage)
         entries.append(entry)
 
         return Timeline(entries: entries, policy: .after(nextUpdate))
@@ -42,6 +42,7 @@ struct Provider: AppIntentTimelineProvider {
         guard let url = URL(string: urlString) else { return nil }
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
+            return UIImage(data: data)
         } catch {
             print("Error downloading Image for widget: \(error)")
             return nil
@@ -79,14 +80,14 @@ struct Provider: AppIntentTimelineProvider {
 }
 
 struct KnowledgeEntry: TimelineEntry {
-    let date: Date
-    let knowledge: WidgetKnowledge?
-    let uiImage: UIImage
+    var date: Date
+    var knowledge: WidgetKnowledge?
+    var uiImage: UIImage?
 }
 
 struct AppLukWidgetEntryView: View {
     var knowledge: WidgetKnowledge?
-    var uiImage: UIImage
+    var uiImage: UIImage?
 
     var body: some View {
         VStack {
@@ -108,6 +109,7 @@ struct AppLukWidgetEntryView: View {
             Text(knowledge?.title ?? "")
                 .font(.com_regular)
                 .lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 
@@ -123,12 +125,21 @@ struct AppLukWidgetEntryView: View {
         Color.clear
             .aspectRatio(1.0, contentMode: .fit)
             .overlay(
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFill()
+                backgroundImage
             )
             .clipped()
         // .clipShape(RoundedRectangle(cornerRadius: 30))
+    }
+
+    @ViewBuilder
+    var backgroundImage: some View {
+        if let uiImage = uiImage {
+            Image(uiImage: uiImage.resized())
+                .resizable()
+                .scaledToFill()
+        } else {
+            Color.gray
+        }
     }
 }
 

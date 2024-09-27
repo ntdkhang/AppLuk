@@ -79,6 +79,7 @@
 		42C6A9102CA4E19900A28FAA /* WidgetKnowledge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6A90E2CA4E17E00A28FAA /* WidgetKnowledge.swift */; };
 		42EDD2BB2C78EEA800D99EDE /* AsyncCachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */; };
 		42FA36692CA604DF00CB8A14 /* WidgetUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FA36682CA604DF00CB8A14 /* WidgetUser.swift */; };
+		42FA366B2CA6578300CB8A14 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FA366A2CA6578300CB8A14 /* UIImage+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +168,7 @@
 		42C6A90E2CA4E17E00A28FAA /* WidgetKnowledge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetKnowledge.swift; sourceTree = "<group>"; };
 		42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncCachedImage.swift; sourceTree = "<group>"; };
 		42FA36682CA604DF00CB8A14 /* WidgetUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetUser.swift; sourceTree = "<group>"; };
+		42FA366A2CA6578300CB8A14 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,6 +293,7 @@
 				42FA36682CA604DF00CB8A14 /* WidgetUser.swift */,
 				42C6A8C22C835E4000A28FAA /* AppLukWidget.swift */,
 				42C6A8C42C835E4000A28FAA /* AppIntent.swift */,
+				42FA366A2CA6578300CB8A14 /* UIImage+.swift */,
 				42C6A8C62C835E4300A28FAA /* Assets.xcassets */,
 				42C6A8C82C835E4300A28FAA /* Info.plist */,
 			);
@@ -534,6 +537,7 @@
 				42C6A9102CA4E19900A28FAA /* WidgetKnowledge.swift in Sources */,
 				42C6A8D62C83776700A28FAA /* Color+.swift in Sources */,
 				42C6A8C12C835E4000A28FAA /* AppLukWidgetBundle.swift in Sources */,
+				42FA366B2CA6578300CB8A14 /* UIImage+.swift in Sources */,
 				42FA36692CA604DF00CB8A14 /* WidgetUser.swift in Sources */,
 				42C6A8C52C835E4000A28FAA /* AppIntent.swift in Sources */,
 			);
