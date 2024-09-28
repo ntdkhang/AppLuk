@@ -10,4 +10,5 @@ import Foundation
 
 class WidgetDataManager: ObservableObject {
     @Published var knowledge: Knowledge = .empty
+    var currentUserId: String = "" // this ID is set from the Auth UID
 }

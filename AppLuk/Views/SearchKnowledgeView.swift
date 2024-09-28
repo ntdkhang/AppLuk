@@ -13,6 +13,7 @@ struct SearchKnowledgeView: View {
     @State private var showComments = false
     // @State private var knowledgeId = ""
     @State private var currentKnowledge: Knowledge? = Knowledge.empty
+    @State private var searchString = ""
     let tags = Knowledge.tags
     var body: some View {
         VStack {
@@ -24,6 +25,7 @@ struct SearchKnowledgeView: View {
                             .containerRelativeFrame(.vertical)
                     }
                 }
+                .padding(.top, 32)
             }
             .ignoresSafeArea()
             .scrollTargetLayout()
@@ -34,13 +36,11 @@ struct SearchKnowledgeView: View {
                 CommentsView(commentsVM: CommentsViewModel(knowledge: self.currentKnowledge ?? .empty))
             }
         }
+        .searchable(text: $searchString)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
             Color.background
         )
-        .onAppear {
-            knowledgeVM.selectedTag = tags[0]
-        }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Menu {
@@ -54,10 +54,25 @@ struct SearchKnowledgeView: View {
                         }
                     }
                 } label: {
-                    Text(knowledgeVM.selectedTag)
-                        .font(.com_regular)
-                        .foregroundColor(.lightButton)
+                    if knowledgeVM.selectedTag == "" {
+                        Text("Filter Tag")
+                            .font(.com_regular)
+                            .foregroundColor(.lightButton)
+                    } else {
+                        Text(knowledgeVM.selectedTag)
+                            .font(.com_regular)
+                            .foregroundColor(.lightButton)
+                    }
                 }
+
+                // Picker("Choose Tag", selection: $knowledgeVM.selectedTag) {
+                //     ForEach(tags, id: \.self) { tag in
+                //         Text(tag)
+                //             .tag(tag)
+                //             .font(.com_subheadline)
+                //             .foregroundColor(.white)
+                //     }
+                // }
             }
         }
     }

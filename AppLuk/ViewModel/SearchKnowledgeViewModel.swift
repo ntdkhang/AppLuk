@@ -10,7 +10,7 @@ import SwiftUI
 
 class SearchKnowledgeViewModel: ObservableObject {
     @Published var knowledges: [Knowledge]
-    @Published var selectedTag: String = "Health" {
+    @Published var selectedTag: String = "" {
         didSet {
             Task {
                 await queryKnowledges()
