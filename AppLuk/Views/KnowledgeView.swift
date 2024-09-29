@@ -136,6 +136,9 @@ struct SaveAndReactView: View {
 
 struct PostedByView: View {
     var knowledge: Knowledge
+    let timer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
+    @State var timeSincePosted = "1m"
+
     var body: some View {
         HStack {
             VStack {
@@ -157,12 +160,18 @@ struct PostedByView: View {
                     Text(DataStorageManager.shared.getFriendName(withId: knowledge.postedById))
                         .font(.com_title3)
 
-                    Text(knowledge.relativeTimeString)
+                    Text(timeSincePosted)
                         .font(.com_subheadline)
                 }
             }
             .accessibilityElement(children: .combine)
             .frame(maxWidth: .infinity, alignment: .center)
+            .onReceive(timer) { _ in
+                self.timeSincePosted = knowledge.relativeTimeString
+            }
+            .onAppear {
+                self.timeSincePosted = knowledge.relativeTimeString
+            }
         }
     }
 }
