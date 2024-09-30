@@ -80,6 +80,8 @@
 		42EDD2BB2C78EEA800D99EDE /* AsyncCachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */; };
 		42FA36692CA604DF00CB8A14 /* WidgetUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FA36682CA604DF00CB8A14 /* WidgetUser.swift */; };
 		42FA366B2CA6578300CB8A14 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FA366A2CA6578300CB8A14 /* UIImage+.swift */; };
+		42FA366F2CAB2E2500CB8A14 /* UserKnowledgeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FA366E2CAB2E2500CB8A14 /* UserKnowledgeListView.swift */; };
+		42FA36712CAB2E5700CB8A14 /* UserKnowledgeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FA36702CAB2E5700CB8A14 /* UserKnowledgeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +171,8 @@
 		42EDD2BA2C78EEA800D99EDE /* AsyncCachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncCachedImage.swift; sourceTree = "<group>"; };
 		42FA36682CA604DF00CB8A14 /* WidgetUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetUser.swift; sourceTree = "<group>"; };
 		42FA366A2CA6578300CB8A14 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		42FA366E2CAB2E2500CB8A14 /* UserKnowledgeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKnowledgeListView.swift; sourceTree = "<group>"; };
+		42FA36702CAB2E5700CB8A14 /* UserKnowledgeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKnowledgeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,15 +231,15 @@
 				42C6A8B12C825EE000A28FAA /* Info.plist */,
 				42B597CD2C6EEF7500C37F66 /* GoogleService-Info.plist */,
 				4212EDCF2C56D9E400F30DD2 /* AppLukApp.swift */,
-				42C6A9032C9E536C00A28FAA /* DeepLinkViewModel.swift */,
-				42C6A9072CA0DF3C00A28FAA /* DeepLinkedAddFriendView.swift */,
-				42C6A9052CA04EFA00A28FAA /* DeepLinkedKnowledgeView.swift */,
 				42C6A8F92C971D2000A28FAA /* NotificationsManager.swift */,
+				42B5982D2C70482800C37F66 /* DataStorageManager.swift */,
 				42C6A8E82C89102D00A28FAA /* Secrets.swift */,
+				42FA366E2CAB2E2500CB8A14 /* UserKnowledgeListView.swift */,
+				42FA36702CAB2E5700CB8A14 /* UserKnowledgeViewModel.swift */,
 				4212EDD12C56D9E400F30DD2 /* ContentView.swift */,
+				42FA366C2CAB2D9C00CB8A14 /* DeepLink */,
 				42C6A8F32C8E4FD200A28FAA /* Extensions */,
 				42C6A8F42C8E4FE400A28FAA /* Views */,
-				42B5982D2C70482800C37F66 /* DataStorageManager.swift */,
 				42C6A8F52C8E502200A28FAA /* Model */,
 				42C6A8F62C8E503B00A28FAA /* ViewModel */,
 				42B598122C6FC92600C37F66 /* Auth */,
@@ -354,6 +358,16 @@
 				42B5974A2C6B977200C37F66 /* CreateKnowledgeViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		42FA366C2CAB2D9C00CB8A14 /* DeepLink */ = {
+			isa = PBXGroup;
+			children = (
+				42C6A9032C9E536C00A28FAA /* DeepLinkViewModel.swift */,
+				42C6A9072CA0DF3C00A28FAA /* DeepLinkedAddFriendView.swift */,
+				42C6A9052CA04EFA00A28FAA /* DeepLinkedKnowledgeView.swift */,
+			);
+			path = DeepLink;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -512,6 +526,7 @@
 				42C6A9002C974DD600A28FAA /* FriendRequestsView.swift in Sources */,
 				428AAAC52C5D3259006B6647 /* Knowledge.swift in Sources */,
 				425307F02C7656B000CF16DA /* CommentsViewModel.swift in Sources */,
+				42FA36712CAB2E5700CB8A14 /* UserKnowledgeViewModel.swift in Sources */,
 				42B598342C70482900C37F66 /* DataStorageManager.swift in Sources */,
 				42C6A90C2CA4D16D00A28FAA /* EditKnowledgeViewModel.swift in Sources */,
 				42B5981C2C6FC93200C37F66 /* AuthenticationView.swift in Sources */,
@@ -524,6 +539,7 @@
 				42C6A8F22C8CDA0400A28FAA /* UpdateProfileView.swift in Sources */,
 				42EDD2BB2C78EEA800D99EDE /* AsyncCachedImage.swift in Sources */,
 				425307F42C7665C900CF16DA /* CommentsView.swift in Sources */,
+				42FA366F2CAB2E2500CB8A14 /* UserKnowledgeListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

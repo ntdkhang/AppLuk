@@ -11,11 +11,21 @@ import SwiftUI
 struct KnowledgeView: View {
     @ObservedObject var dataStorageManager = DataStorageManager.shared
     var knowledge: Knowledge
+    var showUserLink: Bool = true
     @Binding var showComments: Bool
     @Binding var currentKnowledge: Knowledge?
     var body: some View {
         VStack {
-            PostedByView(knowledge: knowledge)
+            if showUserLink {
+                NavigationLink {
+                    UserKnowledgeListView(userId: knowledge.postedById)
+                } label: {
+                    PostedByView(knowledge: knowledge)
+                        .foregroundColor(.white)
+                }
+            } else {
+                PostedByView(knowledge: knowledge)
+            }
 
             KnowledgeMainContent(knowledge: knowledge)
                 .padding(.horizontal, 8)

@@ -2,7 +2,7 @@
 # To get started, simply uncomment the below code or create your own.
 # Deploy with `firebase deploy`
 
-from firebase_functions import firestore_fn
+from firebase_functions import firestore_fn, https_fn
 import firebase_admin
 from firebase_admin import firestore, messaging
 from google.cloud.firestore_v1.base_query import FieldFilter
@@ -129,3 +129,17 @@ def newCommentNoti(event: firestore_fn.Event[firestore_fn.DocumentSnapshot | Non
                         messaging.send(msg)
 
 
+
+@https_fn.on_call()
+def unfriend(req: https_fn.CallableRequest):
+    db = firestore.client(app)
+    friendId = req.data["friendId"]
+    if req.auth is None:
+        return
+    userId = req.auth.uid
+
+    userRef = db.collection("users").document(userId)
+    userRef.update({"friendsId": firestore.firestore.ArrayRemove([friendId])})
+
+    friendRef = db.collection("users").document(friendId)
+    friendRef.update({"friendsId": firestore.firestore.ArrayRemove([userId])})

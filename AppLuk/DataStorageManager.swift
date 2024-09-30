@@ -6,6 +6,7 @@
 //
 
 import FirebaseFirestore
+import FirebaseFunctions
 import FirebaseStorage
 import Foundation
 import SwiftUI
@@ -284,9 +285,16 @@ class DataStorageManager: ObservableObject {
 
     func removeFriend(user: User) {
         if let id = user.id {
-            db.collection("users").document(currentUserId).updateData([
-                "friendsId": FieldValue.arrayRemove([id]),
-            ])
+            removeFriend(userId: id)
+        }
+    }
+
+    func removeFriend(userId: String) {
+        lazy var functions = Functions.functions()
+        functions.httpsCallable("unfriend").call(["friendId": userId]) { result, error in
+            if let error = error {
+                print("Error removing friend: \(error)")
+            }
         }
     }
 
