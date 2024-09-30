@@ -12,10 +12,16 @@ struct UserKnowledgeListView: View {
     @State private var showComments = false
     @State private var currentKnowledge: Knowledge? = Knowledge.empty
     @State private var isShowingUnfriendDialog = false
+    private var titleString: String = ""
     @Environment(\.dismiss) var dismiss
 
     init(userId: String) {
         _userKnowledgeVM = StateObject(wrappedValue: UserKnowledgeViewModel(userId: userId))
+        if userId == DataStorageManager.shared.currentUserId {
+            titleString = "Your Knowledge"
+        } else {
+            titleString = "Friend's Knowledge"
+        }
     }
 
     var body: some View {
@@ -39,25 +45,33 @@ struct UserKnowledgeListView: View {
         }
         .background(Color.background)
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    isShowingUnfriendDialog = true
-                } label: {
-                    Text("Unfriend")
-                        .font(.com_back_button)
-                        .foregroundColor(.dangerButton)
-                }
-                .confirmationDialog(
-                    "Remove this person from your friend list?",
-                    isPresented: $isShowingUnfriendDialog
-                ) {
-                    Button("Remove", role: .destructive) {
-                        DataStorageManager.shared.removeFriend(userId: userKnowledgeVM.userId)
-                        dismiss()
-                    }
-                } message: {
-                    Text("Remove this person from your friend list?")
-                }
+            // ToolbarItem(placement: .topBarTrailing) {
+            //     Button {
+            //         isShowingUnfriendDialog = true
+            //     } label: {
+            //         // Image(systemName: "person.crop.circle.badge.questionmark")
+            //         //     .resizable()
+            //         //     .scaledToFit()
+            //         Image(systemName: "person.fill.xmark")
+            //             .resizable()
+            //             .scaledToFit()
+            //             .frame(height: 20)
+            //             .foregroundColor(.dangerButton)
+            //     }
+            //     .confirmationDialog(
+            //         "Remove this person from your friend list?",
+            //         isPresented: $isShowingUnfriendDialog
+            //     ) {
+            //         Button("Remove", role: .destructive) {
+            //             DataStorageManager.shared.removeFriend(userId: userKnowledgeVM.userId)
+            //         }
+            //     } message: {
+            //         Text("Remove this person from your friend list?")
+            //     }
+            // }
+            ToolbarItem(placement: .principal) {
+                Text(titleString)
+                    .font(.com_regular)
             }
         }
     }
