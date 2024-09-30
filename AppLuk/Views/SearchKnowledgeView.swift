@@ -55,7 +55,7 @@ struct SearchKnowledgeView: View {
                     }
                 } label: {
                     if knowledgeVM.selectedTag == "" {
-                        Text("Filter Tag")
+                        Text("Topic")
                             .font(.com_regular)
                             .foregroundColor(.lightButton)
                     } else {
