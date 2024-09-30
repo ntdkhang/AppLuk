@@ -19,12 +19,12 @@ struct DeepLinkedAddFriendView: View {
                         CachedAsyncImage(url: user.avatarURL) { image in
                             image
                                 .resizable()
-                                .aspectRatio(contentMode: .fit)
+                                .aspectRatio(contentMode: .fill)
                                 .frame(width: 40)
                                 .clipShape(Circle())
                         } placeholder: {
                             Color.gray
-                                .aspectRatio(contentMode: .fit)
+                                .aspectRatio(contentMode: .fill)
                                 .frame(width: 40)
                                 .clipShape(Circle())
                         }

@@ -23,12 +23,14 @@ struct MainProfileView: View {
                 CachedAsyncImage(url: dataStorageManager.currentUserAvatarUrl) { image in
                     image
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .clipShape(Circle())
+                        .frame(width: 100, height: 100)
                 } placeholder: {
                     Color.gray
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .clipShape(Circle())
+                        .frame(width: 100, height: 100)
                 }
                 .frame(height: 100)
                 .padding()

@@ -19,14 +19,14 @@ struct AddFriendView: View {
                         CachedAsyncImage(url: user.avatarURL) { image in
                             image
                                 .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40)
+                                .aspectRatio(contentMode: .fill)
                                 .clipShape(Circle())
+                                .frame(width: 40, height: 40)
                         } placeholder: {
                             Color.gray
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40)
+                                .aspectRatio(contentMode: .fill)
                                 .clipShape(Circle())
+                                .frame(width: 40, height: 40)
                         }
 
                         VStack(alignment: .leading) {

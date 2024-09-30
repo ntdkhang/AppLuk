@@ -70,11 +70,12 @@ struct HomeView: View {
                 CachedAsyncImage(url: dataStorageManager.currentUserAvatarUrl) { image in
                     image
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .clipShape(Circle())
+                        .frame(width: 40, height: 40)
                 } placeholder: {
                     Color.gray
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .frame(width: 40)
                         .clipShape(Circle())
                 }
