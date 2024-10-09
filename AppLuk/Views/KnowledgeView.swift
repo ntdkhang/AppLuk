@@ -107,28 +107,6 @@ struct SaveAndReactView: View {
 
             Spacer()
 
-            // Button {
-            // } label: {
-            //     Image(systemName: "chevron.up")
-            //         .resizable()
-            //         .aspectRatio(contentMode: .fit)
-            //         .frame(width: 30)
-            // }
-            // .foregroundColor(.lightButton)
-            // .padding(.vertical)
-            //
-            // Button {
-            // } label: {
-            //     Image(systemName: "chevron.down")
-            //         .resizable()
-            //         .aspectRatio(contentMode: .fit)
-            //         .frame(width: 30)
-            // }
-            // .foregroundColor(.lightButton)
-            // .padding(.vertical)
-            // .padding(.horizontal, 8)
-
-            // TODO: move show comment button somewhere else
             Button {
                 currentKnowledge = knowledge
                 showComments.toggle()
@@ -222,7 +200,6 @@ struct PageView: View {
     var body: some View {
         ZStack {
             clippedImage
-            // Color.imageBlur
             Rectangle()
                 .fill(
                     Color.imageBlur.gradient.shadow(.inner(color: .black, radius: 10))
@@ -268,7 +245,6 @@ struct PageView: View {
                 }
             )
             .clipped()
-        // .clipShape(RoundedRectangle(cornerRadius: 30))
     }
 }
 
