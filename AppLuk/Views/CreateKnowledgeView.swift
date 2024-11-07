@@ -31,17 +31,19 @@ struct CreateKnowledgeView: View {
                 Button {
                     knowledgeVM.removeCurrentImage()
                 } label: {
-                    Image.attachment
+                    // Image.attachment
+                    Image(systemName: "pip.remove")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 30)
                         .padding(.horizontal)
                 }
-                .foregroundColor(knowledgeVM.disableRemoveCurrentImage ? .gray : .lightButton)
-                .disabled(knowledgeVM.disableRemoveCurrentImage)
+                .opacity(knowledgeVM.disableRemoveCurrentImage ? 0 : 1)
+                .foregroundColor(.lightButton)
                 .accessibilityLabel("Remove current image")
 
                 Spacer()
+
                 Button {
                     knowledgeVM.newPage()
                 } label: {
