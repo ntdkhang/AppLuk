@@ -14,6 +14,7 @@ struct MainProfileView: View {
     @ObservedObject var dataStorageManager = DataStorageManager.shared
     @StateObject var viewModel = ProfileViewModel()
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var authVM: AuthenticationViewModel
 
     @State private var showEditNameSheet: Bool = false
 
@@ -96,11 +97,6 @@ struct MainProfileView: View {
                 //     makeRow(iconName: "lock.shield", text: "Privacy policy")
                 // }
                 //
-                // NavigationLink {
-                //     Text("Work in progress")
-                // } label: {
-                //     makeRow(iconName: "trash", text: "Delete your account")
-                // }
 
                 Button {
                     do {
@@ -111,6 +107,14 @@ struct MainProfileView: View {
 
                 } label: {
                     makeRow(iconName: "rectangle.portrait.and.arrow.right", text: "Sign out")
+                }
+
+                Button {
+                    Task {
+                        await authVM.deleteAccount()
+                    }
+                } label: {
+                    makeRow(iconName: "trash", text: "Delete your account")
                 }
             }
             .listRowBackground(Color.gray.opacity(0.2))

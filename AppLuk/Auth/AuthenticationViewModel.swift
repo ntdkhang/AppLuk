@@ -197,13 +197,21 @@ extension AuthenticationViewModel {
         }
     }
 
-//    func deleteAccount() async -> Bool {
-//        do {
-//            try await user?.delete()
-//            return true
-//        } catch {
-//            errorMessage = error.localizedDescription
-//            return false
-//        }
-//    }
+    func deleteAccount() async {
+        do {
+            try await user?.delete()
+        } catch {
+            print("Error deleting account: \(error)")
+        }
+    }
+
+    // func deleteAccount() async -> Bool {
+    //     do {
+    //         try await user?.delete()
+    //             return true
+    //     } catch {
+    //         errorMessage = error.localizedDescription
+    //             return false
+    //     }
+    // }
 }
