@@ -67,6 +67,7 @@ struct SaveAndReactView: View {
     let knowledge: Knowledge
     @Binding var showComments: Bool
     @Binding var currentKnowledge: Knowledge?
+    @State private var showReport: Bool = false
     @State private var presentEditView: Bool = false
     var body: some View {
         HStack {
@@ -109,6 +110,18 @@ struct SaveAndReactView: View {
 
             Button {
                 currentKnowledge = knowledge
+                showReport.toggle()
+            } label: {
+                Image(systemName: "exclamationmark.octagon")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 40)
+            }
+            .foregroundColor(.white)
+            .padding(.horizontal, 8)
+
+            Button {
+                currentKnowledge = knowledge
                 showComments.toggle()
             } label: {
                 Image(systemName: "bubble.left.and.bubble.right")
@@ -119,6 +132,41 @@ struct SaveAndReactView: View {
             .foregroundColor(.white)
         }
         .padding()
+        .sheet(isPresented: $showReport) {
+            ReportView(knowledge: knowledge)
+        }
+    }
+}
+
+struct ReportView: View {
+    let knowledge: Knowledge
+    @State private var reason: String = ""
+    @State private var removeFriend: Bool = false
+    @ObservedObject private var dataStorageManager = DataStorageManager.shared
+
+    @Environment(\.dismiss) var dismiss
+
+    var body: some View {
+        VStack {
+            TextField("Enter your reason for reporting this post", text: $reason, axis: .vertical)
+                .keyboardType(.alphabet)
+                .font(.com_regular)
+                .disableAutocorrection(true)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .padding(16)
+            Toggle("Remove this friend?", isOn: $removeFriend)
+                // .frame(width: 100)
+                .padding(.horizontal, 16)
+
+            Button {
+                dataStorageManager.reportKnowledge(knowledge, reason: reason, removeFriend: removeFriend)
+                dismiss()
+            } label: {
+                Text("Report")
+                    .font(.com_regular)
+                    .foregroundColor(.red)
+            }
+        }
     }
 }
 

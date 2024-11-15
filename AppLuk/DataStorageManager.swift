@@ -17,6 +17,7 @@ class DataStorageManager: ObservableObject {
     @Published var currentUser: User?
     @Published var knowledges = [Knowledge]()
     @Published var savedKnowledges = [Knowledge]()
+    @Published var blockedKnowledgesId: [String] = ["ligma"]
     @Published var avatar: Image?
 
     @Published var usersCache = [User]()
@@ -85,7 +86,7 @@ class DataStorageManager: ObservableObject {
 
         // because the array for query cannot be empty
         // Since we're checking before calling the function, this should never be empty
-        let tempSavesId = currentUser.savesId.isEmpty ? ["VS7iKmF50v6HF2o6w07g"] : currentUser.savesId
+        let tempSavesId = currentUser.savesId.isEmpty ? ["Ligma69420"] : currentUser.savesId
 
         db.collection("knowledges")
             .whereField(FieldPath.documentID(), in: tempSavesId)
@@ -106,7 +107,9 @@ class DataStorageManager: ObservableObject {
                     }
                 }
 
-                self.savedKnowledges = knowledges
+                self.savedKnowledges = knowledges.filter { knowledge in
+                    self.blockedKnowledgesId.firstIndex(of: knowledge.id!) == nil
+                }
             }
     }
 
@@ -130,7 +133,10 @@ class DataStorageManager: ObservableObject {
                     }
                 }
 
-                self.knowledges = knowledges
+                self.knowledges = knowledges.filter { knowledge in
+                    self.blockedKnowledgesId.firstIndex(of: knowledge.id!) == nil
+                }
+
                 if let currentUser = self.currentUser, !currentUser.savesId.isEmpty {
                     self.getSavedKnowledes()
                 }
@@ -175,7 +181,7 @@ class DataStorageManager: ObservableObject {
                         }
                     }
                     self.friends = friends
-                    self.getKnowledges()
+                    self.getBlockedKnowledgesList()
                 }
         }
     }
@@ -311,6 +317,55 @@ class DataStorageManager: ObservableObject {
             } catch {
                 print("Error reading knowledge: \(error)")
             }
+        }
+    }
+
+    func reportKnowledge(_ knowledge: Knowledge, reason: String, removeFriend: Bool) {
+        guard let knowledgeId = knowledge.id else {
+            return
+        }
+
+        let report = KnowledgeReport(reporterId: currentUserId, knowledgeId: knowledgeId, reason: reason)
+
+        do {
+            try db.collection("knowledgeReports").addDocument(from: report) { error in
+                if let error = error {
+                    print("Error adding knowledge report: \(error)")
+                    return
+                }
+            }
+        } catch {
+            print("Error adding knowledge report: \(error)")
+        }
+
+        let ref = db.collection("blockedKnowledges").document(currentUserId)
+        ref.setData(["blockedKnowledgesId": knowledgeId], merge: true) { error in
+            if let error = error {
+                print("Error appending to blockedKnowledges: \(error)")
+                return
+            }
+        }
+
+        blockedKnowledgesId.append(knowledgeId)
+
+        if removeFriend {
+            self.removeFriend(userId: knowledge.postedById)
+            getFriends()
+        }
+        getKnowledges()
+    }
+
+    func getBlockedKnowledgesList() {
+        db.collection("blockedKnowledges").document(currentUserId).getDocument { document, error in
+            guard let document = document else {
+                print("Error fetching blocked knowledge id: \(error!)")
+                return
+            }
+
+            if let data = document.data() {
+                self.blockedKnowledgesId = data["blockedKnowledgesId"] as? [String] ?? []
+            }
+            self.getKnowledges()
         }
     }
 

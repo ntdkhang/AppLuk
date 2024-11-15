@@ -11,6 +11,7 @@
 		4212EDD22C56D9E400F30DD2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4212EDD12C56D9E400F30DD2 /* ContentView.swift */; };
 		4212EDD42C56D9E500F30DD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4212EDD32C56D9E500F30DD2 /* Assets.xcassets */; };
 		4212EDD72C56D9E600F30DD2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4212EDD62C56D9E600F30DD2 /* Preview Assets.xcassets */; };
+		421927DA2CE52EFF008A59AE /* KnowledgeReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421927D92CE52EFF008A59AE /* KnowledgeReport.swift */; };
 		425307F02C7656B000CF16DA /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425307EF2C7656B000CF16DA /* CommentsViewModel.swift */; };
 		425307F22C76570300CF16DA /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425307F12C76570300CF16DA /* Comment.swift */; };
 		425307F42C7665C900CF16DA /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425307F32C7665C900CF16DA /* CommentsView.swift */; };
@@ -114,6 +115,7 @@
 		4212EDD12C56D9E400F30DD2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4212EDD32C56D9E500F30DD2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4212EDD62C56D9E600F30DD2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		421927D92CE52EFF008A59AE /* KnowledgeReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeReport.swift; sourceTree = "<group>"; };
 		425307EF2C7656B000CF16DA /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
 		425307F12C76570300CF16DA /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		425307F32C7665C900CF16DA /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 			isa = PBXGroup;
 			children = (
 				42C6A8ED2C8B3E6800A28FAA /* FriendRequest.swift */,
+				421927D92CE52EFF008A59AE /* KnowledgeReport.swift */,
 				42B598082C6F7FE100C37F66 /* User.swift */,
 				425307F12C76570300CF16DA /* Comment.swift */,
 				428AAAC42C5D3259006B6647 /* Knowledge.swift */,
@@ -497,6 +500,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42C6A8AE2C81FBA200A28FAA /* AddFriendViewModel.swift in Sources */,
+				421927DA2CE52EFF008A59AE /* KnowledgeReport.swift in Sources */,
 				42C6A8E92C89102D00A28FAA /* Secrets.swift in Sources */,
 				42B598182C6FC93200C37F66 /* AuthenticationViewModel.swift in Sources */,
 				4212EDD22C56D9E400F30DD2 /* ContentView.swift in Sources */,

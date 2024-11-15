@@ -17,6 +17,7 @@ private enum FocusableField: Hashable {
 
 struct SignupView: View {
     @EnvironmentObject var viewModel: AuthenticationViewModel
+    @State private var showUELA: Bool = false
     @Environment(\.dismiss) var dismiss
 
     @FocusState private var focus: FocusableField?
@@ -116,6 +117,13 @@ struct SignupView: View {
                     Text(viewModel.errorMessage)
                         .foregroundColor(Color(UIColor.systemRed))
                 }
+            }
+
+            Button {
+            } label: {
+                Text("Read our End User License Agreement before continuing")
+                    .font(.com_regular)
+                    .foregroundColor(.primary)
             }
 
             Button {
