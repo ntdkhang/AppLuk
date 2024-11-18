@@ -147,7 +147,7 @@ extension AuthenticationViewModel {
                 return
             }
 
-            var userProfile = AppLuk.User(name: self.name, userName: self.userName, avatarUrl: "", friendsId: [], savesId: [])
+            var userProfile = Sowlmate.User(name: self.name, userName: self.userName, avatarUrl: "", friendsId: [], savesId: [])
 
             if let uiImage = self.image ?? UIImage(named: "empty_ava"),
                let imageData = uiImage.jpegData(compressionQuality: 0.6)
@@ -170,7 +170,7 @@ extension AuthenticationViewModel {
                                 }
                                 return
                             }
-                            userProfile = AppLuk.User(name: self.name, userName: self.userName, avatarUrl: url.absoluteString, friendsId: [], savesId: [])
+                            userProfile = Sowlmate.User(name: self.name, userName: self.userName, avatarUrl: url.absoluteString, friendsId: [], savesId: [])
                             DataStorageManager.shared.createNewUser(id: result.user.uid, user: userProfile) { error in
                                 completion(error)
                             }

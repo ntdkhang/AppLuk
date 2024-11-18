@@ -17,6 +17,7 @@ struct MainProfileView: View {
     @EnvironmentObject var authVM: AuthenticationViewModel
 
     @State private var showEditNameSheet: Bool = false
+    @State private var showDeleteAccountConfirmation: Bool = false
 
     var body: some View {
         Form {
@@ -110,9 +111,7 @@ struct MainProfileView: View {
                 }
 
                 Button {
-                    Task {
-                        await authVM.deleteAccount()
-                    }
+                    showDeleteAccountConfirmation.toggle()
                 } label: {
                     makeRow(iconName: "trash", text: "Delete your account")
                 }
@@ -122,6 +121,17 @@ struct MainProfileView: View {
         .sheet(isPresented: $showEditNameSheet) {
             UpdateProfileView(viewModel: viewModel)
                 .presentationDetents([.medium])
+        }
+        .confirmationDialog(
+            "Are you sure you want to permanently delete your account?",
+            isPresented: $showDeleteAccountConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("Delete", role: .destructive) {
+                Task {
+                    await authVM.deleteAccount()
+                }
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .scrollContentBackground(.hidden)

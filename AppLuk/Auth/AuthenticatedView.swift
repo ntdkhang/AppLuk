@@ -55,6 +55,7 @@ struct AuthenticatedView<Content, Unauthenticated>: View where Content: View, Un
         case .authenticated:
             VStack {
                 content()
+                    .environmentObject(viewModel)
             }
         }
     }

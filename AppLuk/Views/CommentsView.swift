@@ -68,6 +68,7 @@ struct CommentsView: View {
             .frame(width: 40, height: 40)
             .padding(.trailing, 4)
             .accessibilityLabel("Post comment")
+            .disabled(currentComment.isEmpty)
         }
         .background {
             RoundedRectangle(cornerRadius: 20)

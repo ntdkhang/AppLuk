@@ -110,7 +110,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4212EDCC2C56D9E400F30DD2 /* AppLuk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppLuk.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4212EDCC2C56D9E400F30DD2 /* Sowlmate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sowlmate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4212EDCF2C56D9E400F30DD2 /* AppLukApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLukApp.swift; sourceTree = "<group>"; };
 		4212EDD12C56D9E400F30DD2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4212EDD32C56D9E500F30DD2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -220,7 +220,7 @@
 		4212EDCD2C56D9E400F30DD2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4212EDCC2C56D9E400F30DD2 /* AppLuk.app */,
+				4212EDCC2C56D9E400F30DD2 /* Sowlmate.app */,
 				42C6A8BA2C835E4000A28FAA /* AppLukWidgetExtension.appex */,
 			);
 			name = Products;
@@ -376,9 +376,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4212EDCB2C56D9E400F30DD2 /* AppLuk */ = {
+		4212EDCB2C56D9E400F30DD2 /* Sowlmate */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4212EDDA2C56D9E600F30DD2 /* Build configuration list for PBXNativeTarget "AppLuk" */;
+			buildConfigurationList = 4212EDDA2C56D9E600F30DD2 /* Build configuration list for PBXNativeTarget "Sowlmate" */;
 			buildPhases = (
 				4212EDC82C56D9E400F30DD2 /* Sources */,
 				4212EDC92C56D9E400F30DD2 /* Frameworks */,
@@ -390,7 +390,7 @@
 			dependencies = (
 				42C6A8CA2C835E4300A28FAA /* PBXTargetDependency */,
 			);
-			name = AppLuk;
+			name = Sowlmate;
 			packageProductDependencies = (
 				428AAAC22C5D304D006B6647 /* MarkdownUI */,
 				42B5974F2C6D507D00C37F66 /* FirebaseAuth */,
@@ -401,7 +401,7 @@
 				42C6A8FB2C972F6200A28FAA /* FirebaseFunctions */,
 			);
 			productName = AppLuk;
-			productReference = 4212EDCC2C56D9E400F30DD2 /* AppLuk.app */;
+			productReference = 4212EDCC2C56D9E400F30DD2 /* Sowlmate.app */;
 			productType = "com.apple.product-type.application";
 		};
 		42C6A8B92C835E4000A28FAA /* AppLukWidgetExtension */ = {
@@ -461,7 +461,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4212EDCB2C56D9E400F30DD2 /* AppLuk */,
+				4212EDCB2C56D9E400F30DD2 /* Sowlmate */,
 				42C6A8B92C835E4000A28FAA /* AppLukWidgetExtension */,
 			);
 		};
@@ -631,6 +631,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = Sowlmate;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -687,6 +688,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = Sowlmate;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
@@ -780,7 +782,7 @@
 				DEVELOPMENT_TEAM = T76274KP97;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AppLukWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = AppLukWidget;
+				INFOPLIST_KEY_CFBundleDisplayName = Sowlmate;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -808,7 +810,7 @@
 				DEVELOPMENT_TEAM = T76274KP97;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AppLukWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = AppLukWidget;
+				INFOPLIST_KEY_CFBundleDisplayName = Sowlmate;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -837,7 +839,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4212EDDA2C56D9E600F30DD2 /* Build configuration list for PBXNativeTarget "AppLuk" */ = {
+		4212EDDA2C56D9E600F30DD2 /* Build configuration list for PBXNativeTarget "Sowlmate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4212EDDB2C56D9E600F30DD2 /* Debug */,

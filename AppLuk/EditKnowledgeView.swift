@@ -73,7 +73,7 @@ struct EditPageView: View {
             clippedImage
             Color.imageBlur
             TextField("Start typing here", text: $pageContent, axis: .vertical)
-                .keyboardType(.alphabet)
+                // .keyboardType(.alphabet)
                 .font(.com_regular)
                 .disableAutocorrection(true)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
